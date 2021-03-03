@@ -1,4 +1,5 @@
 import 'package:bfa_turismo/src/screens/first_screen.dart';
+import 'package:bfa_turismo/src/screens/fourth_screen.dart';
 import 'package:bfa_turismo/src/screens/second_screen.dart';
 import 'package:bfa_turismo/src/screens/third_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,5 @@ final liquidPages = [
   FirstScreen(),
   SecondScreen(),
   ThirdScreen(),
-  Container(
-    color: Colors.blue,
-    child: Center(
-      child: Text(
-        "Slide 4",
-        style: estiloTexto,
-      ),
-    ),
-  ),
+  PlacesScreen()
 ];
