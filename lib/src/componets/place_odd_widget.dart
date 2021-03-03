@@ -19,7 +19,7 @@ class PlacepOddWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  child: Image.network(
+                  child: Image.asset(
                     place.imageUrl,
                     fit: BoxFit.cover,
                     height: 150,
@@ -35,8 +35,8 @@ class PlacepOddWidget extends StatelessWidget {
                 ),
                 RhombusCustom(
                   alignmentGeometry: Alignment.bottomRight,
-                  height: 100,
-                  opacity: 0.3,
+                  height: 80,
+                  opacity: 0.4,
                 )
               ],
             ),

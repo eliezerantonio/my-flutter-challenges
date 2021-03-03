@@ -1,4 +1,5 @@
 import 'package:bfa_turismo/src/models/place.dart';
+import 'package:flutter/material.dart';
 
 final DUMMY_PLACES = [
   Place(
@@ -6,8 +7,7 @@ final DUMMY_PLACES = [
     title: 'Huíla',
     capital: 'Lubango',
     climate: 'Tropical',
-    imageUrl:
-        'https://media-cdn.tripadvisor.com/media/photo-s/16/b8/ec/28/photo1jpg.jpg',
+    imageUrl: "images/provincias/huila.jpg",
     description:
         'A mais de 1.000 metros de altitude e chegando aos 2.300 nos seus pontos mais elevados, a província da Huíla é marcada pelo final do Planalto Central e irrigada pelas imensas bacias hidrográficas do Cunene e do Cubango. Especialmente fértil, é também a província das belas paisagens de abismos e cascatas.',
     temperature: '20ºC',
@@ -17,7 +17,7 @@ final DUMMY_PLACES = [
     title: 'Namibe',
     capital: 'MOÇÂMEDES',
     climate: 'Tropical Seco',
-    imageUrl: 'https://www.verangola.net/va/images/cms-image-000005449.jpg',
+    imageUrl: "images/provincias/namibe.jpg",
     description:
         '“Terra da Felicidade” é assim que é conhecida a província do deserto, da Welwitschia Mirabilis, flor de duas únicas folhas que só nasce nesta região, do Parque do Iona, mas também das praias desertas, dos hotéis com localizações inesperadas e das famosas Pinturas.',
     temperature: '21ºC',

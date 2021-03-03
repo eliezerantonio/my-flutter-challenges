@@ -41,7 +41,7 @@ class PlacepPairWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  child: Image.network(
+                  child: Image.asset(
                     place.imageUrl,
                     fit: BoxFit.cover,
                     height: 150,
