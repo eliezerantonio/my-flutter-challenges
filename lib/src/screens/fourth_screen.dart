@@ -1,3 +1,5 @@
+import 'package:bfa_turismo/src/componets/place_pair_widget.dart';
+import 'package:bfa_turismo/src/componets/text_top_widget.dart';
 import 'package:bfa_turismo/src/data/place_data.dart';
 import 'package:bfa_turismo/src/models/place.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class PlacesScreen extends StatefulWidget {
 }
 
 class _PlacesScreenState extends State<PlacesScreen> {
-  final List<Place> loadPlaces = DUMMY_PLACES;
+  final List<Place> places = DUMMY_PLACES;
   bool _showFavoriteOnly = false;
   @override
   Widget build(BuildContext context) {
@@ -59,9 +61,37 @@ class _PlacesScreenState extends State<PlacesScreen> {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: loadPlaces.length,
-        itemBuilder: (context, i) => Text(loadPlaces[i].title),
+      body: Container(
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextTopWidget(
+                    color: Colors.grey[500],
+                    fontSize: 17,
+                    text: "BFA Turismo",
+                  ),
+                  TextTopWidget(
+                    color: Colors.orange[800],
+                    text: "o fomento ao turismo passa por aqui".toUpperCase(),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 150 * places.length + 10.0,
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: places.length,
+                  itemBuilder: (context, i) {
+                    return PlacepPairWidget(place: places[i]);
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
