@@ -1,3 +1,4 @@
+import 'package:bfa_turismo/src/componets/place_odd_widget.dart';
 import 'package:bfa_turismo/src/componets/place_pair_widget.dart';
 import 'package:bfa_turismo/src/componets/text_top_widget.dart';
 import 'package:bfa_turismo/src/data/place_data.dart';
@@ -87,7 +88,11 @@ class _PlacesScreenState extends State<PlacesScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: places.length,
                   itemBuilder: (context, i) {
-                    return PlacepPairWidget(place: places[i]);
+                    if (i % 2 == 0) {
+                      return PlacepPairWidget(place: places[i]);
+                    } else {
+                      return PlacepOddWidget(place: places[i]);
+                    }
                   }),
             ),
           ],

@@ -16,7 +16,7 @@ class TextTopWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: top, left: 40, bottom: bottom),
+      margin: EdgeInsets.only(top: top, left: 20, right: 1, bottom: bottom),
       child: Text(
         text,
         style: TextStyle(

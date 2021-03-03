@@ -33,6 +33,7 @@ class PlacepPairWidget extends StatelessWidget {
             ),
           ),
           Expanded(
+            flex: 2,
             child: Container(
               child: Image.network(
                 place.imageUrl,
