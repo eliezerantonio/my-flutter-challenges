@@ -3,7 +3,7 @@ class Place {
   final String title;
   final String capital;
   final String description;
-  final dynamic imageUrl;
+  final String imageUrl;
   final String climate;
   final String temperature;
   bool isFavorite;
