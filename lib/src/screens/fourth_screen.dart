@@ -1,8 +1,11 @@
 import 'package:bfa_turismo/src/componets/place_odd_widget.dart';
 import 'package:bfa_turismo/src/componets/place_pair_widget.dart';
+import 'package:bfa_turismo/src/componets/point_custom.dart';
 import 'package:bfa_turismo/src/componets/text_top_widget.dart';
+import 'package:bfa_turismo/src/componets/triangle_custom.dart';
 import 'package:bfa_turismo/src/data/place_data.dart';
 import 'package:bfa_turismo/src/models/place.dart';
+
 import 'package:flutter/material.dart';
 
 enum FilterOptions {
@@ -66,18 +69,34 @@ class _PlacesScreenState extends State<PlacesScreen> {
         child: ListView(
           children: [
             Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              height: 150,
+              padding: EdgeInsets.all(1),
+              child: Stack(
                 children: [
-                  TextTopWidget(
-                    color: Colors.grey[500],
-                    fontSize: 17,
-                    text: "BFA Turismo",
+                  PointCustom(),
+                  TriangleCustom(
+                    alignmentGeometry: Alignment.bottomLeft,
                   ),
-                  TextTopWidget(
-                    color: Colors.orange[800],
-                    text: "o fomento ao turismo passa por aqui".toUpperCase(),
+                  TriangleCustom(
+                    alignmentGeometry: Alignment.centerRight,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextTopWidget(
+                          color: Colors.grey[500],
+                          fontSize: 17,
+                          text: "BFA Turismo",
+                        ),
+                        TextTopWidget(
+                          color: Colors.orange[800],
+                          text: "o fomento ao turismo passa por aqui"
+                              .toUpperCase(),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

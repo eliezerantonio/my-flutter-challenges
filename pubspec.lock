@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.2"
+  clippy_flutter:
+    dependency: "direct main"
+    description:
+      name: clippy_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
   clock:
     dependency: transitive
     description:
