@@ -1,5 +1,8 @@
+import 'package:bfa_turismo/src/componets/point_custom.dart';
+import 'package:bfa_turismo/src/componets/rhombus_custom.dart';
 import 'package:bfa_turismo/src/componets/text_top_widget.dart';
 import 'package:bfa_turismo/src/models/place.dart';
+import 'package:clippy_flutter/arc.dart';
 import 'package:flutter/material.dart';
 
 class PlacepOddWidget extends StatelessWidget {
@@ -13,12 +16,29 @@ class PlacepOddWidget extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              child: Image.network(
-                place.imageUrl,
-                fit: BoxFit.cover,
-                height: 150,
-              ),
+            child: Stack(
+              children: [
+                Container(
+                  child: Image.network(
+                    place.imageUrl,
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: double.infinity,
+                  ),
+                ),
+                PointCustom(
+                  alignmentGeometry: Alignment.centerLeft,
+                  height: 150,
+                  numSize: 100,
+                  opacity: 0.2,
+                  edge: Edge.RIGHT,
+                ),
+                RhombusCustom(
+                  alignmentGeometry: Alignment.bottomRight,
+                  height: 100,
+                  opacity: 0.3,
+                )
+              ],
             ),
           ),
           Expanded(

@@ -76,6 +76,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                   PointCustom(),
                   TriangleCustom(
                     alignmentGeometry: Alignment.bottomLeft,
+                    colorNum: 200,
                   ),
                   TriangleCustom(
                     alignmentGeometry: Alignment.centerRight,
