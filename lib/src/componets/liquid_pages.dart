@@ -18,13 +18,4 @@ final liquidPages = [
       ),
     ),
   ),
-  Container(
-    color: Colors.green,
-    child: Center(
-      child: Text(
-        "Slide 5",
-        style: estiloTexto,
-      ),
-    ),
-  )
 ];

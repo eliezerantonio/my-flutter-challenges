@@ -7,6 +7,7 @@ class ThirdScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
         child: Image.asset(
           "images/thirdImage.png",
           height: double.infinity,
