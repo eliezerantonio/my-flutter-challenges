@@ -92,4 +92,14 @@ final DUMMY_PLACES = [
         'Por entre terrenos pintados de verde intenso decorreram momentos importantes da história de Angola. Por isso mesmo, são de visitar quer as belezas naturais da província, quer os testemunhos que o homem por aqui vem deixando ao longo de séculos.',
     temperature: '23ºC',
   ),
+  Place(
+    id: 'p10',
+    title: 'Cuanza Sul',
+    capital: "SUMBE",
+    climate: 'TROPICAL HÚMIDO',
+    imageUrl: "images/cuanza_sul.jpg",
+    description:
+        'No interior, as terras férteis do Waku Kungo produzem muito mais que o café que merece uma “rota” própria na província. Na costa, as praias do Sumbe e Porto Amboim convidam a um mergulho. Por todo o território, os rios Cuanza, Longa, Queve e Cubal oferecem paisagens de sonho.',
+    temperature: '23ºC',
+  ),
 ];
