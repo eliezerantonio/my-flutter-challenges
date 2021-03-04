@@ -1,5 +1,5 @@
 import 'package:bfa_turismo/src/screens/first_screen.dart';
-import 'package:bfa_turismo/src/screens/fourth_screen.dart';
+import 'package:bfa_turismo/src/screens/places_screen.dart';
 import 'package:bfa_turismo/src/screens/second_screen.dart';
 import 'package:bfa_turismo/src/screens/third_screen.dart';
 import 'package:flutter/material.dart';
