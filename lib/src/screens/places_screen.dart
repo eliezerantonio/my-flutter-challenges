@@ -11,6 +11,8 @@ import 'package:bfa_turismo/src/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
+import 'place_detail_screen.dart';
+
 enum FilterOptions {
   Favorite,
   All,
@@ -22,11 +24,11 @@ class PlacesScreen extends StatefulWidget {
 }
 
 class _PlacesScreenState extends State<PlacesScreen> {
-  List<Place> places = [];
+  List<Place> places = DUMMY_PLACES;
   Timer _timer;
-  int _start = 5;
+  int _start = 1;
 
-  void startTimer() {
+  void startTimer() async {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
       oneSec,
@@ -46,14 +48,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
   }
 
   @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    startTimer();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -104,21 +99,31 @@ class _PlacesScreenState extends State<PlacesScreen> {
             ),
             AnimationLimiter(
               child: Container(
-                height: 152 * places.length + 30.0,
+                height: 154 * places.length + 30.0,
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: places.length,
                     itemBuilder: (context, i) {
                       return AnimationConfiguration.staggeredList(
                         position: i,
-                        duration: const Duration(milliseconds: 1500),
+                        duration: const Duration(milliseconds: 1000),
                         child: SlideAnimation(
-                          delay: Duration(milliseconds: 10),
                           verticalOffset: -100.0,
-                          child: FadeInAnimation(
-                            child: i % 2 == 0
-                                ? PlacepPairWidget(place: places[i])
-                                : PlacepOddWidget(place: places[i]),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PlaceDetailScreen(
+                                    places[i],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: FadeInAnimation(
+                              child: i % 2 == 0
+                                  ? PlacepPairWidget(place: places[i])
+                                  : PlacepOddWidget(place: places[i]),
+                            ),
                           ),
                         ),
                       );
