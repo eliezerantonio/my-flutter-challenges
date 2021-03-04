@@ -73,7 +73,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
               padding: EdgeInsets.all(1),
               child: Stack(
                 children: [
-                  PointCustom(),
+                  PointCustom(width: 150,),
                   TriangleCustom(
                     alignmentGeometry: Alignment.bottomLeft,
                     colorNum: 200,
