@@ -8,11 +8,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: LiquidSwipe(
         pages: liquidPages,
-        fullTransitionValue: 300,
+        fullTransitionValue: 800,
         enableLoop: true,
-        enableSlideIcon: true,
         positionSlideIcon: 0.8,
-        waveType: WaveType.circularReveal, //tipos
+        waveType: WaveType.liquidReveal, //tipos
         onPageChangeCallback: (page) => pageChangeCallback(page),
         currentUpdateTypeCallback: (updateType) =>
             updateTypeCallback(updateType),
