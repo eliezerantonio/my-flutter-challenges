@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bfa_turismo/src/componets/place_odd_widget.dart';
 import 'package:bfa_turismo/src/componets/place_pair_widget.dart';
 import 'package:bfa_turismo/src/componets/point_custom.dart';
@@ -14,10 +16,44 @@ enum FilterOptions {
   All,
 }
 
-class PlacesScreen extends StatelessWidget {
-  final List<Place> places = DUMMY_PLACES;
+class PlacesScreen extends StatefulWidget {
+  @override
+  _PlacesScreenState createState() => _PlacesScreenState();
+}
+
+class _PlacesScreenState extends State<PlacesScreen> {
+  List<Place> places = [];
+  Timer _timer;
+  int _start = 5;
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            places = DUMMY_PLACES;
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    startTimer();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
