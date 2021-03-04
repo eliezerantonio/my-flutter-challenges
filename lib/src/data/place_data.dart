@@ -15,7 +15,7 @@ final DUMMY_PLACES = [
   Place(
     id: 'p2',
     title: 'Namibe',
-    capital: 'MOÇÂMEDES',
+    capital: 'Moçâmedes',
     climate: 'Tropical Seco',
     imageUrl: "images/namibe.jpg",
     description:
@@ -25,7 +25,7 @@ final DUMMY_PLACES = [
   Place(
     id: 'p3',
     title: 'Cunene',
-    capital: 'ONDJIVA',
+    capital: 'Ondjiva',
     climate: 'Tropical Seco',
     imageUrl: "images/cunene.jpg",
     description:
@@ -35,7 +35,7 @@ final DUMMY_PLACES = [
   Place(
     id: 'p4',
     title: 'Bengo',
-    capital: 'CAXITO',
+    capital: 'Caxito',
     climate: 'Tropical Seco',
     imageUrl: "images/bengo.jpg",
     description:
@@ -46,7 +46,7 @@ final DUMMY_PLACES = [
     id: 'p5',
     title: 'Benguela',
     capital: 'Benguela',
-    climate: 'Tropical ÁRIDO',
+    climate: 'Tropical Árido',
     imageUrl: "images/benguela.jpg",
     description:
         'Na costa, as praias de areia branca e águas de azul profundo fazem de Benguela um dos destinos de férias privilegiados do país. No interior, as florestas abertas, as savanas arborizadas e a estepe são o berço de uma fauna variada e proporcionam aos mais aventureiros as emoções fortes dos safaris africanos.',
@@ -55,8 +55,8 @@ final DUMMY_PLACES = [
   Place(
     id: 'p6',
     title: 'Bié',
-    capital: 'CUITO',
-    climate: 'Tropical HÚMIDO',
+    capital: 'Cuito',
+    climate: 'Tropical Húmido',
     imageUrl: "images/bie.jpeg",
     description:
         'O Bié foi uma das províncias mais afectadas pela Guerra Civil. No entanto, as praias fluviais, lagoas, cascatas e florestas têm sido os seus mais fortes aliados na sua busca por integrar a rota turística do país.',
@@ -66,7 +66,7 @@ final DUMMY_PLACES = [
     id: 'p7',
     title: 'Cabinda',
     capital: 'Cabinda',
-    climate: 'Tropical HÚMIDO',
+    climate: 'Tropical Húmido',
     imageUrl: "images/cabinda.jpg",
     description:
         'Ao ouvirmos falar de Cabinda associamos imediatamente esta província aos poços de prospecção de petróleo que a tornam numa das zonas mais ricas do país. Porém, o enclave oferece muitas outras surpresas a quem o visitar, com natural destaque para a Floresta do Maiombe.',
@@ -75,8 +75,8 @@ final DUMMY_PLACES = [
   Place(
     id: 'p8',
     title: 'Cuando Cubango',
-    capital: 'MENONGUE',
-    climate: 'SEMIÁRIDO',
+    capital: 'Menongue',
+    climate: 'Semíario',
     imageUrl: "images/cuando_cubango.jpg",
     description:
         'Em tempos conhecida como as “Terras do Fim do Mundo”, a província do Cuando Cubango encara agora o futuro com esperança. As riquezas minerais escondidas no seu subsolo competem com a paisagem mágica dos parques e reservas naturais',
@@ -85,8 +85,8 @@ final DUMMY_PLACES = [
   Place(
     id: 'p9',
     title: 'Cuanza Norte',
-    capital: "N'DALATANDO",
-    climate: 'TROPICAL HÚMIDO',
+    capital: "N'dalatando",
+    climate: 'Tropical Húmido',
     imageUrl: "images/cuanza_norte.jpg",
     description:
         'Por entre terrenos pintados de verde intenso decorreram momentos importantes da história de Angola. Por isso mesmo, são de visitar quer as belezas naturais da província, quer os testemunhos que o homem por aqui vem deixando ao longo de séculos.',
@@ -95,8 +95,8 @@ final DUMMY_PLACES = [
   Place(
     id: 'p10',
     title: 'Cuanza Sul',
-    capital: "SUMBE",
-    climate: 'TROPICAL HÚMIDO',
+    capital: "Sumbe",
+    climate: 'Tropical Húmido',
     imageUrl: "images/cuanza_sul.jpg",
     description:
         'No interior, as terras férteis do Waku Kungo produzem muito mais que o café que merece uma “rota” própria na província. Na costa, as praias do Sumbe e Porto Amboim convidam a um mergulho. Por todo o território, os rios Cuanza, Longa, Queve e Cubal oferecem paisagens de sonho.',
@@ -104,9 +104,9 @@ final DUMMY_PLACES = [
   ),
   Place(
     id: 'p11',
-    title: 'HUAMBO',
-    capital: "HUAMBO",
-    climate: 'TROPICAL DE ALTITUDE',
+    title: 'Huambo',
+    capital: "Huambo",
+    climate: 'Tropical de Altitude',
     imageUrl: "images/huambo.jpg",
     description:
         'Em pleno Planalto Central, o Huambo foi berço de reinos antigos que se impuseram pela sua resiliência e resistência. Na época colonial, ali nasceu, de raiz, a cidade a que chamaram de “Nova Lisboa” e que se pretendia que viesse a ser a capital da colónia.',
