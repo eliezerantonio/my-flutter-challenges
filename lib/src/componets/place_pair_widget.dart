@@ -6,9 +6,17 @@ import 'package:flutter/material.dart';
 
 import 'icon_favorite_custom.dart';
 
-class PlacepPairWidget extends StatelessWidget {
+class PlacepPairWidget extends StatefulWidget {
   const PlacepPairWidget({this.place});
   final Place place;
+
+  @override
+  _PlacepPairWidgetState createState() => _PlacepPairWidgetState();
+}
+
+class _PlacepPairWidgetState extends State<PlacepPairWidget> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,11 +32,11 @@ class PlacepPairWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextTopWidget(
-                    text: place.title.toUpperCase(),
+                    text: widget.place.title.toUpperCase(),
                     color: Colors.orange[800],
                   ),
                   TextTopWidget(
-                    text: 'Capital ${place.capital}'.toUpperCase(),
+                    text: 'Capital ${widget.place.capital}'.toUpperCase(),
                     fontSize: 12,
                     color: Colors.orange[800],
                   ),
@@ -42,7 +50,7 @@ class PlacepPairWidget extends StatelessWidget {
               children: [
                 Container(
                   child: Image.asset(
-                    place.imageUrl,
+                    widget.place.imageUrl,
                     fit: BoxFit.cover,
                     height: 150,
                     width: double.infinity,
@@ -58,7 +66,7 @@ class PlacepPairWidget extends StatelessWidget {
                   height: 100,
                   opacity: 0.3,
                 ),
-                IconFavoriteCustom(place: place)
+                IconFavoriteCustom(place: widget.place)
               ],
             ),
           ),
@@ -67,4 +75,3 @@ class PlacepPairWidget extends StatelessWidget {
     );
   }
 }
-

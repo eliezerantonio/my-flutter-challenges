@@ -5,6 +5,8 @@ import 'package:bfa_turismo/src/models/place.dart';
 import 'package:clippy_flutter/arc.dart';
 import 'package:flutter/material.dart';
 
+import 'icon_favorite_custom.dart';
+
 class PlacepOddWidget extends StatelessWidget {
   const PlacepOddWidget({this.place});
   final Place place;
@@ -37,6 +39,10 @@ class PlacepOddWidget extends StatelessWidget {
                   alignmentGeometry: Alignment.bottomRight,
                   height: 80,
                   opacity: 0.4,
+                ),
+                IconFavoriteCustom(
+                  place: place,
+                  alignment: Alignment.bottomLeft,
                 )
               ],
             ),
