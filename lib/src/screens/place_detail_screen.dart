@@ -21,63 +21,79 @@ class PlaceDetailScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        height: 150,
+        height: 180,
         width: double.infinity,
         padding: EdgeInsets.all(1),
-        child: Stack(
+        child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Image.asset(
-                place.imageUrl,
-                width: double.infinity,
-                fit: BoxFit.cover,
+            Expanded(
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Image.asset(
+                      place.imageUrl,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  TriangleCustom(
+                    edge: Edge.LEFT,
+                    height: 300,
+                    opacity: 0.3,
+                    width: 2000,
+                    alignmentGeometry: Alignment.topLeft,
+                    colorNum: 100,
+                  ),
+                  PointCustom(
+                    alignmentGeometry: Alignment.centerLeft,
+                    height: 180,
+                    numSize: 100,
+                    width: 190,
+                    opacity: 1.0,
+                    edge: Edge.RIGHT,
+                  ),
+                  TriangleCustom(
+                    edge: Edge.RIGHT,
+                    height: 100,
+                    opacity: 0.6,
+                    width: 150,
+                    alignmentGeometry: Alignment.centerLeft,
+                    colorNum: 300,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextTopWidget(
+                            color: Colors.grey[500],
+                            fontSize: 14,
+                            text: "BFA Turismo",
+                          ),
+                          Container(
+                            width: 190,
+                            child: TextTopWidget(
+                              color: Colors.orange[800],
+                              fontSize: 24,
+                              text: place.title.toUpperCase(),
+                            ),
+                          ),
+                          // SizedBox()
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            TriangleCustom(
-              edge: Edge.LEFT,
-              height: 300,
-              opacity: 0.3,
-              width: 2000,
-              alignmentGeometry: Alignment.topLeft,
-              colorNum: 100,
-            ),
-            PointCustom(
-              alignmentGeometry: Alignment.centerLeft,
-              height: 150,
-              numSize: 100,
-              width: 150,
-              opacity: 1.0,
-              edge: Edge.RIGHT,
-            ),
-            TriangleCustom(
-              edge: Edge.RIGHT,
-              height: 100,
-              opacity: 0.6,
-              width: 100,
-              alignmentGeometry: Alignment.centerLeft,
-              colorNum: 300,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextTopWidget(
-                      color: Colors.grey[500],
-                      fontSize: 17,
-                      text: "BFA Turismo",
-                    ),
-                    TextTopWidget(
-                      color: Colors.orange[800],
-                      text: place.title.toUpperCase(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            Container(
+              height: 40,
+              width: double.infinity,
+              color: Colors.orange[800],
+            )
           ],
         ),
       ),
