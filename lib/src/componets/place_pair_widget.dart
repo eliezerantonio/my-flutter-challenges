@@ -15,8 +15,6 @@ class PlacepPairWidget extends StatefulWidget {
 }
 
 class _PlacepPairWidgetState extends State<PlacepPairWidget> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,12 +30,13 @@ class _PlacepPairWidgetState extends State<PlacepPairWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextTopWidget(
+                    fontSize: 16,
                     text: widget.place.title.toUpperCase(),
                     color: Colors.orange[800],
                   ),
                   TextTopWidget(
-                    text: 'Capital ${widget.place.capital}'.toUpperCase(),
-                    fontSize: 12,
+                    text: 'Capital: ${widget.place.capital}'.toUpperCase(),
+                    fontSize: 10,
                     color: Colors.orange[800],
                   ),
                 ],
@@ -66,7 +65,6 @@ class _PlacepPairWidgetState extends State<PlacepPairWidget> {
                   height: 100,
                   opacity: 0.3,
                 ),
-                IconFavoriteCustom(place: widget.place)
               ],
             ),
           ),

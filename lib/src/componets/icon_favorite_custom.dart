@@ -24,23 +24,13 @@ class _IconFavoriteCustomState extends State<IconFavoriteCustom> {
     return GestureDetector(
       onTap: toggleFavorite,
       child: Container(
-        height: 135,
+        margin: EdgeInsets.only(top: 120),
         padding: EdgeInsets.only(left: 10, right: 10),
         child: Align(
           alignment: widget.alignment,
           child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 1,
-                  color: Colors.black26,
-                  offset: Offset(0, 2),
-                )
-              ],
-            ),
             child: Icon(
               !widget.place.isFavorite ? Icons.favorite_border : Icons.favorite,
-              size: 35,
               color: Colors.orange[800],
             ),
           ),

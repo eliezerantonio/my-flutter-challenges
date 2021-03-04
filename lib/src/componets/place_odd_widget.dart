@@ -17,7 +17,7 @@ class PlacepOddWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Stack(
               children: [
                 Container(
@@ -40,14 +40,11 @@ class PlacepOddWidget extends StatelessWidget {
                   height: 80,
                   opacity: 0.4,
                 ),
-                IconFavoriteCustom(
-                  place: place,
-                  alignment: Alignment.bottomLeft,
-                )
               ],
             ),
           ),
           Expanded(
+            flex: 2,
             child: Container(
               height: 150,
               decoration: BoxDecoration(color: Colors.grey[300]),
@@ -56,6 +53,7 @@ class PlacepOddWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextTopWidget(
+                    fontSize: 16,
                     text: place.title.toUpperCase(),
                     color: Colors.orange[800],
                   ),
