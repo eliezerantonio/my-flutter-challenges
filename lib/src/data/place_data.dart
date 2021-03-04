@@ -102,4 +102,14 @@ final DUMMY_PLACES = [
         'No interior, as terras férteis do Waku Kungo produzem muito mais que o café que merece uma “rota” própria na província. Na costa, as praias do Sumbe e Porto Amboim convidam a um mergulho. Por todo o território, os rios Cuanza, Longa, Queve e Cubal oferecem paisagens de sonho.',
     temperature: '23ºC',
   ),
+  Place(
+    id: 'p11',
+    title: 'HUAMBO',
+    capital: "HUAMBO",
+    climate: 'TROPICAL DE ALTITUDE',
+    imageUrl: "images/huambo.jpg",
+    description:
+        'Em pleno Planalto Central, o Huambo foi berço de reinos antigos que se impuseram pela sua resiliência e resistência. Na época colonial, ali nasceu, de raiz, a cidade a que chamaram de “Nova Lisboa” e que se pretendia que viesse a ser a capital da colónia.',
+    temperature: '19ºC',
+  ),
 ];
