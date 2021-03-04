@@ -1,16 +1,25 @@
 import 'dart:ui';
 
+import 'package:bfa_turismo/src/componets/option_detail_widget.dart';
 import 'package:bfa_turismo/src/componets/point_custom.dart';
+import 'package:bfa_turismo/src/componets/text_timber_widget.dart';
 import 'package:bfa_turismo/src/componets/text_top_widget.dart';
 import 'package:bfa_turismo/src/componets/triangle_custom.dart';
 import 'package:bfa_turismo/src/models/place.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
-class PlaceDetailScreen extends StatelessWidget {
+class PlaceDetailScreen extends StatefulWidget {
   PlaceDetailScreen({Key key, @required this.place});
   var place = Place();
 
+  @override
+  _PlaceDetailScreenState createState() => _PlaceDetailScreenState();
+}
+
+class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +45,7 @@ class PlaceDetailScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Image.asset(
-                          place.imageUrl,
+                          widget.place.imageUrl,
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
@@ -82,7 +91,7 @@ class PlaceDetailScreen extends StatelessWidget {
                                 child: TextTopWidget(
                                   color: Colors.orange[800],
                                   fontSize: 24,
-                                  text: place.title.toUpperCase(),
+                                  text: widget.place.title.toUpperCase(),
                                 ),
                               ),
                               // SizedBox()
@@ -101,16 +110,16 @@ class PlaceDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextTimber(
-                        place: place.capital,
+                      TextTimberWidget(
+                        place: widget.place.capital,
                         title: 'Capital',
                       ),
-                      TextTimber(
-                        place: place.climate,
+                      TextTimberWidget(
+                        place: widget.place.climate,
                         title: ' | Clima',
                       ),
-                      TextTimber(
-                        place: place.temperature,
+                      TextTimberWidget(
+                        place: widget.place.temperature,
                         title: ' | Temperatura',
                       ),
                     ],
@@ -122,35 +131,47 @@ class PlaceDetailScreen extends StatelessWidget {
           Padding(
             padding:
                 const EdgeInsets.only(left: 10, top: 7, right: 10, bottom: 10),
-            child: Text("${place.description}",
+            child: Text("${widget.place.description}",
                 style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.grey,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.justify),
           ),
+          Row(
+            children: [
+              Expanded(
+                child: OptionDetailWidget(
+                  function: () {
+                    setState(() {
+                      selected = !selected;
+                    });
+                  },
+                  icon: Octicons.info,
+                  selected: !selected,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: OptionDetailWidget(
+                  function: () {
+                    setState(
+                      () {
+                        selected = !selected;
+                      },
+                    );
+                  },
+                  selected: selected,
+                  icon: FontAwesome.home,
+                ),
+              ),
+            ],
+          )
         ],
       ),
-    );
-  }
-}
-
-class TextTimber extends StatelessWidget {
-  const TextTimber({
-    Key key,
-    @required this.place,
-    @required this.title,
-  }) : super(key: key);
-
-  final String place;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "$title: $place",
-      style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
     );
   }
 }
