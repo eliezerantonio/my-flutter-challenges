@@ -7,6 +7,7 @@ import 'package:bfa_turismo/src/data/place_data.dart';
 import 'package:bfa_turismo/src/models/place.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 enum FilterOptions {
   Favorite,
@@ -65,18 +66,27 @@ class PlacesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              height: 152 * places.length + 30.0,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: places.length,
-                  itemBuilder: (context, i) {
-                    if (i % 2 == 0) {
-                      return PlacepPairWidget(place: places[i]);
-                    } else {
-                      return PlacepOddWidget(place: places[i]);
-                    }
-                  }),
+            AnimationLimiter(
+              child: Container(
+                height: 152 * places.length + 30.0,
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: places.length,
+                    itemBuilder: (context, i) {
+                      return AnimationConfiguration.staggeredList(
+                        position: i,
+                        duration: const Duration(milliseconds: 1500),
+                        child: SlideAnimation(
+                          verticalOffset: -100.0,
+                          child: FadeInAnimation(
+                            child: i % 2 == 0
+                                ? PlacepPairWidget(place: places[i])
+                                : PlacepOddWidget(place: places[i]),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
             ),
           ],
         ),
