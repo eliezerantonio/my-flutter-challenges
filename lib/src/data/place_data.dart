@@ -61,5 +61,14 @@ final DUMMY_PLACES = [
     description:
         'O Bié foi uma das províncias mais afectadas pela Guerra Civil. No entanto, as praias fluviais, lagoas, cascatas e florestas têm sido os seus mais fortes aliados na sua busca por integrar a rota turística do país.',
     temperature: '19ºC',
+  ), Place(
+    id: 'p7',
+    title: 'Cabinda',
+    capital: 'Cabinda',
+    climate: 'Tropical HÚMIDO',
+    imageUrl: "images/cabinda.jpg",
+    description:
+        'Ao ouvirmos falar de Cabinda associamos imediatamente esta província aos poços de prospecção de petróleo que a tornam numa das zonas mais ricas do país. Porém, o enclave oferece muitas outras surpresas a quem o visitar, com natural destaque para a Floresta do Maiombe.',
+    temperature: '25ºC',
   ),
 ];
