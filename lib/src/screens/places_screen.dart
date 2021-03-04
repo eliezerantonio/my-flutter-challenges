@@ -77,6 +77,7 @@ class PlacesScreen extends StatelessWidget {
                         position: i,
                         duration: const Duration(milliseconds: 1500),
                         child: SlideAnimation(
+                          delay: Duration(milliseconds: 10),
                           verticalOffset: -100.0,
                           child: FadeInAnimation(
                             child: i % 2 == 0
