@@ -5,6 +5,8 @@ import 'package:bfa_turismo/src/models/place.dart';
 import 'package:clippy_flutter/arc.dart';
 import 'package:flutter/material.dart';
 
+import 'icon_favorite_custom.dart';
+
 class PlacepOddWidget extends StatelessWidget {
   const PlacepOddWidget({this.place});
   final Place place;
@@ -15,7 +17,7 @@ class PlacepOddWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Stack(
               children: [
                 Container(
@@ -37,11 +39,12 @@ class PlacepOddWidget extends StatelessWidget {
                   alignmentGeometry: Alignment.bottomRight,
                   height: 80,
                   opacity: 0.4,
-                )
+                ),
               ],
             ),
           ),
           Expanded(
+            flex: 2,
             child: Container(
               height: 150,
               decoration: BoxDecoration(color: Colors.grey[300]),
@@ -50,6 +53,7 @@ class PlacepOddWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextTopWidget(
+                    fontSize: 16,
                     text: place.title.toUpperCase(),
                     color: Colors.orange[800],
                   ),
