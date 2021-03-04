@@ -82,4 +82,14 @@ final DUMMY_PLACES = [
         'Em tempos conhecida como as “Terras do Fim do Mundo”, a província do Cuando Cubango encara agora o futuro com esperança. As riquezas minerais escondidas no seu subsolo competem com a paisagem mágica dos parques e reservas naturais',
     temperature: '20ºC',
   ),
+  Place(
+    id: 'p9',
+    title: 'Cuanza Norte',
+    capital: "N'DALATANDO",
+    climate: 'TROPICAL HÚMIDO',
+    imageUrl: "images/cuanza_norte.jpg",
+    description:
+        'Por entre terrenos pintados de verde intenso decorreram momentos importantes da história de Angola. Por isso mesmo, são de visitar quer as belezas naturais da província, quer os testemunhos que o homem por aqui vem deixando ao longo de séculos.',
+    temperature: '23ºC',
+  ),
 ];
