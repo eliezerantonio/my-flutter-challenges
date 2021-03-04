@@ -33,37 +33,6 @@ class _PlacesScreenState extends State<PlacesScreen> {
           "images/logo.png",
           width: 100,
         ),
-        actions: [
-          PopupMenuButton(
-            onSelected: (FilterOptions selectedValue) {
-              if (selectedValue == FilterOptions.Favorite) {
-                setState(() {
-                  _showFavoriteOnly = true;
-                });
-              } else {
-                setState(
-                  () {
-                    _showFavoriteOnly = false;
-                  },
-                );
-              }
-            },
-            itemBuilder: (_) => [
-              PopupMenuItem(
-                child: Text('favoritos'),
-                value: FilterOptions.Favorite,
-              ),
-              PopupMenuItem(
-                child: Text('Todos'),
-                value: FilterOptions.All,
-              ),
-            ],
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
-          )
-        ],
       ),
       body: Container(
         child: ListView(
@@ -73,7 +42,9 @@ class _PlacesScreenState extends State<PlacesScreen> {
               padding: EdgeInsets.all(1),
               child: Stack(
                 children: [
-                  PointCustom(width: 150,),
+                  PointCustom(
+                    width: 150,
+                  ),
                   TriangleCustom(
                     alignmentGeometry: Alignment.bottomLeft,
                     colorNum: 200,
