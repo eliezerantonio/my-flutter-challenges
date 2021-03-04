@@ -42,4 +42,14 @@ final DUMMY_PLACES = [
         'A 80 km de Luanda, o Bengo é uma das províncias com maior potencial turístico do país. As praias seduzem os visitantes para passeios de fim-de-semana ou escapadinhas de poucos dias, mas este ainda é um segredo bem guardado.',
     temperature: '26ºC',
   ),
+  Place(
+    id: 'p5',
+    title: 'Benguela',
+    capital: 'Benguela',
+    climate: 'Tropical ÁRIDO',
+    imageUrl: "images/benguela.jpg",
+    description:
+        'Na costa, as praias de areia branca e águas de azul profundo fazem de Benguela um dos destinos de férias privilegiados do país. No interior, as florestas abertas, as savanas arborizadas e a estepe são o berço de uma fauna variada e proporcionam aos mais aventureiros as emoções fortes dos safaris africanos.',
+    temperature: '24ºC',
+  ),
 ];
