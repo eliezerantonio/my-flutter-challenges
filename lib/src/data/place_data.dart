@@ -52,4 +52,14 @@ final DUMMY_PLACES = [
         'Na costa, as praias de areia branca e águas de azul profundo fazem de Benguela um dos destinos de férias privilegiados do país. No interior, as florestas abertas, as savanas arborizadas e a estepe são o berço de uma fauna variada e proporcionam aos mais aventureiros as emoções fortes dos safaris africanos.',
     temperature: '24ºC',
   ),
+  Place(
+    id: 'p6',
+    title: 'Bié',
+    capital: 'CUITO',
+    climate: 'Tropical HÚMIDO',
+    imageUrl: "images/bie.jpeg",
+    description:
+        'O Bié foi uma das províncias mais afectadas pela Guerra Civil. No entanto, as praias fluviais, lagoas, cascatas e florestas têm sido os seus mais fortes aliados na sua busca por integrar a rota turística do país.',
+    temperature: '19ºC',
+  ),
 ];
