@@ -21,5 +21,15 @@ final DUMMY_PLACES = [
     description:
         '“Terra da Felicidade” é assim que é conhecida a província do deserto, da Welwitschia Mirabilis, flor de duas únicas folhas que só nasce nesta região, do Parque do Iona, mas também das praias desertas, dos hotéis com localizações inesperadas e das famosas Pinturas.',
     temperature: '21ºC',
-  )
+  ),
+  Place(
+    id: 'p3',
+    title: 'Cunene',
+    capital: 'ONDJIVA',
+    climate: 'Tropical Seco',
+    imageUrl: "images/cunene.jpg",
+    description:
+        'Na fronteira com a Namíbia, esta província terá nos povos que a habitam a sua principal riqueza. Resistindo a todo o tipo de dificuldades há séculos, sobretudo às que são impostas pela própria natureza, grupos de nómadas Koysan, de Ovambos (Kwanyamas, Cuamatos e Muvales), Nyanecas Humbes e Hereros (Mucahones e Mutuas) persistem em viver de acordo com as suas regras ancestrais.',
+    temperature: '23ºC',
+  ),
 ];
