@@ -1,10 +1,10 @@
 import 'package:bfa_turismo/src/componets/point_custom.dart';
 import 'package:bfa_turismo/src/componets/rhombus_custom.dart';
 import 'package:bfa_turismo/src/componets/text_top_widget.dart';
-import 'package:bfa_turismo/src/componets/triangle_custom.dart';
 import 'package:bfa_turismo/src/models/place.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'icon_favorite_custom.dart';
 
 class PlacepPairWidget extends StatelessWidget {
   const PlacepPairWidget({this.place});
@@ -57,7 +57,8 @@ class PlacepPairWidget extends StatelessWidget {
                   alignmentGeometry: Alignment.topLeft,
                   height: 100,
                   opacity: 0.3,
-                )
+                ),
+                IconFavoriteCustom(place: place)
               ],
             ),
           ),
@@ -66,3 +67,4 @@ class PlacepPairWidget extends StatelessWidget {
     );
   }
 }
+
