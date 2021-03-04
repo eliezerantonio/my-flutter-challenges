@@ -61,7 +61,8 @@ final DUMMY_PLACES = [
     description:
         'O Bié foi uma das províncias mais afectadas pela Guerra Civil. No entanto, as praias fluviais, lagoas, cascatas e florestas têm sido os seus mais fortes aliados na sua busca por integrar a rota turística do país.',
     temperature: '19ºC',
-  ), Place(
+  ),
+  Place(
     id: 'p7',
     title: 'Cabinda',
     capital: 'Cabinda',
@@ -70,5 +71,15 @@ final DUMMY_PLACES = [
     description:
         'Ao ouvirmos falar de Cabinda associamos imediatamente esta província aos poços de prospecção de petróleo que a tornam numa das zonas mais ricas do país. Porém, o enclave oferece muitas outras surpresas a quem o visitar, com natural destaque para a Floresta do Maiombe.',
     temperature: '25ºC',
+  ),
+  Place(
+    id: 'p8',
+    title: 'Cuando Cubango',
+    capital: 'MENONGUE',
+    climate: 'SEMIÁRIDO',
+    imageUrl: "images/cuando_cubango.jpg",
+    description:
+        'Em tempos conhecida como as “Terras do Fim do Mundo”, a província do Cuando Cubango encara agora o futuro com esperança. As riquezas minerais escondidas no seu subsolo competem com a paisagem mágica dos parques e reservas naturais',
+    temperature: '20ºC',
   ),
 ];

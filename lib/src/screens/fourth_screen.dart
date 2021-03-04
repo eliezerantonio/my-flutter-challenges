@@ -103,7 +103,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
               ),
             ),
             Container(
-              height: 150 * places.length + 10.0,
+              height: 152 * places.length + 30.0,
               child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: places.length,
