@@ -13,16 +13,8 @@ enum FilterOptions {
   All,
 }
 
-class PlacesScreen extends StatefulWidget {
-  PlacesScreen({Key key}) : super(key: key);
-
-  @override
-  _PlacesScreenState createState() => _PlacesScreenState();
-}
-
-class _PlacesScreenState extends State<PlacesScreen> {
+class PlacesScreen extends StatelessWidget {
   final List<Place> places = DUMMY_PLACES;
-  bool _showFavoriteOnly = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
