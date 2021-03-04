@@ -10,6 +10,7 @@ class TriangleCustom extends StatelessWidget {
       this.height = 135,
       this.width = 100,
       this.colorNum = 100,
+      this.opacity=1.0,
       this.edge = Edge.TOP})
       : super(key: key);
   final AlignmentGeometry alignmentGeometry;
@@ -17,6 +18,7 @@ class TriangleCustom extends StatelessWidget {
   final double height;
   final Edge edge;
   final int colorNum;
+  final double opacity;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -24,7 +26,7 @@ class TriangleCustom extends StatelessWidget {
       child: Triangle.isosceles(
         edge: edge,
         child: Container(
-          color: Colors.grey[colorNum],
+          color: Colors.grey[colorNum].withOpacity(opacity),
           transform: Matrix4.rotationZ(-2 * pi / 280)..translate(-2.0),
           width: width,
           height: height,

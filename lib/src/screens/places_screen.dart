@@ -114,7 +114,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => PlaceDetailScreen(
-                                    places[i],
+                                   place:  places[i],
                                   ),
                                 ),
                               );
