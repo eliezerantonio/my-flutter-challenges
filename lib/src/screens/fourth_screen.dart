@@ -22,7 +22,6 @@ class PlacesScreen extends StatefulWidget {
 
 class _PlacesScreenState extends State<PlacesScreen> {
   final List<Place> places = DUMMY_PLACES;
-  bool _showFavoriteOnly = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
