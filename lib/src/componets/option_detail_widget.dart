@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class OptionDetailWidget extends StatefulWidget {
-  OptionDetailWidget({Key key, this.function, this.icon, this.selected})
+  OptionDetailWidget(
+      {Key key, this.function, this.icon, this.selected, this.text})
       : super(key: key);
 
   final Function function;
   final IconData icon;
   bool selected;
+  final String text;
   @override
   _OptionDetailWidgetState createState() => _OptionDetailWidgetState();
 }
@@ -23,7 +25,8 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
       },
       child: Container(
         color: widget.selected ? Colors.grey[200] : Colors.transparent,
-        margin: EdgeInsets.only(left: 10, right: 10),
+        margin: EdgeInsets.only(left: 10, right: 6),
+        width: 170,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -35,12 +38,12 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
                   size: 50,
                   color: widget.selected ? Colors.orange[800] : Colors.grey,
                 ),
-                Text("Pontos Turisticos"),
+                Text(widget.text),
               ],
             ),
             Container(
               height: 3,
-              width: 190,
+              width: 170,
               color: widget.selected ? Colors.orange[800] : Colors.grey,
             ),
           ],
