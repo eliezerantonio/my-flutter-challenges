@@ -32,7 +32,7 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
               children: [
                 Icon(
                   widget.icon,
-                  size: 60,
+                  size: 50,
                   color: widget.selected ? Colors.orange[800] : Colors.grey,
                 ),
                 Text("Pontos Turisticos"),
@@ -42,7 +42,7 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
               height: 3,
               width: 190,
               color: widget.selected ? Colors.orange[800] : Colors.grey,
-            )
+            ),
           ],
         ),
       ),
