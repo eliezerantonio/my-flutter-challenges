@@ -56,7 +56,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                         edge: Edge.LEFT,
                         height: 300,
                         opacity: 0.3,
-                        width: 2000,
+                        width: 1800,
                         alignmentGeometry: Alignment.topLeft,
                         colorNum: 100,
                       ),
@@ -143,8 +143,9 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
           ),
           Row(
             children: [
-              Expanded(
+              Flexible(
                 child: OptionDetailWidget(
+                  text: "Pontos Turisticos",
                   function: () {
                     setState(() {
                       selected = !selected;
@@ -155,10 +156,11 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                 ),
               ),
               SizedBox(
-                width: 10,
+                width: 7,
               ),
-              Expanded(
+              Flexible(
                 child: OptionDetailWidget(
+                  text: "Agências",
                   function: () {
                     setState(
                       () {
