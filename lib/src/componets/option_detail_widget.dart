@@ -42,7 +42,7 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
               height: 3,
               width: 190,
               color: widget.selected ? Colors.orange[800] : Colors.grey,
-            )
+            ),
           ],
         ),
       ),

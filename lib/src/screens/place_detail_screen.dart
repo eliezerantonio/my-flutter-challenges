@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bfa_turismo/src/componets/expansion_tile_custom.dart';
 import 'package:bfa_turismo/src/componets/option_detail_widget.dart';
 import 'package:bfa_turismo/src/componets/point_custom.dart';
 import 'package:bfa_turismo/src/componets/text_timber_widget.dart';
@@ -31,7 +32,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
           width: 100,
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             height: 180,
@@ -169,7 +170,27 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                 ),
               ),
             ],
-          )
+          ),
+          ExpansionTileCustom(
+            title: Text(
+              "imperdível".toUpperCase(),
+            ),
+            onExpansionChanged: (value) {
+              setState(() {
+                value = true;
+              });
+            },
+          ),
+          ExpansionTileCustom(
+            title: Text(
+              "Inesquecível comida da região".toUpperCase(),
+            ),
+          ),
+          ExpansionTileCustom(
+            title: Text(
+              "Melhores caminhos".toUpperCase(),
+            ),
+          ),
         ],
       ),
     );

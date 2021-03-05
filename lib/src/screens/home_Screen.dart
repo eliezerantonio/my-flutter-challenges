@@ -22,9 +22,6 @@ class HomeScreen extends StatelessWidget {
         enableLoop: true,
         positionSlideIcon: 0.8,
         waveType: WaveType.liquidReveal, //tipos
-        onPageChangeCallback: (page) => pageChangeCallback(page),
-        currentUpdateTypeCallback: (updateType) =>
-            updateTypeCallback(updateType),
       ),
     );
   }
