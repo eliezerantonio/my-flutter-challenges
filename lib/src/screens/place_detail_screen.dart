@@ -171,26 +171,45 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
               ),
             ],
           ),
-          ExpansionTileCustom(
-            title: Text(
-              "imperdível".toUpperCase(),
-            ),
-            onExpansionChanged: (value) {
-              setState(() {
-                value = true;
-              });
-            },
-          ),
-          ExpansionTileCustom(
-            title: Text(
-              "Inesquecível comida da região".toUpperCase(),
-            ),
-          ),
-          ExpansionTileCustom(
-            title: Text(
-              "Melhores caminhos".toUpperCase(),
-            ),
-          ),
+          !selected
+              ? Column(
+                  children: [
+                    ExpansionTileCustom(
+                      title: Text(
+                        "imperdível".toUpperCase(),
+                      ),
+                    ),
+                    ExpansionTileCustom(
+                      title: Text(
+                        "Inesquecível comida da região".toUpperCase(),
+                      ),
+                    ),
+                    ExpansionTileCustom(
+                      title: Text(
+                        "Melhores caminhos".toUpperCase(),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    ExpansionTileCustom(
+                      title: Text(
+                        "agencias".toUpperCase(),
+                      ),
+                    ),
+                    ExpansionTileCustom(
+                      title: Text(
+                        "agencias".toUpperCase(),
+                      ),
+                    ),
+                    ExpansionTileCustom(
+                      title: Text(
+                        "agencias".toUpperCase(),
+                      ),
+                    ),
+                  ],
+                ),
         ],
       ),
     );
