@@ -143,7 +143,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
           ),
           Row(
             children: [
-              Flexible(
+              Expanded(
                 child: OptionDetailWidget(
                   text: "Pontos Turisticos",
                   function: () {
@@ -158,7 +158,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
               SizedBox(
                 width: 7,
               ),
-              Flexible(
+              Expanded(
                 child: OptionDetailWidget(
                   text: "Agências",
                   function: () {
@@ -186,8 +186,32 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                           children: [
                             ExpansionTileCustom(
                               title: Text(
-                                "imperdível".toUpperCase(),
+                                "Imperdível".toUpperCase(),
                               ),
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  height: 45.0 * 4+ 10,
+                                  child: ListView.builder(
+                                    itemCount: widget.place.points.length,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return ExpansionTileCustom(
+                                        leading: Icon(Icons.add),
+                                        title: Text(
+                                          widget.place.points[index][index]
+                                              .toString()
+                                              .toUpperCase()
+                                              .replaceAll("[", "")
+                                              .replaceAll("]", ""),
+                                        ),
+                                        children: [],
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
                             ),
                             ExpansionTileCustom(
                               title: Text(
