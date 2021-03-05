@@ -143,7 +143,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
           ),
           Row(
             children: [
-              Flexible(
+              Expanded(
                 child: OptionDetailWidget(
                   text: "Pontos Turisticos",
                   function: () {
@@ -158,7 +158,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
               SizedBox(
                 width: 7,
               ),
-              Flexible(
+              Expanded(
                 child: OptionDetailWidget(
                   text: "Agências",
                   function: () {

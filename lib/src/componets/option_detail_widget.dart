@@ -25,7 +25,7 @@ class _OptionDetailWidgetState extends State<OptionDetailWidget> {
       },
       child: Container(
         color: widget.selected ? Colors.grey[200] : Colors.transparent,
-        margin: EdgeInsets.only(left: 10, right: 6),
+        margin: EdgeInsets.only(left: 10, right: 10),
         width: 170,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

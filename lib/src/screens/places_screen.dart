@@ -76,38 +76,49 @@ class _PlacesScreenState extends State<PlacesScreen> {
                 ],
               ),
             ),
-            AnimationLimiter(
-              child: Container(
-                height: 154 * places.length + 30.0,
-                child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: places.length,
-                    itemBuilder: (context, i) {
-                      return AnimationConfiguration.staggeredList(
-                        position: i,
-                        duration: const Duration(milliseconds: 1000),
-                        child: SlideAnimation(
-                          verticalOffset: -100.0,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => PlaceDetailScreen(
-                                    place: places[i],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: FadeInAnimation(
-                              child: i % 2 == 0
-                                  ? PlacepPairWidget(place: places[i])
-                                  : PlacepOddWidget(place: places[i]),
+            Container(
+              height: 154 * places.length + 30.0,
+              child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: places.length,
+                  itemBuilder: (context, i) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PlaceDetailScreen(
+                              place: places[i],
                             ),
                           ),
-                        ),
-                      );
-                    }),
-              ),
+                        );
+                      },
+                      child: i % 2 == 0
+                          ? AnimationLimiter(
+                              child: AnimationConfiguration.staggeredList(
+                                position: i,
+                                duration: const Duration(milliseconds: 1300),
+                                child: SlideAnimation(
+                                  horizontalOffset: 100.0,
+                                  child: FadeInAnimation(
+                                    child: PlacepPairWidget(place: places[i]),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : AnimationLimiter(
+                              child: AnimationConfiguration.staggeredList(
+                                position: i,
+                                duration: const Duration(milliseconds: 1300),
+                                child: SlideAnimation(
+                                  horizontalOffset: -100.0,
+                                  child: FadeInAnimation(
+                                    child: PlacepOddWidget(place: places[i]),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    );
+                  }),
             ),
           ],
         ),
