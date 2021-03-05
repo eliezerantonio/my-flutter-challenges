@@ -10,6 +10,7 @@ import 'package:bfa_turismo/src/models/place.dart';
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class PlaceDetailScreen extends StatefulWidget {
   PlaceDetailScreen({Key key, @required this.place});
@@ -172,24 +173,35 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
             ],
           ),
           !selected
-              ? Column(
-                  children: [
-                    ExpansionTileCustom(
-                      title: Text(
-                        "imperdível".toUpperCase(),
+              ? AnimationLimiter(
+                  child: AnimationConfiguration.staggeredList(
+                    position: 0,
+                    duration: const Duration(milliseconds: 1300),
+                    child: SlideAnimation(
+                      horizontalOffset: 100.0,
+                      child: FadeInAnimation(
+                        child: Column(
+                          children: [
+                            ExpansionTileCustom(
+                              title: Text(
+                                "imperdível".toUpperCase(),
+                              ),
+                            ),
+                            ExpansionTileCustom(
+                              title: Text(
+                                "Inesquecível comida da região".toUpperCase(),
+                              ),
+                            ),
+                            ExpansionTileCustom(
+                              title: Text(
+                                "Melhores caminhos".toUpperCase(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    ExpansionTileCustom(
-                      title: Text(
-                        "Inesquecível comida da região".toUpperCase(),
-                      ),
-                    ),
-                    ExpansionTileCustom(
-                      title: Text(
-                        "Melhores caminhos".toUpperCase(),
-                      ),
-                    ),
-                  ],
+                  ),
                 )
               : Column(
                   children: [
