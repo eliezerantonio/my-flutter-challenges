@@ -25,27 +25,6 @@ class PlacesScreen extends StatefulWidget {
 
 class _PlacesScreenState extends State<PlacesScreen> {
   List<Place> places = DUMMY_PLACES;
-  Timer _timer;
-  int _start = 1;
-
-  void startTimer() async {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_start == 0) {
-          setState(() {
-            places = DUMMY_PLACES;
-            timer.cancel();
-          });
-        } else {
-          setState(() {
-            _start--;
-          });
-        }
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +93,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => PlaceDetailScreen(
-                                   place:  places[i],
+                                    place: places[i],
                                   ),
                                 ),
                               );

@@ -203,11 +203,6 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                         "agencias".toUpperCase(),
                       ),
                     ),
-                    ExpansionTileCustom(
-                      title: Text(
-                        "agencias".toUpperCase(),
-                      ),
-                    ),
                   ],
                 ),
         ],
