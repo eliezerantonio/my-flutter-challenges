@@ -9,7 +9,6 @@ class FirstScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       body: Column(
@@ -25,22 +24,24 @@ class FirstScreen extends StatelessWidget {
             color: Colors.orange[800],
             top: 7,
             fontSize: 36,
-            bottom: 50,
+            bottom: 37,
           ),
           Container(
             width: double.infinity,
             height: 250,
+            transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-10.0),
             decoration: BoxDecoration(
                 image: DecorationImage(
                   alignment: Alignment.topCenter,
                   image: AssetImage("images/allplaces.png"),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
+                borderRadius: BorderRadius.circular(7),
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 8,
-                    color: Colors.black12,
-                    offset: Offset(-10, 4),
+                    blurRadius: 10,
+                    color: Colors.transparent,
+                    offset: Offset(-10, 6),
                   )
                 ]),
           ),
