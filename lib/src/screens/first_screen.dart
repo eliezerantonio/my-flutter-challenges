@@ -31,9 +31,9 @@ class FirstScreen extends StatelessWidget {
             width: double.infinity,
             height: 250,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(23),
                 image: DecorationImage(
-                  image: AssetImage("images/firstImage.gif"),
+                  alignment: Alignment.topCenter,
+                  image: AssetImage("images/allplaces.png"),
                   fit: BoxFit.fill,
                 ),
                 boxShadow: [
@@ -43,7 +43,6 @@ class FirstScreen extends StatelessWidget {
                     offset: Offset(-10, 4),
                   )
                 ]),
-            transform: Matrix4.rotationZ(-5 * pi / 280)..translate(-2.0),
           ),
           SizedBox(
             height: 50,
