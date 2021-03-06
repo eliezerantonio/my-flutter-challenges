@@ -7,7 +7,7 @@ class Place {
   final String climate;
   final String temperature;
   bool isFavorite;
-  final List<List<List>> points;
+  final List points;
 
   Place({
     this.id,
