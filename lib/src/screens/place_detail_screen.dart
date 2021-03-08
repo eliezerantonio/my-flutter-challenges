@@ -191,29 +191,36 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
-                                  height: 45.0 * 4+ 10,
+                                  height: 28.0 * 4 + 10,
                                   child: ListView.builder(
                                     itemCount: widget.place.points.length,
-                                    physics: NeverScrollableScrollPhysics(),
+                                    //  physics: NeverScrollableScrollPhysics(),
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return ExpansionTileCustom(
                                         leading: Icon(Icons.add),
                                         title: Text(
-                                          widget.place.points[index][index]
-                                              .toString()
-                                              .toUpperCase()
-                                              .replaceAll("[", "")
-                                              .replaceAll("]", ""),
-                                        ),
-                                        children: [],
+                                            widget.place.points[index][0]),
+                                        children: [
+                                          ExpansionTileCustom(
+                                            leading: Icon(Icons.add),
+                                            title: GestureDetector(
+                                              onTap: () {
+                                                print(widget.place.points[index]
+                                                    [(index + 1 + 1)]);
+                                              },
+                                              child: Text(widget.place.points[index][(1)]),
+                                            ),
+                                            children: [],
+                                          )
+                                        ],
                                       );
                                     },
                                   ),
                                 )
                               ],
                             ),
-                            ExpansionTileCustom(
+                            /* ExpansionTileCustom(
                               title: Text(
                                 "Inesquecível comida da região".toUpperCase(),
                               ),
@@ -222,7 +229,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                               title: Text(
                                 "Melhores caminhos".toUpperCase(),
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
                       ),
