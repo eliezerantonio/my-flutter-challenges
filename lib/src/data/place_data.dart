@@ -12,9 +12,9 @@ final DUMMY_PLACES = [
         'A mais de 1.000 metros de altitude e chegando aos 2.300 nos seus pontos mais elevados, a província da Huíla é marcada pelo final do Planalto Central e irrigada pelas imensas bacias hidrográficas do Cunene e do Cubango. Especialmente fértil, é também a província das belas paisagens de abismos e cascatas.',
     temperature: '20ºC',
     points: [
-      ["Cristo Rei", "Statua", "latitude e longitude"], 
-      ["Fenda", "buraco", "latitude e longitude"], 
-      ["Serra", "loja", "latitude e longitude"], 
+      ["Cristo Rei", "Statua", "latitude e longitude"],
+      ["Fenda", "buraco", "latitude e longitude"],
+      ["Serra", "loja", "latitude e longitude"],
     ],
   ),
   Place(
@@ -143,5 +143,27 @@ final DUMMY_PLACES = [
         'Em pleno Planalto Central, o Huambo foi berço de reinos antigos que se impuseram pela sua resiliência e resistência. Na época colonial, ali nasceu, de raiz, a cidade a que chamaram de “Nova Lisboa” e que se pretendia que viesse a ser a capital da colónia.',
     temperature: '19ºC',
     //   points: [["Cristo rei"," bom lugar"],["Tundavala","Fenda"],]
+  ),
+  Place(
+    id: 'p12',
+    title: 'Luanda',
+    capital: "Luanda",
+    climate: 'Tropical seco',
+    imageUrl: "images/luanda.jpg",
+    description:
+        'Fundada em 1575 (1576), sob o nome de São Paulo da Assunção de Loanda, a capital do país cresceu sem parar desde então e é hoje uma cidade com quase sete milhões de habitantes. Testemunha e personagem principal da história do país, Luanda é cosmopolita e repleta de atracções para os seus habitantes e visitantes.',
+    temperature: '25ºC',
+    points: [
+      [
+        "Baía De Luanda",
+        "A Baía de Luanda, cujas águas são protegidas pela Ilha de Luanda, foi o lugar de fundação da cidade por Paulo Dias de Novais em 1575.Continua até hoje a ser o cartão postal da cidade.",
+        "-8.810277,+13.231640"
+      ],
+      [
+        "Ilha do Cabo",
+        "Descritas por poetas, cantores com uma saudade impar, Ilha do Cabo é um cordão litoral composto por uma estreita língua de terra com 7 km de comprimento que separa a cidade de Luanda do Oceano Atlântico e originou a Baía de Luanda.",
+        "-10.6928128,12.3845321"
+      ],
+    ],
   ),
 ];
