@@ -166,4 +166,26 @@ final DUMMY_PLACES = [
       ],
     ],
   ),
+  Place(
+    id: 'p13',
+    title: 'Lunda Norte',
+    capital: "Dundo",
+    climate: 'Tropical Humido',
+    imageUrl: "images/lunda_norte.jpg",
+    description:
+        'As pedras preciosas deram fama a uma província que revela muitos outros tesouros a quem a visita, das antigas cidades traçadas a régua e esquadro às paisagens de fazer perder a respiração e onde a água está sempre presente.',
+    temperature: '25ºC',
+    points: [
+      [
+        "Museu Etnográfico Do Dundo",
+        "O Museu Etnográfico do Dundo, o primeiro museu de Angola e um dos maiores a sul do Saara, que exibe um acervo da região e do país, com destaque para a cultura Cokwe e a sua mais famosa estatueta Mwana Pwo, que idealiza os valores femininos, assim como para a célebre estatueta que hoje representa Angola no mundo, a Samanyonga (O Pensador).",
+        "-9.9647949,12.613236"
+      ],
+      [
+        "Lagoa de Carumbo",
+        "A Lagoa de Carumbo, uma das Sete Maravilhas Naturais de Angola, a cerca de 170 quilómetros do Dundo.",
+        "-9.9495846,12.4076322"
+      ],
+    ],
+  ),
 ];
