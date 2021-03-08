@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:bfa_turismo/src/componets/expansion_tile_custom.dart';
+import 'package:bfa_turismo/src/componets/expansion_tile_custom2.dart';
 import 'package:bfa_turismo/src/componets/option_detail_widget.dart';
 import 'package:bfa_turismo/src/componets/point_custom.dart';
 import 'package:bfa_turismo/src/componets/text_timber_widget.dart';
@@ -191,27 +192,34 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
-                                  height: 28.0 * 4 + 10,
+                                  height:
+                                      63.0 * widget.place.points.length + 20,
                                   child: ListView.builder(
                                     itemCount: widget.place.points.length,
-                                    //  physics: NeverScrollableScrollPhysics(),
+                                      physics: NeverScrollableScrollPhysics(),
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return ExpansionTileCustom(
-                                        leading: Icon(Icons.add),
-                                        title: Text(
-                                            widget.place.points[index][0]),
+                                      return ExpansionTileCustom2(
+                                        title:
+                                            Text(widget.place.points[index][0]),
                                         children: [
-                                          ExpansionTileCustom(
-                                            leading: Icon(Icons.add),
-                                            title: GestureDetector(
-                                              onTap: () {
-                                                print(widget.place.points[index]
-                                                    [(index + 1 + 1)]);
-                                              },
-                                              child: Text(widget.place.points[index][(1)]),
-                                            ),
-                                            children: [],
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                  child:
+                                                      Icon(Icons.location_on)),
+                                              Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    widget.place.points[index]
+                                                        [(1)],
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color:
+                                                            Colors.grey[600]),
+                                                  ))
+                                            ],
                                           )
                                         ],
                                       );
