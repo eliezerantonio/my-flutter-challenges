@@ -209,5 +209,26 @@ final DUMMY_PLACES = [
         "-10.9070871,12.4105619"
       ],
     ],
+  ), Place(
+    id: 'p15',
+    title: 'Malanje',
+    capital: "Malanje",
+    climate: 'Tropical Húmido',
+    imageUrl: "images/malanje.jpg",
+    description:
+        'Se há província em Angola que é privilegiada pelas suas belezas naturais Malanje é uma delas. Não é por acaso que este é um dos destinos mais procurado por quem não abdica do descanso ao mesmo tempo que conhece alguns dos pontos mais turísticos do país.',
+    temperature: '22ºC',
+    points: [
+      [
+        "Quedas Do Rio Chiumbe",
+        "Para visitar na província da Lunda-Sul são as bonitas Quedas do Rio Chiumbe, uma das Sete Maravilhas Naturais de Angola e o seu Miradouro, local perfeito para visualizar o quadro edílico e inesquecível.",
+        "-11.9267938,12.373994"
+      ],
+      [
+        "Sé Catedral De Saurimo",
+        "A imponência da Sé Catedral de Saurimo e dos seus jardins, construída entre 1958 e 1959 e dedicada a Nossa Senhora de Assunção.",
+        "-10.9070871,12.4105619"
+      ],
+    ],
   ),
 ];
