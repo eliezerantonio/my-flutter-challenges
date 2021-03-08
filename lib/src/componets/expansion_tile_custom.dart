@@ -229,8 +229,8 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTileTheme.merge(
-            iconColor: _iconColor.value,
-            textColor: _headerColor.value,
+            iconColor:Colors.grey[500],
+            textColor: Colors.grey[700],
             child: ListTile(
               onTap: _handleTap,
               contentPadding: widget.tilePadding,
@@ -239,7 +239,7 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
               subtitle: widget.subtitle,
               leading: widget.leading ?? RotationTransition(
                 turns: _iconTurns,
-                child: const Icon(Icons.expand_more),
+                child:  Icon(Icons.expand_more, color: Colors.orange[800],),
               ),
             ),
           ),
