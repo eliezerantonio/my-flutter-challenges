@@ -200,7 +200,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                                       return ExpansionTileCustom(
                                         leading: Icon(Icons.add),
                                         title: Text(
-                                            widget.place.points[index][index]),
+                                            widget.place.points[index][0]),
                                         children: [
                                           ExpansionTileCustom(
                                             leading: Icon(Icons.add),
@@ -209,8 +209,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                                                 print(widget.place.points[index]
                                                     [(index + 1 + 1)]);
                                               },
-                                              child: Text(widget.place
-                                                  .points[index][(index + 1)]),
+                                              child: Text(widget.place.points[index][(1)]),
                                             ),
                                             children: [],
                                           )

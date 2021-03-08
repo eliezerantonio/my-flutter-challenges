@@ -11,7 +11,11 @@ final DUMMY_PLACES = [
     description:
         'A mais de 1.000 metros de altitude e chegando aos 2.300 nos seus pontos mais elevados, a província da Huíla é marcada pelo final do Planalto Central e irrigada pelas imensas bacias hidrográficas do Cunene e do Cubango. Especialmente fértil, é também a província das belas paisagens de abismos e cascatas.',
     temperature: '20ºC',
-    points: [["Cristo Rei","Statua","latitude e longitude"],],
+    points: [
+      ["Cristo Rei", "Statua", "latitude e longitude"], 
+      ["Fenda", "buraco", "latitude e longitude"], 
+      ["Serra", "loja", "latitude e longitude"], 
+    ],
   ),
   Place(
     id: 'p2',
@@ -33,7 +37,13 @@ final DUMMY_PLACES = [
     description:
         'Na fronteira com a Namíbia, esta província terá nos povos que a habitam a sua principal riqueza. Resistindo a todo o tipo de dificuldades há séculos, sobretudo às que são impostas pela própria natureza, grupos de nómadas Koysan, de Ovambos (Kwanyamas, Cuamatos e Muvales), Nyanecas Humbes e Hereros (Mucahones e Mutuas) persistem em viver de acordo com as suas regras ancestrais.',
     temperature: '23ºC',
-    // points: [[["Cristo rei"],[" bom lugar"]],[["Tundavala"],["Fenda"]],]
+    points: [
+      [
+        "Praia Pambala",
+        "Na Praia Pambala, a água do mar é limpa e fresca, onde só se ouve o barulho das ondas e dos pássaros. O local ideal para desanuviar do stress provocado pela semana de trabalho.",
+        "-8.6061398, 13.1740878"
+      ]
+    ],
   ),
   Place(
     id: 'p4',
@@ -44,7 +54,18 @@ final DUMMY_PLACES = [
     description:
         'A 80 km de Luanda, o Bengo é uma das províncias com maior potencial turístico do país. As praias seduzem os visitantes para passeios de fim-de-semana ou escapadinhas de poucos dias, mas este ainda é um segredo bem guardado.',
     temperature: '26ºC',
-    // points: [["Cristo rei"," bom lugar"],["Tundavala","Fenda"],]
+    points: [
+      [
+        "Praia Pambala",
+        "Na Praia Pambala, a água do mar é limpa e fresca, onde só se ouve o barulho das ondas e dos pássaros. O local ideal para desanuviar do stress provocado pela semana de trabalho.",
+        "-8.6061398, 13.1740878"
+      ],
+      [
+        "Praia Pambala",
+        "Na Praia Pambala, a água do mar é limpa e fresca, onde só se ouve o barulho das ondas e dos pássaros. O local ideal para desanuviar do stress provocado pela semana de trabalho.",
+        "-8.6061398, 13.1740878"
+      ],
+    ],
   ),
   Place(
     id: 'p5',
