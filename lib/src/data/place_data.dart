@@ -188,4 +188,26 @@ final DUMMY_PLACES = [
       ],
     ],
   ),
+  Place(
+    id: 'p14',
+    title: 'Lunda Sul',
+    capital: "Saurimo",
+    climate: 'Savana Tropical',
+    imageUrl: "images/lunda_sul.jpg",
+    description:
+        'A Lunda Sul tem vindo a desligar-se da sua imagem de uma província com diamantes para se assumir como um destino com valiosos lugares para serem conhecidos. O seu imenso potencial turístico já é reconhecido por todos.',
+    temperature: '22ºC',
+    points: [
+      [
+        "Quedas Do Rio Chiumbe",
+        "Para visitar na província da Lunda-Sul são as bonitas Quedas do Rio Chiumbe, uma das Sete Maravilhas Naturais de Angola e o seu Miradouro, local perfeito para visualizar o quadro edílico e inesquecível.",
+        "-11.9267938,12.373994"
+      ],
+      [
+        "Sé Catedral De Saurimo",
+        "A imponência da Sé Catedral de Saurimo e dos seus jardins, construída entre 1958 e 1959 e dedicada a Nossa Senhora de Assunção.",
+        "-10.9070871,12.4105619"
+      ],
+    ],
+  ),
 ];
