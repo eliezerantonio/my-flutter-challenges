@@ -1,4 +1,3 @@
-
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -22,7 +21,7 @@ const Duration _kExpand = Duration(milliseconds: 200);
 /// This widget is typically used with [ListView] to create an
 /// "expand / collapse" list entry. When used with scrolling widgets like
 /// [ListView], a unique [PageStorageKey] must be specified to enable the
-/// [ExpansionTileCustom] to save and restore its expanded state when it is scrolled
+/// [ExpansionTileCustom2] to save and restore its expanded state when it is scrolled
 /// in and out of view.
 ///
 /// See also:
@@ -31,11 +30,11 @@ const Duration _kExpand = Duration(milliseconds: 200);
 ///    expansion tile represents a sublist.
 ///  * The "Expand/collapse" section of
 ///    <https://material.io/guidelines/components/lists-controls.html>.
-class ExpansionTileCustom extends StatefulWidget {
+class ExpansionTileCustom2 extends StatefulWidget {
   /// Creates a single-line [ListTile] with a trailing button that expands or collapses
   /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
   /// be non-null.
-  const ExpansionTileCustom({
+  const ExpansionTileCustom2({
     Key key,
     this.leading,
     @required this.title,
@@ -50,14 +49,14 @@ class ExpansionTileCustom extends StatefulWidget {
     this.expandedCrossAxisAlignment,
     this.expandedAlignment,
     this.childrenPadding,
-  }) : assert(initiallyExpanded != null),
-       assert(maintainState != null),
-       assert(
-       expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
-       'CrossAxisAlignment.baseline is not supported since the expanded children '
-           'are aligned in a column, not a row. Try to use another constant.',
-       ),
-       super(key: key);
+  })  : assert(initiallyExpanded != null),
+        assert(maintainState != null),
+        assert(
+          expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
+          'CrossAxisAlignment.baseline is not supported since the expanded children '
+          'are aligned in a column, not a row. Try to use another constant.',
+        ),
+        super(key: key);
 
   /// A widget to display before the title.
   ///
@@ -149,13 +148,17 @@ class ExpansionTileCustom extends StatefulWidget {
   final EdgeInsetsGeometry childrenPadding;
 
   @override
-  _ExpansionTileCustomState createState() => _ExpansionTileCustomState();
+  _ExpansionTileCustom2State createState() => _ExpansionTileCustom2State();
 }
 
-class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTickerProviderStateMixin {
-  static final Animatable<double> _easeOutTween = CurveTween(curve: Curves.easeOut);
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
+class _ExpansionTileCustom2State extends State<ExpansionTileCustom2>
+    with SingleTickerProviderStateMixin {
+  static final Animatable<double> _easeOutTween =
+      CurveTween(curve: Curves.easeOut);
+  static final Animatable<double> _easeInTween =
+      CurveTween(curve: Curves.easeIn);
+  static final Animatable<double> _halfTween =
+      Tween<double>(begin: 0.0, end: 0.5);
 
   final ColorTween _borderColorTween = ColorTween();
   final ColorTween _headerColorTween = ColorTween();
@@ -181,11 +184,12 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
     _borderColor = _controller.drive(_borderColorTween.chain(_easeOutTween));
     _headerColor = _controller.drive(_headerColorTween.chain(_easeInTween));
     _iconColor = _controller.drive(_iconColorTween.chain(_easeInTween));
-    _backgroundColor = _controller.drive(_backgroundColorTween.chain(_easeOutTween));
+    _backgroundColor =
+        _controller.drive(_backgroundColorTween.chain(_easeOutTween));
 
-    _isExpanded = PageStorage.of(context)?.readState(context) as bool ?? widget.initiallyExpanded;
-    if (_isExpanded)
-      _controller.value = 1.0;
+    _isExpanded = PageStorage.of(context)?.readState(context) as bool ??
+        widget.initiallyExpanded;
+    if (_isExpanded) _controller.value = 1.0;
   }
 
   @override
@@ -201,8 +205,7 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
         _controller.forward();
       } else {
         _controller.reverse().then<void>((void value) {
-          if (!mounted)
-            return;
+          if (!mounted) return;
           setState(() {
             // Rebuild without widget.children.
           });
@@ -229,18 +232,28 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTileTheme.merge(
-            iconColor:Colors.grey[500],
+            iconColor: Colors.grey[700],
             textColor: Colors.grey[700],
             child: ListTile(
               onTap: _handleTap,
               contentPadding: widget.tilePadding,
-            //  leading: widget.leading,
+              //  leading: widget.leading,
               title: widget.title,
               subtitle: widget.subtitle,
-              leading: widget.leading ?? RotationTransition(
-                turns: _iconTurns,
-                child:  Icon(Icons.expand_more, color: Colors.orange[800],),
-              ),
+              leading: _isExpanded
+                  ? RotationTransition(
+                      turns: _iconTurns,
+                      child: Icon(
+                        Icons.remove_circle,
+                        color: Colors.grey[500],
+                      ))
+                  : RotationTransition(
+                      turns: _iconTurns,
+                      child: Icon(
+                        Icons.add_circle,
+                        color: Colors.grey[500],
+                      ),
+                    ),
             ),
           ),
           ClipRect(
@@ -275,18 +288,18 @@ class _ExpansionTileCustomState extends State<ExpansionTileCustom> with SingleTi
     final bool shouldRemoveChildren = closed && !widget.maintainState;
 
     final Widget result = Offstage(
-      child: TickerMode(
-        child: Padding(
-          padding: widget.childrenPadding ?? EdgeInsets.zero,
-          child: Column(
-            crossAxisAlignment: widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
-            children: widget.children,
+        child: TickerMode(
+          child: Padding(
+            padding: widget.childrenPadding ?? EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: widget.expandedCrossAxisAlignment ??
+                  CrossAxisAlignment.center,
+              children: widget.children,
+            ),
           ),
+          enabled: !closed,
         ),
-        enabled: !closed,
-      ),
-      offstage: closed
-    );
+        offstage: closed);
 
     return AnimatedBuilder(
       animation: _controller.view,
