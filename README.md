@@ -1,6 +1,10 @@
-# bfa_turismo Clone
+# 
 
+## Challenges
 
+|[](bfa_turismo Clone)|
+|:-:|:-:|
+|![Twitter Desktop](bfa_turismo_clone/screen_shots/01gif.gif)|
 
  <img width="390px"  src="https://github.com/eliezerantonio/bfa_turismo-clone-/blob/main/bfa_turismo_clone/screen_shots/01gif.gif"> |  <img width="390"  src="https://github.com/eliezerantonio/bfa_turismo-clone-/blob/main/bfa_turismo_clone/screen_shots/02gif.gif">
  
