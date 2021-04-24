@@ -22,16 +22,7 @@ final DUMMY_PLACES = [
         "A estátua de Cristo Rei é um monumento e santuário católico com vista para a cidade de Lubango, no sul de Angola. Foi inspirado na estátua do Cristo Redentor no Rio de Janeiro, como uma das quatro únicas no mundo. Esta estátua de mármore branco com 30 metros de altura foi construída em 1957",
         "-13.735941,12.3715226"
       ],
-      [
-        "Fenda Da Tundavala",
-        "A estátua de Cristo Rei é um monumento e santuário católico com vista para a cidade de Lubango, no sul de Angola. Foi inspirado na estátua do Cristo Redentor no Rio de Janeiro, como uma das quatro únicas no mundo. Esta estátua de mármore branco com 30 metros de altura foi construída em 1957",
-        "-13.735941,12.3715226"
-      ],
-      [
-        "Fenda Da Tundavala",
-        "A estátua de Cristo Rei é um monumento e santuário católico com vista para a cidade de Lubango, no sul de Angola. Foi inspirado na estátua do Cristo Redentor no Rio de Janeiro, como uma das quatro únicas no mundo. Esta estátua de mármore branco com 30 metros de altura foi construída em 1957",
-        "-13.735941,12.3715226"
-      ],
+   
     ],
   ),
   Place(
