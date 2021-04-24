@@ -193,32 +193,37 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   height:
-                                      63.0 * widget.place.points.length + 20,
+                                      40.0 * widget.place.points.length + 40,
                                   child: ListView.builder(
                                     itemCount: widget.place.points.length,
-                                      physics: NeverScrollableScrollPhysics(),
+                                    physics: NeverScrollableScrollPhysics(),
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return ExpansionTileCustom2(
                                         title:
                                             Text(widget.place.points[index][0]),
                                         children: [
-                                          Row(
+                                          Column(
                                             children: [
-                                              Expanded(
-                                                  child:
-                                                      Icon(Icons.location_on)),
-                                              Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    widget.place.points[index]
-                                                        [(1)],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color:
-                                                            Colors.grey[600]),
-                                                  ))
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                      child: Icon(
+                                                          Icons.location_on)),
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Text(
+                                                      widget.place.points[index]
+                                                          [(1)],
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              Colors.grey[600]),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ],
                                           )
                                         ],
