@@ -28,29 +28,72 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Container(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CardTotalMoney(),
             SizedBox(height: 20),
-            Expanded(
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                children: [
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                  StainWidget(),
-                ],
+            Container(
+              child: StainWidget(
+                icon: Icons.file_upload,
+                title: "Enviar",
+                subtitle: "Enviar dinheiro",
+                color: Colors.red[100],
+                colorIcon: Colors.red,
               ),
             ),
+            // Expanded(
+            //   child: GridView(
+            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //         crossAxisCount: 2),
+            //     children: [
+            //       StainWidget(
+            //         icon: Icons.file_upload,
+            //         title: "Enviar",
+            //         subtitle: "Enviar dinheiro",
+            //         color: Colors.red[100],
+            //         colorIcon: Colors.red,
+            //       ),
+            //       StainWidget(
+            //         icon: Icons.file_download,
+            //         title: "Receber",
+            //         subtitle: "Receber dinheiro",
+            //         color: Colors.green[100],
+            //         colorIcon: Colors.green,
+            //       ),
+            //       StainWidget(
+            //         icon: Icons.search,
+            //         title: "Consultar",
+            //         subtitle: "Receber dinheiro",
+            //         color: Colors.indigo[100],
+            //         colorIcon: Colors.indigo,
+            //       ),
+            //       StainWidget(
+            //         icon: Icons.file_download,
+            //         title: "Receber",
+            //         subtitle: "Receber dinheiro",
+            //         color: Colors.green[100],
+            //         colorIcon: Colors.green,
+            //       ),
+            //       StainWidget(
+            //         icon: Icons.download_done_outlined,
+            //         title: "Receber",
+            //         subtitle: "Receber dinheiro",
+            //         color: Colors.green[100],
+            //         colorIcon: Colors.green,
+            //       ),
+            //       StainWidget(
+            //         icon: Icons.download_done_outlined,
+            //         title: "Receber",
+            //         subtitle: "Receber dinheiro",
+            //         color: Colors.green[100],
+            //         colorIcon: Colors.green,
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

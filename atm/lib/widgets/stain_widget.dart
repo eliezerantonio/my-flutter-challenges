@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 class StainWidget extends StatelessWidget {
-  const StainWidget(
-      {Key key,
-      @required this.title,
-      @required this.subtitle,
-      @required this.icon})
-      : super(key: key);
+  const StainWidget({
+    Key key,
+    @required this.title,
+    @required this.subtitle,
+    @required this.icon,
+    @required this.color,
+    @required this.colorIcon,
+  }) : super(key: key);
   final String title;
   final String subtitle;
   final IconData icon;
+  final Color color;
+  final Color colorIcon;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -38,11 +42,11 @@ class StainWidget extends StatelessWidget {
                     height: 30,
                     child: Icon(
                       icon,
-                      color: Colors.red,
+                      color: colorIcon,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.red[100],
+                      color: color,
                     ),
                   ),
                   SizedBox(
