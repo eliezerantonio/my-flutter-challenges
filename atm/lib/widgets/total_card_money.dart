@@ -5,6 +5,8 @@ class CardTotalMoney extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final accentColor = Theme.of(context).accentColor;
+    final primaryColor = Theme.of(context).primaryColor;
     return Container(
       width: 300,
       alignment: Alignment.center,
@@ -15,13 +17,13 @@ class CardTotalMoney extends StatelessWidget {
           Text(
             "Balanço total",
             style: TextStyle(
-              color: Colors.white,
+              color: primaryColor,
             ),
           ),
           Text(
             "3.000.000 AOA",
             style: TextStyle(
-              color: Colors.white,
+              color: primaryColor,
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
@@ -29,7 +31,7 @@ class CardTotalMoney extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: Colors.indigo[200],
+        color: accentColor,
         borderRadius: BorderRadius.circular(10),
       ),
     );

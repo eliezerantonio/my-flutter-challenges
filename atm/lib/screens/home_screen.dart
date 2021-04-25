@@ -8,11 +8,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final accentColor = Theme.of(context).accentColor;
     return Scaffold(
       appBar: AppBar(
         leading: LogoWidget(),
         leadingWidth: 30,
-        
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -29,7 +29,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: Center(
