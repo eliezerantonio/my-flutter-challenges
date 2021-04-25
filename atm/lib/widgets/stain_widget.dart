@@ -21,11 +21,11 @@ class StainWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 157,
+            width: 150,
             height: 170,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.grey[200],
+              color: Colors.grey[100],
             ),
           ),
           Align(
@@ -51,14 +51,14 @@ class StainWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 7,
+                    height: 17,
                   ),
                   Text(
                     title,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: 20,
                   ),
                   Text(
                     subtitle,

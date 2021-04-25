@@ -3,6 +3,7 @@ import 'package:atm/models/client.dart';
 import 'package:atm/models/user_manager.dart';
 import 'package:atm/screens/home_screen.dart';
 import 'package:atm/widgets/bottom_nav_bar.dart';
+import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
@@ -66,17 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 60,
-                          color: !_loading ? primaryColor : Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -124,7 +114,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            )
+            ),
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: LogoWidget(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -148,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (apiResponse.ok) {
       Client user = apiResponse.result;
       if (user != null) {
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => BottomNavBar(),
         ));
       }

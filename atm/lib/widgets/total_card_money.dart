@@ -7,32 +7,35 @@ class CardTotalMoney extends StatelessWidget {
   Widget build(BuildContext context) {
     final accentColor = Theme.of(context).accentColor;
     final primaryColor = Theme.of(context).primaryColor;
-    return Container(
-      width: 300,
-      alignment: Alignment.center,
-      height: 100,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Balanço total",
-            style: TextStyle(
-              color: primaryColor,
+    return Padding(
+      padding: EdgeInsets.only(top: 10),
+      child: Container(
+        width: 350,
+        alignment: Alignment.center,
+        height: 90,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Balanço total",
+              style: TextStyle(
+                color: primaryColor,
+              ),
             ),
-          ),
-          Text(
-            "3.000.000 AOA",
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+            Text(
+              "60.000 AOA",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-        color: accentColor,
-        borderRadius: BorderRadius.circular(10),
+          ],
+        ),
+        decoration: BoxDecoration(
+          color: accentColor,
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
     );
   }

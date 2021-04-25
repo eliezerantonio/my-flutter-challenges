@@ -10,6 +10,8 @@ void main() => runApp(
             primaryColor: Color(0xff4ca6a8),
             accentColor: Color(0xffbbeced),
             scaffoldBackgroundColor: Colors.white,
-            appBarTheme: AppBarTheme(color: Colors.white)),
+            appBarTheme: AppBarTheme(
+              color: Colors.white,
+            )),
       ),
     );
