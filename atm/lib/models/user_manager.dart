@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:atm/helpers/api_response.dart';
 import 'package:atm/models/client.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
-class UserManager {
+class UserManager extends ChangeNotifier {
   static Future<ApiResponse<Client>> login(
       String email, String password) async {
     try {
