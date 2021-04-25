@@ -2,6 +2,8 @@ import 'package:atm/helpers/api_response.dart';
 import 'package:atm/models/client.dart';
 import 'package:atm/models/user_manager.dart';
 import 'package:atm/screens/home_screen.dart';
+import 'package:atm/widgets/bottom_nav_bar.dart';
+import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Form(
@@ -38,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 420,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.indigo,
+                        color: primaryColor,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(550),
                         ),
@@ -51,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 420,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.indigo,
+                        color: primaryColor,
                         borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(550),
                         ),
@@ -64,17 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 40,
-                            color: !_loading ? Colors.indigo : Colors.white),
-                      ),
-                    ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     TextFormFieldWidget(
                       hint: "E-mail",
@@ -101,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               highlightColor: Colors.white30,
                               elevation: 7,
                               color: Colors.white,
-                              textColor: Colors.indigo,
+                              textColor: primaryColor,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),
@@ -110,14 +104,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               onPressed: _onClikLogin,
-                              child: Text("Entrar"),
+                              child: Text(
+                                "Entrar",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           )
                         : Center(child: CircularProgressIndicator())
                   ],
                 ),
               ),
-            )
+            ),
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: LogoWidget(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -141,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
     if (apiResponse.ok) {
       Client user = apiResponse.result;
       if (user != null) {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => BottomNavBar(),
         ));
       }
     } else {

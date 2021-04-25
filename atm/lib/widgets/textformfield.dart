@@ -18,6 +18,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final FormFieldValidator validator;
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return Card(
       elevation: 7,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -26,12 +27,12 @@ class TextFormFieldWidget extends StatelessWidget {
         obscureText: obscure,
         keyboardType: keyboardType,
         validator: validator,
-        style: TextStyle(color: Colors.indigo),
+        style: TextStyle(color: primaryColor),
         decoration: InputDecoration(
             border: InputBorder.none,
             prefixIcon: Icon(
               icon,
-              color: Colors.indigo,
+              color: primaryColor,
             ),
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
@@ -40,8 +41,8 @@ class TextFormFieldWidget extends StatelessWidget {
             contentPadding: EdgeInsets.all(20),
             hintText: hint,
             errorMaxLines: 1,
-            labelStyle: TextStyle(color: Colors.indigo),
-            hintStyle: TextStyle(color: Colors.indigo)),
+            labelStyle: TextStyle(color: primaryColor),
+            hintStyle: TextStyle(color: primaryColor)),
       ),
     );
   }
