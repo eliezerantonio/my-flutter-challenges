@@ -31,6 +31,8 @@ dependencies:
   provider: ^4.3.2+2 
   http: ^0.12.2
   curved_navigation_bar: ^0.3.4
+  credit_card: ^0.1.6
+  
 
 dev_dependencies:
   flutter_test:
