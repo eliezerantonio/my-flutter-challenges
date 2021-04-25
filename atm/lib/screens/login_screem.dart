@@ -2,6 +2,7 @@ import 'package:atm/helpers/api_response.dart';
 import 'package:atm/models/client.dart';
 import 'package:atm/models/user_manager.dart';
 import 'package:atm/screens/home_screen.dart';
+import 'package:atm/widgets/bottom_nav_bar.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Client user = apiResponse.result;
       if (user != null) {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => BottomNavBar(),
         ));
       }
     } else {
