@@ -1,7 +1,6 @@
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
-import 'package:atm/widgets/total_card_money.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -57,62 +56,65 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 20),
           child: ListView(
             children: [
               MySample(),
               SizedBox(height: 7),
-              SizedBox(
-                width: 150,
-                height: size.height - 50,
-                child: GridView(
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  children: [
-                    StainWidget(
-                      icon: Icons.file_upload,
-                      title: "Enviar",
-                      subtitle: "Enviar dinheiro",
-                      color: Colors.red[100],
-                      colorIcon: Colors.red,
-                    ),
-                    StainWidget(
-                      icon: Icons.file_download,
-                      title: "Receber",
-                      subtitle: "Receber dinheiro",
-                      color: Colors.green[100],
-                      colorIcon: Colors.green,
-                    ),
-                    StainWidget(
-                      icon: Icons.search,
-                      title: "Consultar",
-                      subtitle: "Consultar dados",
-                      color: Colors.indigo[100],
-                      colorIcon: Colors.indigo,
-                    ),
-                    StainWidget(
-                      icon: Icons.attach_money_sharp,
-                      title: "Pagamentos",
-                      subtitle: "Contas",
-                      color: Colors.amber[100],
-                      colorIcon: Colors.amber,
-                    ),
-                    StainWidget(
-                      icon: Icons.shopping_cart_outlined,
-                      title: "Compras",
-                      subtitle: "Compras online",
-                      color: Colors.lightBlue[100],
-                      colorIcon: Colors.lightBlue,
-                    ),
-                    StainWidget(
-                      icon: Icons.trending_up_rounded,
-                      title: "Levantar",
-                      subtitle: "Levantar dinheiro",
-                      color: Colors.pinkAccent[100],
-                      colorIcon: Colors.pinkAccent,
-                    ),
-                  ],
+              Container(
+                padding: EdgeInsets.only(left: 20),
+                child: SizedBox(
+                  width: 150,
+                  height: size.height - 50,
+                  child: GridView(
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
+                    children: [
+                      StainWidget(
+                        icon: Icons.file_upload,
+                        title: "Enviar",
+                        subtitle: "Enviar dinheiro",
+                        color: Colors.red[100],
+                        colorIcon: Colors.red,
+                      ),
+                      StainWidget(
+                        icon: Icons.file_download,
+                        title: "Carregar",
+                        subtitle: "Carregar Conta",
+                        color: Colors.green[100],
+                        colorIcon: Colors.green,
+                      ),
+                      StainWidget(
+                        icon: Icons.search,
+                        title: "Consultar",
+                        subtitle: "Consultar dados",
+                        color: Colors.indigo[100],
+                        colorIcon: Colors.indigo,
+                      ),
+                      StainWidget(
+                        icon: Icons.attach_money_sharp,
+                        title: "Pagamentos",
+                        subtitle: "Contas",
+                        color: Colors.amber[100],
+                        colorIcon: Colors.amber,
+                      ),
+                      StainWidget(
+                        icon: Icons.shopping_cart_outlined,
+                        title: "Compras",
+                        subtitle: "Compras online",
+                        color: Colors.lightBlue[100],
+                        colorIcon: Colors.lightBlue,
+                      ),
+                      StainWidget(
+                        icon: Icons.trending_up_rounded,
+                        title: "Levantar",
+                        subtitle: "Levantar dinheiro",
+                        color: Colors.pinkAccent[100],
+                        colorIcon: Colors.pinkAccent,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
