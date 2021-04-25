@@ -6,5 +6,9 @@ void main() => runApp(
       MaterialApp(
         home: LoginScreen(),
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Color(0xff4ca6a8),
+          scaffoldBackgroundColor: Colors.white,
+        ),
       ),
     );

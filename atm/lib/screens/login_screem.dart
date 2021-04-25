@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Form(
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 420,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.indigo,
+                        color: primaryColor,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(550),
                         ),
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 420,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.indigo,
+                        color: primaryColor,
                         borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(550),
                         ),
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Login",
                         style: TextStyle(
                           fontSize: 60,
-                          color: !_loading ? Colors.indigo : Colors.white,
+                          color: !_loading ? primaryColor : Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               highlightColor: Colors.white30,
                               elevation: 7,
                               color: Colors.white,
-                              textColor: Colors.indigo,
+                              textColor: primaryColor,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),
@@ -113,7 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               onPressed: _onClikLogin,
-                              child: Text("Entrar"),
+                              child: Text(
+                                "Entrar",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           )
                         : Center(child: CircularProgressIndicator())
