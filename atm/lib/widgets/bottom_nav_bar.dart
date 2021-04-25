@@ -35,11 +35,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: 0,
-          height: 50.0,
+          height: 40.0,
           items: <Widget>[
             Icon(Icons.home, size: 30),
             Icon(Icons.compare_arrows, size: 30),
-            Icon(Icons.add, size: 30),
+            Icon(Icons.add, size: 45),
             Icon(Icons.call_split, size: 30),
             Icon(Icons.perm_identity, size: 30),
           ],
