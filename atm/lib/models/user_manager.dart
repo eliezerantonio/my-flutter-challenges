@@ -11,8 +11,8 @@ class UserManager {
       var url = 'http://172.20.10.4:3000/api/client/login';
       Map<String, String> headers = {"Content-type": "application/json"};
       Map params = {
-        'email': 'eliezer@gmail.com',
-        'password': 'eliezer',
+        'email': email,
+        'password': password,
       };
 
       String credencials = jsonEncode(params);

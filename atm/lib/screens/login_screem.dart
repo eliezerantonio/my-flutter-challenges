@@ -12,47 +12,81 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormFieldWidget(
-              hint: "E-mail",
-              icon: Icons.person,
-              controller: _controllerEmail,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormFieldWidget(
-              hint: "Password",
-              icon: Icons.vpn_key,
-              controller: _controllerPassword,
-            ),
-            SizedBox(
-              height: 70,
-            ),
-            Container(
-              height: 49,
-              child: RaisedButton(
-                highlightColor: Colors.white30,
-                elevation: 3,
-                color: Colors.white,
-                textColor: Colors.blue,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
+      body: SafeArea(
+        child: Container(
+          child: Stack(
+            alignment: AlignmentDirectional.bottomStart,
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  height: 420,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.indigo,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(550),
+                    ),
                   ),
                 ),
-                onPressed: _onClikLogin,
-                child: Text("Entrar"),
               ),
-            ),
-          ],
+              Container(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      height: 130,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(fontSize: 40, color: Colors.indigo),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormFieldWidget(
+                      hint: "E-mail",
+                      icon: Icons.person,
+                      controller: _controllerEmail,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormFieldWidget(
+                      hint: "Password",
+                      icon: Icons.vpn_key,
+                      controller: _controllerPassword,
+                    ),
+                    SizedBox(
+                      height: 70,
+                    ),
+                    Container(
+                      height: 49,
+                      child: RaisedButton(
+                        highlightColor: Colors.white30,
+                        elevation: 7,
+                        color: Colors.white,
+                        textColor: Colors.indigo,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                        ),
+                        onPressed: _onClikLogin,
+                        child: Text("Entrar"),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -68,7 +102,7 @@ class LoginScreen extends StatelessWidget {
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
 
-    ApiResponse apiResponse = await UserManager.login("eliezer@gmail.com", "eliezer");
+    ApiResponse apiResponse = await UserManager.login(email, password);
 
     if (apiResponse.ok) {
       Client user = apiResponse.result;
@@ -94,7 +128,7 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 3,
+      elevation: 7,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: TextFormField(
         controller: controller,
@@ -103,7 +137,7 @@ class TextFormFieldWidget extends StatelessWidget {
             border: InputBorder.none,
             prefixIcon: Icon(
               icon,
-              color: Colors.blueAccent,
+              color: Colors.indigo,
             ),
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
@@ -111,7 +145,7 @@ class TextFormFieldWidget extends StatelessWidget {
             disabledBorder: InputBorder.none,
             contentPadding: EdgeInsets.all(20),
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.blue)),
+            hintStyle: TextStyle(color: Colors.indigo)),
       ),
     );
   }
