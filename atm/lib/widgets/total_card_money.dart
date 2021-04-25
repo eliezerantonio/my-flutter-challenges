@@ -10,26 +10,41 @@ class CardTotalMoney extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10),
       child: Container(
-        width: 350,
+        width: 300,
         alignment: Alignment.center,
         height: 90,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              "Balanço total",
-              style: TextStyle(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Saldo Actual",
+                  style: TextStyle(
+                    color: primaryColor,
+                  ),
+                ),
+                Text(
+                  "60.000,00 AOA",
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              width: 50,
+              height: 50,
+              child: Icon(Icons.add),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
                 color: primaryColor,
               ),
-            ),
-            Text(
-              "60.000 AOA",
-              style: TextStyle(
-                color: primaryColor,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            )
           ],
         ),
         decoration: BoxDecoration(

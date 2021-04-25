@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello, Eliezer Antonio",
+                  "Olá, Eliezer Antonio",
                   style: TextStyle(color: Colors.black, fontSize: 13),
                 ),
                 Text(
@@ -93,18 +93,18 @@ class HomeScreen extends StatelessWidget {
                     colorIcon: Colors.amber,
                   ),
                   StainWidget(
-                    icon: Icons.download_done_outlined,
-                    title: "Receber",
-                    subtitle: "Receber dinheiro",
-                    color: Colors.green[100],
-                    colorIcon: Colors.green,
+                    icon: Icons.shopping_cart_outlined,
+                    title: "Compras",
+                    subtitle: "Compras online",
+                    color: Colors.lightBlue[100],
+                    colorIcon: Colors.lightBlue,
                   ),
                   StainWidget(
-                    icon: Icons.download_done_outlined,
-                    title: "Receber",
-                    subtitle: "Receber dinheiro",
-                    color: Colors.green[100],
-                    colorIcon: Colors.green,
+                    icon: Icons.trending_up_rounded,
+                    title: "Levantar",
+                    subtitle: "Levantar dinheiro",
+                    color: Colors.pinkAccent[100],
+                    colorIcon: Colors.pinkAccent,
                   ),
                 ],
               ),
