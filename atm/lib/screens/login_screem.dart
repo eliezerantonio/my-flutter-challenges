@@ -66,16 +66,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.center,
                       child: Text(
                         "Login",
                         style: TextStyle(
-                            fontSize: 40,
-                            color: !_loading ? Colors.indigo : Colors.white),
+                          fontSize: 60,
+                          color: !_loading ? Colors.indigo : Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     TextFormFieldWidget(
                       hint: "E-mail",
