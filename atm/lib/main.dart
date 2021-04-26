@@ -1,7 +1,7 @@
 import 'package:atm/models/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:atm/models/client.dart' as modelClient;
+import 'package:atm/models/client.dart';
 import 'screens/login_screem.dart';
 
 void main() => runApp(
@@ -11,8 +11,8 @@ void main() => runApp(
             create: (context) => UserManager(),
             lazy: false,
           ),
-          ChangeNotifierProvider<modelClient.Client>(
-            create: (_) => modelClient.Client(),
+          ChangeNotifierProvider<User>(
+            create: (_) => User(),
             lazy: false,
           ),
         ],
