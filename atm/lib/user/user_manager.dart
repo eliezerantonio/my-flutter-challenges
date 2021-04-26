@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:atm/helpers/api_response.dart';
+import 'package:atm/helpers/const.dart';
 import 'package:atm/helpers/prefs.dart';
 import 'package:atm/user/user.dart';
 import 'package:flutter/widgets.dart';
@@ -13,7 +14,7 @@ class UserManager extends ChangeNotifier {
   User user;
   Future<ApiResponse<User>> login(String email, String password) async {
     try {
-      var url = 'http://172.20.10.4:3000/api/client/login';
+      var url = '$BASE_URL/client/login';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       Map params = {
