@@ -8,19 +8,26 @@ import 'screens/login_screem.dart';
 void main() => runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider<User>(
+            create: (_) => User(),
+            lazy: false,
+          ),
           ChangeNotifierProvider<UserManager>(
             create: (context) => UserManager(),
             lazy: false,
           ),
           ChangeNotifierProxyProvider<UserManager, AccountManager>(
             create: (_) => AccountManager(),
-            update: (_, userManager, resersvesManager) =>
-                resersvesManager..getAccount(userId: userManager.user.id),
-            lazy: false,
-          ),
-          ChangeNotifierProvider<User>(
-            create: (_) => User(),
-            lazy: false,
+            update: (_, userManager, accountManager) {
+              int id = userManager.user.id;
+
+              if (id == null) {
+                return null;
+              } else {
+                return accountManager..getAccount(userId: userManager.user.id);
+              }
+            },
+           
           ),
         ],
         child: MaterialApp(

@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Future<User> client = context.read<UserManager>().getUser();
     client.then((User value) {
       if (value != null) {
-        push(context, HomeScreen(), replace: true);
+       Navigator.pushReplacement(context, _crearRuta());
       } else {
         print("oi eliezer");
       }

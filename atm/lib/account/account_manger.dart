@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:atm/helpers/const.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:atm/account/account.dart';
@@ -6,14 +7,14 @@ import 'package:atm/helpers/api_response.dart';
 import 'package:flutter/widgets.dart';
 
 class AccountManager extends ChangeNotifier {
-  Account account;
+  Account account = Account();
   AccountManager() {
     getAccount();
   }
 
   Future<ApiResponse<Account>> getAccount({int userId}) async {
     try {
-      var url = 'http://172.20.10.4:3000/api/account/$userId';
+      var url = '$BASE_URL/account/$userId';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       var response = await http.get(url, headers: headers);
@@ -21,7 +22,7 @@ class AccountManager extends ChangeNotifier {
       Map mapRensponse = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        final account = Account.fromJson(mapRensponse);
+        account = Account.fromJson(mapRensponse);
 
         print(account);
         notifyListeners();
