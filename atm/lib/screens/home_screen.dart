@@ -1,5 +1,7 @@
+import 'package:atm/helpers/nav.dart';
 import 'package:atm/models/client.dart';
 import 'package:atm/models/user_manager.dart';
+import 'package:atm/screens/send_money_screen.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
@@ -13,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final user = context.watch<UserManager>().client;
-  
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -63,7 +65,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: ListView(
             children: [
-              MySample(),
+              MyCreditCard(),
               SizedBox(height: 7),
               Container(
                 padding: EdgeInsets.only(left: 20),
@@ -75,12 +77,17 @@ class HomeScreen extends StatelessWidget {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2),
                     children: [
-                      StainWidget(
-                        icon: Icons.file_upload,
-                        title: "Enviar",
-                        subtitle: "Enviar dinheiro",
-                        color: Colors.red[100],
-                        colorIcon: Colors.red,
+                      GestureDetector(
+                        onTap: () {
+                          push(context, SendMoneyScreen());
+                        },
+                        child: StainWidget(
+                          icon: Icons.file_upload,
+                          title: "Enviar",
+                          subtitle: "Enviar dinheiro",
+                          color: Colors.red[100],
+                          colorIcon: Colors.red,
+                        ),
                       ),
                       StainWidget(
                         icon: Icons.file_download,

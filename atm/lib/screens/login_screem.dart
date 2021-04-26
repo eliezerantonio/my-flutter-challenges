@@ -1,4 +1,5 @@
 import 'package:atm/helpers/api_response.dart';
+import 'package:atm/helpers/nav.dart';
 import 'package:atm/models/client.dart';
 import 'package:atm/models/user_manager.dart';
 import 'package:atm/screens/home_screen.dart';
@@ -24,6 +25,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _loading = false;
 
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+
+    Future<Client> client = context.read<UserManager>().getUser();
+    client.then((Client value) {
+      if (value != null) {
+        push(context, HomeScreen(), replace: true);
+      } else {
+        print("oi eliezer");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
-    await Future.delayed(Duration(seconds: 2));
-    ApiResponse apiResponse = await context.read<UserManager>().login(email, password);
+    await Future.delayed(Duration(seconds: 1));
+    ApiResponse apiResponse =
+        await context.read<UserManager>().login(email, password);
 
     if (apiResponse.ok) {
       Client user = apiResponse.result;

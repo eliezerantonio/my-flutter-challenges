@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:credit_card/credit_card_model.dart';
 import 'package:credit_card/flutter_credit_card.dart';
 
-class MySample extends StatefulWidget {
+class MyCreditCard extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MySampleState();
+    return MyCreditCardState();
   }
 }
 
-class MySampleState extends State<MySample> {
+class MyCreditCardState extends State<MyCreditCard> {
   
   String cardNumber = '';
   String expiryDate = '12/21';
