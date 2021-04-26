@@ -1,17 +1,17 @@
-import 'package:atm/models/user_manager.dart';
+import 'package:atm/user/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:credit_card/credit_card_model.dart';
 import 'package:credit_card/flutter_credit_card.dart';
 
-class MySample extends StatefulWidget {
+class MyCreditCard extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MySampleState();
+    return MyCreditCardState();
   }
 }
 
-class MySampleState extends State<MySample> {
+class MyCreditCardState extends State<MyCreditCard> {
   
   String cardNumber = '';
   String expiryDate = '12/21';
@@ -21,7 +21,7 @@ class MySampleState extends State<MySample> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserManager>().client;
+    final user = context.watch<UserManager>().user;
   String cardHolderName = user.name;
 
     return Container(
