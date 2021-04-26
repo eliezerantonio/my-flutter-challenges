@@ -10,8 +10,8 @@ class UserManager extends ChangeNotifier {
   UserManager() {
     getUser();
   }
-  Client client;
-  Future<ApiResponse<Client>> login(String email, String password) async {
+  User client;
+  Future<ApiResponse<User>> login(String email, String password) async {
     try {
       var url = 'http://172.20.10.4:3000/api/client/login';
       Map<String, String> headers = {"Content-type": "application/json"};
@@ -28,7 +28,7 @@ class UserManager extends ChangeNotifier {
       Map mapRensponse = json.decode(response.body);
 
       if (response.statusCode == 200) {
-        final client = Client.fromJSON(mapRensponse);
+        final client = User.fromJSON(mapRensponse);
         client.save();
         notifyListeners();
         return ApiResponse.ok(client);
@@ -44,13 +44,13 @@ class UserManager extends ChangeNotifier {
     }
   }
 
-  Future<Client> getUser() async {
-    String jsonS = await Prefs.getString("client.prefs");
+  Future<User> getUser() async {
+    String jsonS = await Prefs.getString("user.prefs");
 
     // convertendo String para Map/Objecto
     Map map = json.decode(jsonS);
 
-    client = Client.fromJSONLocal(map);
+    client = User.fromJSONLocal(map);
     return client;
   }
 }

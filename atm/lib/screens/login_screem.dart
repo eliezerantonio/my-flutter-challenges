@@ -29,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-    Future<Client> client = context.read<UserManager>().getUser();
-    client.then((Client value) {
+    Future<User> client = context.read<UserManager>().getUser();
+    client.then((User value) {
       if (value != null) {
         push(context, HomeScreen(), replace: true);
       } else {
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await context.read<UserManager>().login(email, password);
 
     if (apiResponse.ok) {
-      Client user = apiResponse.result;
+      User user = apiResponse.result;
       if (user != null) {
         Navigator.pushReplacement(context, _crearRuta());
       }

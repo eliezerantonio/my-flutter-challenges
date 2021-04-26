@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:atm/helpers/prefs.dart';
 import 'package:flutter/widgets.dart';
 
-class Client extends ChangeNotifier {
+class User extends ChangeNotifier {
   int id;
   String name;
   String genre;
@@ -13,8 +13,8 @@ class Client extends ChangeNotifier {
   String phone;
   String pic;
   String token;
-  Client();
-  Client.fromJSON(Map<String, dynamic> fromJSON) {
+  User();
+  User.fromJSON(Map<String, dynamic> fromJSON) {
     Map json = fromJSON["data"]["client"];
     this.id = json['id'];
     this.name = json["name"];
@@ -27,7 +27,7 @@ class Client extends ChangeNotifier {
     this.birthDate = DateTime.tryParse(json["birthDate"]);
   }
 
-  Client.fromJSONLocal(Map<String, dynamic> fromJSON) {
+  User.fromJSONLocal(Map<String, dynamic> fromJSON) {
     this.id = fromJSON['id'];
     this.name = fromJSON["name"];
     this.bi = fromJSON["bi"];
@@ -62,11 +62,11 @@ class Client extends ChangeNotifier {
     //
     String json = convert.json.encode(map);
 
-    Prefs.setString("client.prefs", json);
+    Prefs.setString("user.prefs", json);
   }
 
   @override
   String toString() {
-    return "Client(idn: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
+    return "User(idn: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
   }
 }
