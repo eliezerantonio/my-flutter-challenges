@@ -13,7 +13,7 @@ void main() => runApp(
             lazy: false,
           ),
           ChangeNotifierProvider<modelClient.Client>(
-            create: (context) => modelClient.Client(),
+            create: (_) => modelClient.Client(),
             lazy: false,
           ),
         ],

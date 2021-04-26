@@ -11,6 +11,7 @@ class Client extends ChangeNotifier {
   String bi;
   DateTime birthDate;
   String phone;
+  String pic;
   String token;
   Client();
   Client.fromJSON(Map<String, dynamic> fromJSON) {
@@ -19,19 +20,20 @@ class Client extends ChangeNotifier {
     this.name = json["name"];
     this.bi = json["bi"];
     this.email = json["email"];
+    this.pic = json["pic"];
     this.genre = json["genre"];
     this.phone = json["phone"];
     this.token = fromJSON["data"]["token"];
     this.birthDate = DateTime.tryParse(json["birthDate"]);
+  }
 
-  } 
-  
   Client.fromJSONLocal(Map<String, dynamic> fromJSON) {
     this.id = fromJSON['id'];
     this.name = fromJSON["name"];
     this.bi = fromJSON["bi"];
     this.email = fromJSON["email"];
     this.genre = fromJSON["genre"];
+    this.pic = fromJSON["pic"].toString().replaceAll("localhost", "172.20.10.4");
     this.phone = fromJSON["phone"];
     this.token = fromJSON["token"];
     //this.birthDate = DateTime.tryParse(fromJSON["birthDate"]);
@@ -44,6 +46,7 @@ class Client extends ChangeNotifier {
     data["name"] = this.name;
     data["bi"] = this.bi;
     data["email"] = this.email;
+    data["pic"] = this.pic;
     data["genre"] = this.genre;
     data["phone"] = this.phone;
     data["token"] = this.token;
@@ -62,18 +65,8 @@ class Client extends ChangeNotifier {
     Prefs.setString("client.prefs", json);
   }
 
-  static Future<Client> get() async {
-    String json = await Prefs.getString("client.prefs");
-
-    // convertendo String para Map/Objecto
-    Map map = convert.jsonDecode(json);
-
-    Client client = Client.fromJSONLocal(map);
-    return client;
-  }
-
   @override
   String toString() {
-    return "Client(idn: $id, name: $name, genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
+    return "Client(idn: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
   }
 }

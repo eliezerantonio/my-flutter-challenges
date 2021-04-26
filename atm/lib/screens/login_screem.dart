@@ -7,6 +7,7 @@ import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
     await Future.delayed(Duration(seconds: 2));
-    ApiResponse apiResponse = await UserManager.login(email, password);
+    ApiResponse apiResponse = await context.read<UserManager>().login(email, password);
 
     if (apiResponse.ok) {
       Client user = apiResponse.result;
