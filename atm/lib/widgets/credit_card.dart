@@ -1,4 +1,4 @@
-import 'package:atm/models/user_manager.dart';
+import 'package:atm/user/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:credit_card/credit_card_model.dart';

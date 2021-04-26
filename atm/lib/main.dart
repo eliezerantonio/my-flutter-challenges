@@ -1,7 +1,8 @@
-import 'package:atm/models/user_manager.dart';
+import 'package:atm/account/account_manger.dart';
+import 'package:atm/user/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:atm/models/client.dart';
+import 'package:atm/user/user.dart';
 import 'screens/login_screem.dart';
 
 void main() => runApp(
@@ -9,6 +10,9 @@ void main() => runApp(
         providers: [
           ChangeNotifierProvider<UserManager>(
             create: (context) => UserManager(),
+            lazy: false,
+          ),   ChangeNotifierProvider<AccountManager>(
+            create: (context) => AccountManager(),
             lazy: false,
           ),
           ChangeNotifierProvider<User>(

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:atm/helpers/api_response.dart';
 import 'package:atm/helpers/prefs.dart';
-import 'package:atm/models/client.dart';
+import 'package:atm/user/user.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,6 +1,6 @@
 import 'package:atm/helpers/nav.dart';
-import 'package:atm/models/client.dart';
-import 'package:atm/models/user_manager.dart';
+import 'package:atm/user/user.dart';
+import 'package:atm/user/user_manager.dart';
 import 'package:atm/screens/send_money_screen.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/logo_widget.dart';
