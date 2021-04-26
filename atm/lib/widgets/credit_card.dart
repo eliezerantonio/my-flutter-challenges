@@ -21,7 +21,7 @@ class MyCreditCardState extends State<MyCreditCard> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserManager>().client;
+    final user = context.watch<UserManager>().user;
   String cardHolderName = user.name;
 
     return Container(

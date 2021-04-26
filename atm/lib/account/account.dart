@@ -1,17 +1,16 @@
-
 class Account {
   int id;
   int clientId;
   String state;
-  int balance;
+  num balance;
 
   Account({this.id, this.clientId, this.state, this.balance});
 
   Account.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    clientId = json['clientId'];
-    state = json['state'];
-    balance = json['balance'];
+    id = json["data"]['id'];
+    clientId = json["data"]['clientId'];
+    state = json["data"]['state'];
+    balance = json["data"]['balance'];
   }
 
   Map<String, dynamic> toJson() {
@@ -21,5 +20,10 @@ class Account {
     data['state'] = this.state;
     data['balance'] = this.balance;
     return data;
+  }
+
+  @override
+  String toString() {
+    return "Account(id: $id, clientId: $clientId, state: $state, balance $balance )";
   }
 }

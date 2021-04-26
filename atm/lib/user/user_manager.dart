@@ -10,7 +10,7 @@ class UserManager extends ChangeNotifier {
   UserManager() {
     getUser();
   }
-  User client;
+  User user;
   Future<ApiResponse<User>> login(String email, String password) async {
     try {
       var url = 'http://172.20.10.4:3000/api/client/login';
@@ -45,12 +45,12 @@ class UserManager extends ChangeNotifier {
   }
 
   Future<User> getUser() async {
-    String jsonS = await Prefs.getString("user.prefs");
+    String jsonS = await Prefs.getString("client.prefs");
 
     // convertendo String para Map/Objecto
     Map map = json.decode(jsonS);
 
-    client = User.fromJSONLocal(map);
-    return client;
+    user = User.fromJSONLocal(map);
+    return user;
   }
 }

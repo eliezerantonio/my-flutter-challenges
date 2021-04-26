@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final user = context.watch<UserManager>().client;
+    final user = context.watch<UserManager>().user;
 
     return Scaffold(
       appBar: AppBar(

@@ -7,10 +7,13 @@ import 'package:flutter/widgets.dart';
 
 class AccountManager extends ChangeNotifier {
   Account account;
+  AccountManager() {
+    getAccount();
+  }
 
-  Future<ApiResponse<Account>> getAccount() async {
+  Future<ApiResponse<Account>> getAccount({int userId}) async {
     try {
-      var url = 'http://172.20.10.4:3000/api/account/1';
+      var url = 'http://172.20.10.4:3000/api/account/$userId';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       var response = await http.get(url, headers: headers);

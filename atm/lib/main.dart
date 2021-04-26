@@ -11,8 +11,11 @@ void main() => runApp(
           ChangeNotifierProvider<UserManager>(
             create: (context) => UserManager(),
             lazy: false,
-          ),   ChangeNotifierProvider<AccountManager>(
-            create: (context) => AccountManager(),
+          ),
+          ChangeNotifierProxyProvider<UserManager, AccountManager>(
+            create: (_) => AccountManager(),
+            update: (_, userManager, resersvesManager) =>
+                resersvesManager..getAccount(userId: userManager.user.id),
             lazy: false,
           ),
           ChangeNotifierProvider<User>(
