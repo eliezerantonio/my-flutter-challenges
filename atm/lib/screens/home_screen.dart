@@ -1,7 +1,10 @@
+import 'package:atm/models/client.dart';
+import 'package:atm/models/user_manager.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -9,6 +12,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final user = context.watch<UserManager>().client;
+  
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -26,11 +31,11 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Olá, Eliezer Antonio",
+                  "Olá, ${user.name}",
                   style: TextStyle(color: Colors.black, fontSize: 13),
                 ),
                 Text(
-                  "Bem- Vindo",
+                  "Bem-Vindo",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -47,8 +52,7 @@ class HomeScreen extends StatelessWidget {
             child: CircleAvatar(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(
-                    "https://media-exp1.licdn.com/dms/image/C4E03AQH3z80PWFUCww/profile-displayphoto-shrink_800_800/0/1609831784971?e=1625097600&v=beta&t=T2UQrb8ai6-9ztk8x7GGGmOrmuLaaochzdN8kX7w4SQ"),
+                child: Image.network(user.pic),
               ),
             ),
           ),

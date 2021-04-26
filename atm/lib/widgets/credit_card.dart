@@ -1,5 +1,6 @@
+import 'package:atm/models/user_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:credit_card/credit_card_form.dart';
+import 'package:provider/provider.dart';
 import 'package:credit_card/credit_card_model.dart';
 import 'package:credit_card/flutter_credit_card.dart';
 
@@ -11,14 +12,18 @@ class MySample extends StatefulWidget {
 }
 
 class MySampleState extends State<MySample> {
+  
   String cardNumber = '';
   String expiryDate = '12/21';
-  String cardHolderName = 'Eliezer António';
+  String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserManager>().client;
+  String cardHolderName = user.name;
+
     return Container(
       child: GestureDetector(
         onTap: () {

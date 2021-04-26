@@ -32,6 +32,7 @@ dependencies:
   http: ^0.12.2
   curved_navigation_bar: ^0.3.4
   credit_card: ^0.1.6
+  shared_preferences: ^0.5.7+3
   
 
 dev_dependencies:

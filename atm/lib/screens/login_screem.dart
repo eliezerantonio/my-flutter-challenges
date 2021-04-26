@@ -7,6 +7,7 @@ import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -34,33 +35,23 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: [
-            !_loading
-                ? Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 420,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.only(
+            AnimatedContainer(
+              duration: Duration(milliseconds: 3000),
+              alignment: !_loading ? Alignment.bottomRight : Alignment.topRight,
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 1000),
+                height: !_loading ? 420 : 0,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: !_loading
+                      ? BorderRadius.only(
                           topLeft: Radius.circular(550),
-                        ),
-                      ),
-                    ),
-                  )
-                : Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      height: 420,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(550),
-                        ),
-                      ),
-                    ),
-                  ),
+                        )
+                      : BorderRadius.circular(550),
+                ),
+              ),
+            ),
             SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.all(20),
@@ -88,10 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 70,
                     ),
-                    !_loading
-                        ? Container(
-                            height: 49,
-                            child: RaisedButton(
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 3000),
+                      height: 49,
+                      child: !_loading
+                          ? RaisedButton(
                               highlightColor: Colors.white30,
                               elevation: 7,
                               color: Colors.white,
@@ -107,10 +99,23 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Text(
                                 "Entrar",
                                 style: TextStyle(fontWeight: FontWeight.bold),
+                              ))
+                          : Align(
+                              alignment: Alignment.centerRight,
+                              child: Center(
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40),
+                                    color: primaryColor,
+                                  ),
+                                  child: CircularProgressIndicator(),
+                                ),
                               ),
                             ),
-                          )
-                        : Center(child: CircularProgressIndicator())
+                    ),
                   ],
                 ),
               ),
@@ -141,8 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
-
-    ApiResponse apiResponse = await UserManager.login(email, password);
+    await Future.delayed(Duration(seconds: 2));
+    ApiResponse apiResponse = await context.read<UserManager>().login(email, password);
 
     if (apiResponse.ok) {
       Client user = apiResponse.result;
@@ -191,15 +196,15 @@ class _LoginScreenState extends State<LoginScreen> {
         // );
 
         return ScaleTransition(
-          child: child,
-          scale: Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation)
-        );
+            child: child,
+            scale:
+                Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation));
 
-    // //   RotationTransition
-    //     return RotationTransition(
-    //       child: child,
-    //       turns: Tween<double>(begin: 0.0, end: 1.0 ).animate(curvedAnimation)
-    //     );
+        // //   RotationTransition
+        //     return RotationTransition(
+        //       child: child,
+        //       turns: Tween<double>(begin: 0.0, end: 1.0 ).animate(curvedAnimation)
+        //     );
 
         // return FadeTransition(
         //   child: child,
