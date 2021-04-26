@@ -9,8 +9,9 @@ class UserManager extends ChangeNotifier {
   static Future<ApiResponse<Client>> login(
       String email, String password) async {
     try {
-      var url = 'http://172.20.10.4:3000/api/client/login';
+      var url = 'http://192.168.1.36:3000/api/client/login';
       Map<String, String> headers = {"Content-type": "application/json"};
+
       Map params = {
         'email': email,
         'password': password,
@@ -19,11 +20,14 @@ class UserManager extends ChangeNotifier {
       String credencials = jsonEncode(params);
 
       var response = await http.post(url, body: credencials, headers: headers);
-      print(response.body);
+
       Map mapRensponse = json.decode(response.body);
 
       if (response.statusCode == 200) {
         final client = Client.fromJSON(mapRensponse);
+        client.save();
+        Client client2 = await Client.get();
+        print("Client2: $client2");
         return ApiResponse.ok(client);
       }
       return ApiResponse.error(mapRensponse["message"]);

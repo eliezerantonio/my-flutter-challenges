@@ -1,7 +1,9 @@
+import 'package:atm/models/client.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -9,6 +11,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    // final user = context.watch<Client>();
+    // print(user);
     return Scaffold(
       appBar: AppBar(
         title: Row(
