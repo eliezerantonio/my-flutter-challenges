@@ -27,7 +27,6 @@ void main() => runApp(
                 return accountManager..getAccount(userId: userManager.user.id);
               }
             },
-           
           ),
         ],
         child: MaterialApp(
@@ -39,6 +38,12 @@ void main() => runApp(
             scaffoldBackgroundColor: Colors.white,
             appBarTheme: AppBarTheme(
               color: Colors.white,
+              textTheme: TextTheme(
+                title: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
+              ),
               iconTheme: IconThemeData(
                 color: Color(0xff4ca6a8),
               ),
