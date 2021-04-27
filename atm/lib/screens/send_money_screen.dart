@@ -1,5 +1,7 @@
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/widgets/credit_card.dart';
+import 'package:atm/widgets/custom_button.dart';
+import 'package:atm/widgets/custom_text_form.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,19 @@ class SendMoneyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final account = context.watch<AccountManager>().account;
-    final primaryColor = Theme.of(context).primaryColor;
+    final _contollerAccount = TextEditingController();
+    final _contollerBalance = TextEditingController();
+
+    _onClickSend() {
+      int currentAccount = account.id;
+      int sendAccount = int.parse(_contollerAccount.text);
+      num balance = int.parse(_contollerBalance.text);
+
+      context.read<AccountManager>().sendMoney(
+          currentAccount: currentAccount,
+          sendAccount: sendAccount,
+          balance: balance);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -35,32 +49,10 @@ class SendMoneyScreen extends StatelessWidget {
                       children: [
                         Text("Numero de conta"),
                         SizedBox(height: 10),
-                        Container(
-                          width: 340,
-                          alignment: Alignment.center,
-                          height: 50,
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: primaryColor),
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.call_missed_rounded,
-                                  color: primaryColor,
-                                ),
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.all(20),
-                                errorMaxLines: 1,
-                                labelStyle: TextStyle(color: primaryColor),
-                                hintStyle: TextStyle(color: primaryColor)),
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[100],
-                          ),
+                        CustomTextForm(
+                          icon: Icons.call_missed_rounded,
+                          controller: _contollerAccount,
+                          showPrefix: true,
                         ),
                       ],
                     ),
@@ -73,49 +65,17 @@ class SendMoneyScreen extends StatelessWidget {
                       children: [
                         Text("Valor"),
                         SizedBox(height: 10),
-                        Container(
-                          width: 340,
-                          alignment: Alignment.center,
-                          height: 50,
-                          child: TextFormField(
-                            style: TextStyle(color: primaryColor),
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.attach_money_sharp,
-                                  color: primaryColor,
-                                ),
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.all(20),
-                                errorMaxLines: 1,
-                                labelStyle: TextStyle(color: primaryColor),
-                                hintStyle: TextStyle(color: primaryColor)),
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[100],
-                          ),
+                        CustomTextForm(
+                          icon: Icons.attach_money,
+                          controller: _contollerBalance,
                         ),
                       ],
                     ),
                   ),
                   SizedBox(height: 70),
-                  Container(
-                    height: 47,
-                    padding: EdgeInsets.symmetric(horizontal: 35),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      textColor: Colors.white,
-                      color: primaryColor,
-                      onPressed: () {},
-                      child: Text("Confirmar"),
-                    ),
+                  CustomButton(
+                    onPressed: _onClickSend,
+                    text: "Confirmar",
                   ),
                 ],
               ),

@@ -25,19 +25,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _loading = false;
 
   final _formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    Future<User> client = context.read<UserManager>().getUser();
-    client.then((User value) {
-      if (value != null) {
-       Navigator.pushReplacement(context, _crearRuta());
-      } else {
-        print("oi eliezer");
-      }
-    });
-  }
+  //   Future<User> client = context.read<UserManager>().getUser();
+  //   client.then((User value) {
+  //     if (value != null) {
+  //      Navigator.pushReplacement(context, _crearRuta());
+  //     } else {
+  //       print("oi eliezer");
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

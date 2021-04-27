@@ -24,7 +24,6 @@ class AccountManager extends ChangeNotifier {
       if (response.statusCode == 200) {
         account = Account.fromJson(mapRensponse);
 
-        print(account);
         notifyListeners();
         return ApiResponse.ok(account);
       }
@@ -34,8 +33,40 @@ class AccountManager extends ChangeNotifier {
       print(
         "Erro no login $e",
       );
-      notifyListeners();
       return ApiResponse.error("Impossivel fazer login");
+    }
+  }
+
+  Future<ApiResponse<Account>> sendMoney(
+      {@required int currentAccount,
+      @required sendAccount,
+      @required num balance}) async {
+    try {
+      print(sendAccount);
+      var url = '$BASE_URL/account/transfer/$currentAccount';
+      Map<String, String> headers = {"Content-type": "application/json"};
+
+      Map<String, dynamic> params = {"id": sendAccount, "balance": balance};
+
+      String values = json.encode(params);
+
+      var response = await http.patch(url, body: values, headers: headers);
+      Map mapRensponse = json.decode(response.body);
+
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final account = Account.fromJson(mapRensponse);
+        getAccount(userId: 1);
+        notifyListeners();
+        return ApiResponse.ok(account);
+      }
+      notifyListeners();
+      return ApiResponse.error(mapRensponse["message"]);
+    } catch (e) {
+      print(
+        "Erro no login $e",
+      );
+      return ApiResponse.error("$e");
     }
   }
 }

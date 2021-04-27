@@ -21,9 +21,7 @@ void main() => runApp(
             update: (_, userManager, accountManager) {
               int id = userManager.user.id;
 
-              if (id == null) {
-                return null;
-              } else {
+              if (id != null) {
                 return accountManager..getAccount(userId: userManager.user.id);
               }
             },
