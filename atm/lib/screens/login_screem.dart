@@ -25,19 +25,19 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _loading = false;
 
   final _formKey = GlobalKey<FormState>();
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  //   Future<User> client = context.read<UserManager>().getUser();
-  //   client.then((User value) {
-  //     if (value != null) {
-  //      Navigator.pushReplacement(context, _crearRuta());
-  //     } else {
-  //       print("oi eliezer");
-  //     }
-  //   });
-  // }
+    Future<User> client = context.read<UserManager>().getUser();
+    client.then((User value) {
+      if (value != null) {
+        Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
+      } else {
+        print("oi eliezer");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (apiResponse.ok) {
       User user = apiResponse.result;
       if (user != null) {
-        Navigator.pushReplacement(context, _crearRuta());
+        Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
       }
     } else {
       messenger(context, apiResponse.msg);
@@ -195,11 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return false;
   }
 
-  Route _crearRuta() {
+  Route _crearRuta(Widget widget) {
     return PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) =>
-          BottomNavBar(),
+          widget,
       transitionDuration: Duration(seconds: 2),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         final curvedAnimation =

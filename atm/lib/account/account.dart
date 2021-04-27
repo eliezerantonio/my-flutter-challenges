@@ -2,7 +2,7 @@ class Account {
   int id;
   int clientId;
   String state;
-  num balance;
+  num balance = 0.0;
 
   Account({this.id, this.clientId, this.state, this.balance});
 
