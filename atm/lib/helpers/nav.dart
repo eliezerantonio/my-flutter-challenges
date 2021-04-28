@@ -12,10 +12,10 @@ Route _crearRuta(Widget widget) {
     pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) =>
         widget,
-    transitionDuration: Duration(seconds: 2),
+    transitionDuration: Duration(seconds: 1),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       final curvedAnimation =
-          CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+          CurvedAnimation(parent: animation, curve: Curves.ease);
 
       // return SlideTransition(
       //   position: Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset.zero ).animate(curvedAnimation),

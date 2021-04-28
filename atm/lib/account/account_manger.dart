@@ -74,9 +74,9 @@ class AccountManager extends ChangeNotifier {
       loading = false;
 
       return ApiResponse.error(mapRensponse["message"]);
-    } catch (e) {
+    } catch (e, exception) {
       print(
-        "Erro no login $e",
+        "Erro no login $e -> $exception",
       );
       return ApiResponse.error("$e");
     }

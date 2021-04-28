@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
+import 'package:atm/helpers/api_response.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
+import 'package:atm/widgets/messenger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,16 +34,93 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
     final _contollerBalance = TextEditingController();
     final primaryColor = Theme.of(context).primaryColor;
     final accentColor = Theme.of(context).accentColor;
-    _onClickSend() {
+
+    _onClickSend() async {
       int currentAccount = account.id;
       int sendAccount = int.parse(_contollerAccount.text);
       num balance = int.parse(_contollerBalance.text);
 
-      context.read<AccountManager>().sendMoney(
-            currentAccount: currentAccount,
-            sendAccount: sendAccount,
-            balance: balance,
+      if (sendAccount == currentAccount) {
+        messenger(context, "Operação não suportada!", error: true);
+        return;
+      }
+      showDialog(
+        builder: (_) {
+          return AlertDialog(
+            actionsPadding: EdgeInsets.symmetric(horizontal: 20),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Center(
+              child: Text("Transferência"),
+            ),
+            titleTextStyle: TextStyle(
+                color: primaryColor, fontWeight: FontWeight.bold, fontSize: 25),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Montante",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Text(
+                  "$balance,00KZ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 18),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Text("Conta"),
+                SizedBox(
+                  height: 7,
+                ),
+                Text("0000.0000.$sendAccount"),
+              ],
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Cancelar",
+                  style: TextStyle(
+                    color: primaryColor,
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  ApiResponse apiResponse =
+                      await context.read<AccountManager>().sendMoney(
+                            currentAccount: currentAccount,
+                            sendAccount: sendAccount,
+                            balance: balance,
+                          );
+
+                  if (apiResponse.ok) {
+                    messenger(context, apiResponse.msg);
+                  } else {
+                    messenger(context, apiResponse.msg, error: true);
+                  }
+                },
+                child: Text(
+                  "Confirmar",
+                  style: TextStyle(
+                    color: primaryColor,
+                  ),
+                ),
+              ),
+            ],
           );
+        },
+        context: context,
+      );
     }
 
     return Scaffold(
@@ -71,7 +152,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                           Text("Numero de conta"),
                           SizedBox(height: 10),
                           CustomTextForm(
-                            icon: Icons.call_missed_rounded,
+                            icon: Icons.trending_up_sharp,
                             controller: _contollerAccount,
                             showPrefix: true,
                           ),

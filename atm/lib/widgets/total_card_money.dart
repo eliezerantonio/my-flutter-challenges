@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CardTotalMoney extends StatelessWidget {
-  const CardTotalMoney({Key key}) : super(key: key);
-
+  const CardTotalMoney({Key key, this.balance}) : super(key: key);
+  final num balance;
   @override
   Widget build(BuildContext context) {
     final accentColor = Theme.of(context).accentColor;
@@ -10,41 +10,27 @@ class CardTotalMoney extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10),
       child: Container(
-        width: 300,
+        width: 200,
         alignment: Alignment.center,
         height: 90,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Saldo Actual",
-                  style: TextStyle(
-                    color: primaryColor,
-                  ),
-                ),
-                Text(
-                  "60.000,00 AOA",
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: 50,
-              height: 50,
-              child: Icon(Icons.add),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+            Text(
+              "Saldo Actual",
+              style: TextStyle(
                 color: primaryColor,
               ),
-            )
+            ),
+            Text(
+              "$balance,00 Kz",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
         decoration: BoxDecoration(
