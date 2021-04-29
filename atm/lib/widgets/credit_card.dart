@@ -12,7 +12,6 @@ class MyCreditCard extends StatefulWidget {
 }
 
 class MyCreditCardState extends State<MyCreditCard> {
-  
   String cardNumber = '';
   String expiryDate = '12/21';
   String cardHolderName = '';
@@ -22,9 +21,10 @@ class MyCreditCardState extends State<MyCreditCard> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserManager>().user;
-  String cardHolderName = user.name;
+    String cardHolderName = user.name;
 
     return Container(
+      alignment: Alignment.center,
       child: GestureDetector(
         onTap: () {
           setState(() {

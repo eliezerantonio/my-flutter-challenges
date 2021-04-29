@@ -12,6 +12,14 @@ class AccountManager extends ChangeNotifier {
     getAccount();
   }
 
+  bool _isLoading = false;
+
+  bool get loading => _isLoading;
+  set loading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
   Future<ApiResponse<Account>> getAccount({int userId}) async {
     try {
       var url = '$BASE_URL/account/$userId';
@@ -24,7 +32,6 @@ class AccountManager extends ChangeNotifier {
       if (response.statusCode == 200) {
         account = Account.fromJson(mapRensponse);
 
-        print(account);
         notifyListeners();
         return ApiResponse.ok(account);
       }
@@ -34,8 +41,44 @@ class AccountManager extends ChangeNotifier {
       print(
         "Erro no login $e",
       );
-      notifyListeners();
       return ApiResponse.error("Impossivel fazer login");
+    }
+  }
+
+  Future<ApiResponse<Account>> sendMoney({
+    @required int currentAccount,
+    @required sendAccount,
+    @required num balance,
+  }) async {
+    try {
+      loading = true;
+      var url = '$BASE_URL/account/transfer/$currentAccount';
+      Map<String, String> headers = {"Content-type": "application/json"};
+
+      Map<String, dynamic> params = {"id": sendAccount, "balance": balance};
+
+      String values = json.encode(params);
+      await Future.delayed(Duration(seconds: 2));
+      var response = await http.patch(url, body: values, headers: headers);
+
+      Map mapRensponse = json.decode(response.body);
+
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final account = Account.fromJson(mapRensponse);
+        loading = false;
+        getAccount(userId: account.clientId);
+        return ApiResponse.ok(account);
+      }
+
+      loading = false;
+
+      return ApiResponse.error(mapRensponse["message"]);
+    } catch (e, exception) {
+      print(
+        "Erro no login $e -> $exception",
+      );
+      return ApiResponse.error("$e");
     }
   }
 }

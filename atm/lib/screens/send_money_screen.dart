@@ -1,37 +1,210 @@
+import 'dart:ui';
+
+import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
+import 'package:atm/helpers/api_response.dart';
 import 'package:atm/widgets/credit_card.dart';
+import 'package:atm/widgets/custom_button.dart';
+import 'package:atm/widgets/custom_text_form.dart';
+import 'package:atm/widgets/messenger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SendMoneyScreen extends StatelessWidget {
+class SendMoneyScreen extends StatefulWidget {
   const SendMoneyScreen({Key key}) : super(key: key);
 
   @override
+  _SendMoneyScreenState createState() => _SendMoneyScreenState();
+}
+
+class _SendMoneyScreenState extends State<SendMoneyScreen> {
+  var account;
+  @override
+  void initState() {
+    super.initState();
+    account = context.read<AccountManager>().getAccount(userId: 1);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final account = context.watch<AccountManager>().account;
+    account = context.watch<AccountManager>().account;
+
+    final loading = context.watch<AccountManager>().loading;
+    final _contollerAccount = TextEditingController();
+    final _contollerBalance = TextEditingController();
+    final primaryColor = Theme.of(context).primaryColor;
+    final accentColor = Theme.of(context).accentColor;
+
+    _onClickSend() async {
+      int currentAccount = account.id;
+      int sendAccount = int.parse(_contollerAccount.text);
+      num balance = int.parse(_contollerBalance.text);
+
+      if (sendAccount == currentAccount) {
+        messenger(context, "Operação não suportada!", error: true);
+        return;
+      }
+      showDialog(
+        builder: (_) {
+          return AlertDialog(
+            actionsPadding: EdgeInsets.symmetric(horizontal: 20),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: Center(
+              child: Text("Transferência"),
+            ),
+            titleTextStyle: TextStyle(
+                color: primaryColor, fontWeight: FontWeight.bold, fontSize: 25),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Montante",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Text(
+                  "$balance,00KZ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 18),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Text("Conta"),
+                SizedBox(
+                  height: 7,
+                ),
+                Text("0000.0000.$sendAccount"),
+              ],
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Cancelar",
+                  style: TextStyle(
+                    color: primaryColor,
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  ApiResponse apiResponse =
+                      await context.read<AccountManager>().sendMoney(
+                            currentAccount: currentAccount,
+                            sendAccount: sendAccount,
+                            balance: balance,
+                          );
+
+                  if (apiResponse.ok) {
+                    messenger(context, apiResponse.msg);
+                  } else {
+                    messenger(context, apiResponse.msg, error: true);
+                  }
+                },
+                child: Text(
+                  "Confirmar",
+                  style: TextStyle(
+                    color: primaryColor,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+        context: context,
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
+          title: Text("Transferência"),
+          centerTitle: true,
         ),
-        body: ListView(
-          children: [
-            Stack(
-              children: [
-                Align(child: MyCreditCard()),
-                Container(
-                  alignment: Alignment.topCenter,
-                  padding: EdgeInsets.only(top: 50),
-                  child: Text(
-                    "${account.balance},00 KZ",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (loading)
+                      LinearProgressIndicator(
+                        backgroundColor: accentColor,
+                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                      ),
+                    MyCreditCard(),
+                    SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Numero de conta"),
+                          SizedBox(height: 10),
+                          CustomTextForm(
+                            icon: Icons.trending_up_sharp,
+                            controller: _contollerAccount,
+                            showPrefix: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Valor"),
+                          SizedBox(height: 10),
+                          CustomTextForm(
+                            icon: Icons.attach_money,
+                            controller: _contollerBalance,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 70),
+                    CustomButton(
+                      onPressed: _onClickSend,
+                      text: "Confirmar",
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+              Container(
+                alignment: Alignment.topRight,
+                padding: EdgeInsets.only(top: 30, right: 40),
+                child: Column(
+                  children: [
+                    Text(
+                      "Saldo Actual",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "${account.balance},00 KZ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 
+import 'package:atm/helpers/const.dart';
 import 'package:atm/helpers/prefs.dart';
 import 'package:flutter/widgets.dart';
 
@@ -33,7 +34,7 @@ class User extends ChangeNotifier {
     this.bi = fromJSON["bi"];
     this.email = fromJSON["email"];
     this.genre = fromJSON["genre"];
-    this.pic = fromJSON["pic"].toString().replaceAll("localhost", "192.168.1.33");
+    this.pic = fromJSON["pic"].toString().replaceAll("localhost", "$PORT");
     this.phone = fromJSON["phone"];
     this.token = fromJSON["token"];
     //this.birthDate = DateTime.tryParse(fromJSON["birthDate"]);
@@ -62,7 +63,7 @@ class User extends ChangeNotifier {
     //
     String json = convert.json.encode(map);
 
-    Prefs.setString("user.prefs", json);
+    Prefs.setString("client.prefs", json);
   }
 
   @override
