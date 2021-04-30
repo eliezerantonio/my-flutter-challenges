@@ -22,9 +22,11 @@ void main() => runApp(
               int id = userManager.user.id;
 
               if (id != null) {
+              
                 return accountManager..getAccount(userId: userManager.user.id);
               }
             },
+           
           ),
         ],
         child: MaterialApp(

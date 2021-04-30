@@ -35,8 +35,10 @@ class UserManager extends ChangeNotifier {
         return ApiResponse.ok(client);
       }
       notifyListeners();
+
       return ApiResponse.error(mapRensponse["message"]);
     } catch (e) {
+
       print(
         "Erro no login $e",
       );
@@ -47,11 +49,14 @@ class UserManager extends ChangeNotifier {
 
   Future<User> getUser() async {
     String jsonS = await Prefs.getString("client.prefs");
+    if (jsonS != null || jsonS != "") {
+      // convertendo String para Map/Objecto
+      Map map = json.decode(jsonS);
 
-    // convertendo String para Map/Objecto
-    Map map = json.decode(jsonS);
+      user = User.fromJSONLocal(map);
 
-    user = User.fromJSONLocal(map);
+      print(user);
+    }
     return user;
   }
 }

@@ -68,6 +68,6 @@ class User extends ChangeNotifier {
 
   @override
   String toString() {
-    return "User(idn: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
+    return "User(id: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";
   }
 }

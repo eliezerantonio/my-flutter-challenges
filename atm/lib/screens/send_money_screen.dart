@@ -18,11 +18,10 @@ class SendMoneyScreen extends StatefulWidget {
 }
 
 class _SendMoneyScreenState extends State<SendMoneyScreen> {
-  var account;
+  Account account;
   @override
   void initState() {
     super.initState();
-    account = context.read<AccountManager>().getAccount(userId: 1);
   }
 
   @override
@@ -102,9 +101,10 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                             sendAccount: sendAccount,
                             balance: balance,
                           );
+                  Navigator.of(context).pop();
 
                   if (apiResponse.ok) {
-                    messenger(context, apiResponse.msg);
+                    messenger(context, "Transferência realizada com sucesso");
                   } else {
                     messenger(context, apiResponse.msg, error: true);
                   }
@@ -194,7 +194,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                       ),
                     ),
                     Text(
-                      "${account.balance},00 KZ",
+                      "${account.balance ?? 0},00 KZ",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
