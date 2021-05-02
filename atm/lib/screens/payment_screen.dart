@@ -76,23 +76,34 @@ class PaymentScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {},
-                            child: StainImageWidget(),
+                            child: StainImageWidget(
+                              image: "unitel",
+                              name: "unitel",
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {},
-                            child: StainImageWidget(),
+                            child: StainImageWidget(
+                              image: "movicel",
+                              name: "movicel",
+                            ),
                           ),
-                          StainImageWidget(),
+                          StainImageWidget(
+                            image: "atelecom",
+                            name: "atelecom",
+                          ),
                           GestureDetector(
                             onTap: () {
                               push(context, PaymentScreen());
                             },
-                            child: StainImageWidget(),
+                            child: StainImageWidget(
+                              name: "dstv",
+                              image: "dstv",
+                            ),
                           ),
-                          StainImageWidget(),
-                          GestureDetector(
-                            onTap: () {},
-                            child: StainImageWidget(),
+                          StainImageWidget(
+                            image: "ende",
+                            name: "ende",
                           ),
                         ],
                       ),
