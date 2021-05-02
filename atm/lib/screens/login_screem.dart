@@ -29,14 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-    Future<User> client = context.read<UserManager>().getUser();
-    client.then((User value) {
-      if (value != null) {
-        Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
-      } else {
-        print("oi eliezer");
-      }
-    });
+    // Future<User> client = context.read<UserManager>().getUser();
+    // client.then((User value) {
+    //   if (value != null) {
+    //     Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
+    //   } else {
+    //     print("oi eliezer");
+    //   }
+    // });
   }
 
   @override
@@ -168,9 +168,11 @@ class _LoginScreenState extends State<LoginScreen> {
       User user = apiResponse.result;
       if (user != null) {
         Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
+
+        return;
       }
     } else {
-      messenger(context, apiResponse.msg);
+      messenger(context, apiResponse.msg, error: true);
     }
     setState(() {
       _loading = false;
@@ -205,34 +207,10 @@ class _LoginScreenState extends State<LoginScreen> {
         final curvedAnimation =
             CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
 
-        // return SlideTransition(
-        //   position: Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset.zero ).animate(curvedAnimation),
-        //   child: child,
-        // );
-
         return ScaleTransition(
             child: child,
             scale:
                 Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation));
-
-        // //   RotationTransition
-        //     return RotationTransition(
-        //       child: child,
-        //       turns: Tween<double>(begin: 0.0, end: 1.0 ).animate(curvedAnimation)
-        //     );
-
-        // return FadeTransition(
-        //   child: child,
-        //   opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation)
-        // );
-
-        // return RotationTransition(
-        //   child: FadeTransition(
-        //       child: child,
-        //       opacity:
-        //           Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation)),
-        //   turns: Tween<double>(begin: 0.0, end: 1.0).animate(curvedAnimation),
-        // );
       },
     );
   }
