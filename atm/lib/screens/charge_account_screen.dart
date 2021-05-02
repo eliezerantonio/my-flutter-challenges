@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
@@ -10,11 +8,9 @@ import 'package:atm/widgets/messenger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SendMoneyScreen extends StatelessWidget {
-   SendMoneyScreen({Key key}) : super(key: key);
-
- 
+class ChargeAccountScreen extends StatelessWidget {
   Account account;
+  ChargeAccountScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +88,6 @@ class SendMoneyScreen extends StatelessWidget {
                             currentAccount: currentAccount,
                             balance: balance,
                           );
-                          
                   Navigator.of(context).pop();
 
                   if (apiResponse.ok) {
@@ -118,7 +113,7 @@ class SendMoneyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Transferência"),
+        title: Text("Carregar conta"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -135,28 +130,13 @@ class SendMoneyScreen extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
                     ),
                   MyCreditCard(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 40),
                   Align(
-                    alignment: Alignment.center,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Numero de conta"),
-                        SizedBox(height: 10),
-                        CustomTextForm(
-                          icon: Icons.trending_up_sharp,
-                          controller: _contollerAccount,
-                          showPrefix: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                        SizedBox(height: 20),
                         Text("Valor"),
                         SizedBox(height: 10),
                         CustomTextForm(
@@ -166,10 +146,10 @@ class SendMoneyScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 70),
+                  SizedBox(height: 90),
                   CustomButton(
                     onPressed: _onClickSend,
-                    text: "Confirmar",
+                    text: "Carregar",
                   ),
                 ],
               ),

@@ -172,8 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
     } else {
-      print(apiResponse.msg);
-      messenger(context, apiResponse.msg);
+      messenger(context, apiResponse.msg, error: true);
     }
     setState(() {
       _loading = false;

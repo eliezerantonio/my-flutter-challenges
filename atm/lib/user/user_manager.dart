@@ -42,7 +42,7 @@ class UserManager extends ChangeNotifier {
       print(
         "Erro no login $e",
       );
-      notifyListeners();
+     // notifyListeners();
       return ApiResponse.error("Impossivel fazer login");
     }
   }

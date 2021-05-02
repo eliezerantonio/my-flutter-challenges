@@ -8,6 +8,8 @@ import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'charge_account_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
@@ -71,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20),
                 child: SizedBox(
                   width: 150,
-                  height: size.height - 50,
+                  height: size.height - 120,
                   child: GridView(
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -89,12 +91,17 @@ class HomeScreen extends StatelessWidget {
                           colorIcon: Colors.red,
                         ),
                       ),
-                      StainWidget(
-                        icon: Icons.file_download,
-                        title: "Carregar",
-                        subtitle: "Carregar Conta",
-                        color: Colors.green[100],
-                        colorIcon: Colors.green,
+                      GestureDetector(
+                        onTap: () {
+                          push(context, ChargeAccountScreen());
+                        },
+                        child: StainWidget(
+                          icon: Icons.file_download,
+                          title: "Carregar",
+                          subtitle: "Carregar Conta",
+                          color: Colors.green[100],
+                          colorIcon: Colors.green,
+                        ),
                       ),
                       StainWidget(
                         icon: Icons.search,
