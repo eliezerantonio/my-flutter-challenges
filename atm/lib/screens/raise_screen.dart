@@ -8,9 +8,9 @@ import 'package:atm/widgets/messenger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChargeAccountScreen extends StatelessWidget {
+class RaiseScreen extends StatelessWidget {
   Account account;
-  ChargeAccountScreen({Key key}) : super(key: key);
+  RaiseScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,6 @@ class ChargeAccountScreen extends StatelessWidget {
               currentAccount: currentAccount,
               balance: balance,
             );
-        Navigator.of(context).pop();
 
         if (apiResponse.ok) {
           messenger(context, "Deposito realizada com sucesso");

@@ -117,4 +117,40 @@ class AccountManager extends ChangeNotifier {
       return ApiResponse.error("$e");
     }
   }
+
+  Future<ApiResponse<Account>> raise({
+    @required int currentAccount,
+    @required num balance,
+  }) async {
+    try {
+      loading = true;
+      var url = '$BASE_URL/account/raise/$currentAccount';
+      Map<String, String> headers = {"Content-type": "application/json"};
+
+      Map<String, dynamic> params = {"balance": balance};
+
+      String values = json.encode(params);
+      await Future.delayed(Duration(seconds: 2));
+      var response = await http.patch(url, body: values, headers: headers);
+
+      Map mapRensponse = json.decode(response.body);
+
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final account = Account.fromJson(mapRensponse);
+        loading = false;
+        getAccount(userId: account.clientId);
+        return ApiResponse.ok(account);
+      }
+
+      loading = false;
+
+      return ApiResponse.error(mapRensponse["message"]);
+    } catch (e, exception) {
+      print(
+        "Erro no login $e -> $exception",
+      );
+      return ApiResponse.error("$e");
+    }
+  }
 }
