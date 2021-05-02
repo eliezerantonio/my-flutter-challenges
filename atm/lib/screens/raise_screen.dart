@@ -26,13 +26,13 @@ class RaiseScreen extends StatelessWidget {
         int currentAccount = account.id;
         num balance = int.parse(_contollerBalance.text);
 
-        ApiResponse apiResponse = await context.read<AccountManager>().deponsit(
+        ApiResponse apiResponse = await context.read<AccountManager>().raise(
               currentAccount: currentAccount,
               balance: balance,
             );
 
         if (apiResponse.ok) {
-          messenger(context, "Deposito realizada com sucesso");
+          messenger(context, "Levantamento realizado com sucesso");
         } else {
           messenger(context, apiResponse.msg, error: true);
         }
@@ -44,7 +44,7 @@ class RaiseScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Carregar conta"),
+        title: Text("Levantar"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
