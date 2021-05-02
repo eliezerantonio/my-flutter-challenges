@@ -6,6 +6,7 @@ import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
 import 'package:atm/widgets/messenger.dart';
+import 'package:atm/widgets/stain_images_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,7 @@ class PaymentScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: SizedBox(
                       width: 150,
-                      height: 100,
+                      height: 800,
                       child: GridView(
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,59 +76,23 @@ class PaymentScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {},
-                            child: StainWidget(
-                              icon: Icons.file_upload,
-                              title: "Enviar",
-                              subtitle: "Enviar dinheiro",
-                              color: Colors.red[100],
-                              colorIcon: Colors.red,
-                            ),
+                            child: StainImageWidget(),
                           ),
                           GestureDetector(
                             onTap: () {},
-                            child: StainWidget(
-                              icon: Icons.file_download,
-                              title: "Carregar",
-                              subtitle: "Carregar Conta",
-                              color: Colors.green[100],
-                              colorIcon: Colors.green,
-                            ),
+                            child: StainImageWidget(),
                           ),
-                          StainWidget(
-                            icon: Icons.search,
-                            title: "Consultar",
-                            subtitle: "Consultar dados",
-                            color: Colors.indigo[100],
-                            colorIcon: Colors.indigo,
-                          ),
+                          StainImageWidget(),
                           GestureDetector(
                             onTap: () {
                               push(context, PaymentScreen());
                             },
-                            child: StainWidget(
-                              icon: Icons.attach_money_sharp,
-                              title: "Pagamentos",
-                              subtitle: "Contas",
-                              color: Colors.amber[100],
-                              colorIcon: Colors.amber,
-                            ),
+                            child: StainImageWidget(),
                           ),
-                          StainWidget(
-                            icon: Icons.shopping_cart_outlined,
-                            title: "Compras",
-                            subtitle: "Compras online",
-                            color: Colors.lightBlue[100],
-                            colorIcon: Colors.lightBlue,
-                          ),
+                          StainImageWidget(),
                           GestureDetector(
                             onTap: () {},
-                            child: StainWidget(
-                              icon: Icons.trending_up_rounded,
-                              title: "Levantar",
-                              subtitle: "Levantar dinheiro",
-                              color: Colors.pinkAccent[100],
-                              colorIcon: Colors.pinkAccent,
-                            ),
+                            child: StainImageWidget(),
                           ),
                         ],
                       ),
