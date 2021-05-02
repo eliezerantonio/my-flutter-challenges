@@ -1,4 +1,5 @@
 import 'package:atm/helpers/nav.dart';
+import 'package:atm/screens/payment_screen.dart';
 import 'package:atm/screens/raise_screen.dart';
 import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
@@ -111,12 +112,17 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.indigo[100],
                         colorIcon: Colors.indigo,
                       ),
-                      StainWidget(
-                        icon: Icons.attach_money_sharp,
-                        title: "Pagamentos",
-                        subtitle: "Contas",
-                        color: Colors.amber[100],
-                        colorIcon: Colors.amber,
+                      GestureDetector(
+                        onTap: () {
+                          push(context, PaymentScreen());
+                        },
+                        child: StainWidget(
+                          icon: Icons.attach_money_sharp,
+                          title: "Pagamentos",
+                          subtitle: "Contas",
+                          color: Colors.amber[100],
+                          colorIcon: Colors.amber,
+                        ),
                       ),
                       StainWidget(
                         icon: Icons.shopping_cart_outlined,
