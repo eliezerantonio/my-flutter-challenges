@@ -4,7 +4,7 @@ import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/screens/home_screen.dart';
 import 'package:atm/widgets/bottom_nav_bar.dart';
-import 'package:atm/widgets/logo_widget.dart';
+import '../widgets/logo_widget.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
