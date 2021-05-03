@@ -38,7 +38,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           height: 40.0,
           items: <Widget>[
             Icon(Icons.compare_arrows, size: 30),
-            Icon(Icons.add, size: 30),
+            Icon(Icons.credit_card_rounded, size: 30),
             Icon(Icons.home, size: 30),
             Icon(Icons.call_split, size: 30),
             Icon(Icons.perm_identity, size: 30),

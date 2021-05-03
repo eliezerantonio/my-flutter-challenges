@@ -8,9 +8,9 @@ import 'package:atm/widgets/messenger.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChargeAccountScreen extends StatelessWidget {
+class RaiseScreen extends StatelessWidget {
   Account account;
-  ChargeAccountScreen({Key key}) : super(key: key);
+  RaiseScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,13 @@ class ChargeAccountScreen extends StatelessWidget {
         int currentAccount = account.id;
         num balance = int.parse(_contollerBalance.text);
 
-        ApiResponse apiResponse = await context.read<AccountManager>().deponsit(
+        ApiResponse apiResponse = await context.read<AccountManager>().raise(
               currentAccount: currentAccount,
               balance: balance,
             );
-        Navigator.of(context).pop();
 
         if (apiResponse.ok) {
-          messenger(context, "Deposito realizada com sucesso");
+          messenger(context, "Levantamento realizado com sucesso");
         } else {
           messenger(context, apiResponse.msg, error: true);
         }
@@ -45,7 +44,7 @@ class ChargeAccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Carregar conta"),
+        title: Text("Levantar"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

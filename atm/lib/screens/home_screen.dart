@@ -1,4 +1,6 @@
 import 'package:atm/helpers/nav.dart';
+import 'package:atm/screens/payment_screen.dart';
+import 'package:atm/screens/raise_screen.dart';
 import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/screens/send_money_screen.dart';
@@ -110,12 +112,17 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.indigo[100],
                         colorIcon: Colors.indigo,
                       ),
-                      StainWidget(
-                        icon: Icons.attach_money_sharp,
-                        title: "Pagamentos",
-                        subtitle: "Contas",
-                        color: Colors.amber[100],
-                        colorIcon: Colors.amber,
+                      GestureDetector(
+                        onTap: () {
+                          push(context, PaymentScreen());
+                        },
+                        child: StainWidget(
+                          icon: Icons.attach_money_sharp,
+                          title: "Pagamentos",
+                          subtitle: "Contas",
+                          color: Colors.amber[100],
+                          colorIcon: Colors.amber,
+                        ),
                       ),
                       StainWidget(
                         icon: Icons.shopping_cart_outlined,
@@ -124,12 +131,17 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.lightBlue[100],
                         colorIcon: Colors.lightBlue,
                       ),
-                      StainWidget(
-                        icon: Icons.trending_up_rounded,
-                        title: "Levantar",
-                        subtitle: "Levantar dinheiro",
-                        color: Colors.pinkAccent[100],
-                        colorIcon: Colors.pinkAccent,
+                      GestureDetector(
+                        onTap: () {
+                          push(context, RaiseScreen());
+                        },
+                        child: StainWidget(
+                          icon: Icons.trending_up_rounded,
+                          title: "Levantar",
+                          subtitle: "Levantar dinheiro",
+                          color: Colors.pinkAccent[100],
+                          colorIcon: Colors.pinkAccent,
+                        ),
                       ),
                     ],
                   ),

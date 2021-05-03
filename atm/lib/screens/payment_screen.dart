@@ -1,16 +1,19 @@
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
+import 'package:atm/helpers/nav.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
 import 'package:atm/widgets/messenger.dart';
+import 'package:atm/widgets/stain_images_widget.dart';
+import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ChargeAccountScreen extends StatelessWidget {
+class PaymentScreen extends StatelessWidget {
   Account account;
-  ChargeAccountScreen({Key key}) : super(key: key);
+  PaymentScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +29,13 @@ class ChargeAccountScreen extends StatelessWidget {
         int currentAccount = account.id;
         num balance = int.parse(_contollerBalance.text);
 
-        ApiResponse apiResponse = await context.read<AccountManager>().deponsit(
+        ApiResponse apiResponse = await context.read<AccountManager>().raise(
               currentAccount: currentAccount,
               balance: balance,
             );
-        Navigator.of(context).pop();
 
         if (apiResponse.ok) {
-          messenger(context, "Deposito realizada com sucesso");
+          messenger(context, "Levantamento realizado com sucesso");
         } else {
           messenger(context, apiResponse.msg, error: true);
         }
@@ -45,7 +47,7 @@ class ChargeAccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("Carregar conta"),
+        title: Text("Pagamentos"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -62,26 +64,50 @@ class ChargeAccountScreen extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
                     ),
                   MyCreditCard(),
-                  SizedBox(height: 40),
-                  Align(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(height: 20),
-                        Text("Valor"),
-                        SizedBox(height: 10),
-                        CustomTextForm(
-                          icon: Icons.attach_money,
-                          controller: _contollerBalance,
-                        ),
-                      ],
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: SizedBox(
+                      width: 150,
+                      height: 800,
+                      child: GridView(
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: StainImageWidget(
+                              image: "unitel",
+                              name: "unitel",
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: StainImageWidget(
+                              image: "movicel",
+                              name: "movicel",
+                            ),
+                          ),
+                          StainImageWidget(
+                            image: "atelecom",
+                            name: "atelecom",
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              push(context, PaymentScreen());
+                            },
+                            child: StainImageWidget(
+                              name: "dstv",
+                              image: "dstv",
+                            ),
+                          ),
+                          StainImageWidget(
+                            image: "ende",
+                            name: "ende",
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 90),
-                  CustomButton(
-                    onPressed: _onClickDeposit,
-                    text: "Confirmar",
                   ),
                 ],
               ),
