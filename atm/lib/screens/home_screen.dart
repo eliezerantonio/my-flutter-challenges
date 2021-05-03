@@ -5,7 +5,7 @@ import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/screens/send_money_screen.dart';
 import 'package:atm/widgets/credit_card.dart';
-import 'package:atm/widgets/logo_widget.dart';
+import 'file:///home/eliezer/Documents/flutter/my%20flutter%20chellenge/atm/logo_widget.dart';
 import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
