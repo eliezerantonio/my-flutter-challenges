@@ -1,3 +1,5 @@
+import 'package:atm/helpers/nav.dart';
+import 'package:atm/screens/edit_profile_screen.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/widgets/info_profile_widget.dart';
 import 'package:atm/widgets/logo_widget.dart';
@@ -74,10 +76,15 @@ class ProfileScreen extends StatelessWidget {
               style: TextStyle(),
             ),
             SizedBox(height: 30),
-            InfoWidget(
-              color: Colors.red,
-              icon: Icons.person,
-              text: "Editar Perfil",
+            GestureDetector(
+              onTap: () {
+                push(context, EditProfileScreen());
+              },
+              child: InfoWidget(
+                color: Colors.red,
+                icon: Icons.person,
+                text: "Editar Perfil",
+              ),
             ),
             SizedBox(height: 22),
             InfoWidget(
@@ -95,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
             InfoWidget(
               color: Colors.purple,
               icon: Icons.share,
-              text: "Editar Perfil",
+              text: "Partilhar",
             ),
             Spacer(),
             InfoWidget(
