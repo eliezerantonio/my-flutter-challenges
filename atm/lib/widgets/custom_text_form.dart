@@ -5,11 +5,15 @@ class CustomTextForm extends StatelessWidget {
       {this.controller,
       this.icon,
       this.obscure = false,
-      this.showPrefix = false});
+      this.black = false,
+      this.showPrefix = false,
+      this.initialValue = ""});
   final TextEditingController controller;
   final IconData icon;
   final bool obscure;
+  final bool black;
   final bool showPrefix;
+  final String initialValue;
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -18,10 +22,12 @@ class CustomTextForm extends StatelessWidget {
       alignment: Alignment.center,
       height: 50,
       child: TextFormField(
+        initialValue: initialValue,
         keyboardType: TextInputType.number,
         obscureText: obscure,
         controller: controller,
-        style: TextStyle(color: primaryColor, fontSize: 18),
+        style: TextStyle(
+            color: !black ? primaryColor : Colors.black, fontSize: 18),
         decoration: InputDecoration(
             border: InputBorder.none,
             prefixIcon: Icon(
