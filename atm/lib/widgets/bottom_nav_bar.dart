@@ -1,4 +1,5 @@
 import 'package:atm/screens/home_screen.dart';
+import 'package:atm/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -23,9 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     Container(
       color: Colors.deepOrange,
     ),
-    Container(
-      color: Colors.red,
-    ),
+    ProfileScreen(),
   ];
 
   @override
