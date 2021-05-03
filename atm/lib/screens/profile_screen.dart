@@ -1,4 +1,5 @@
 import 'package:atm/user/user_manager.dart';
+import 'package:atm/widgets/info_profile_widget.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final user = context.watch<UserManager>().user;
+    final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -71,7 +73,36 @@ class ProfileScreen extends StatelessWidget {
               user.email,
               style: TextStyle(),
             ),
-            
+            SizedBox(height: 30),
+            InfoWidget(
+              color: Colors.red,
+              icon: Icons.person,
+              text: "Editar Perfil",
+            ),
+            SizedBox(height: 22),
+            InfoWidget(
+              color: primaryColor,
+              icon: Icons.lock_clock,
+              text: "Historicos",
+            ),
+            SizedBox(height: 22),
+            InfoWidget(
+              color: Colors.blueAccent,
+              icon: Icons.settings,
+              text: "Notifications",
+            ),
+            SizedBox(height: 22),
+            InfoWidget(
+              color: Colors.purple,
+              icon: Icons.share,
+              text: "Editar Perfil",
+            ),
+            Spacer(),
+            InfoWidget(
+              color: Colors.red,
+              icon: Icons.exit_to_app,
+              text: "Sair",
+            ),
           ],
         ),
       ),
