@@ -69,17 +69,23 @@ class EditProfileScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Text("Nome"),
                 CustomTextForm(
+                  black: true,
                   icon: Icons.person,
+                  initialValue: user.name,
                 ),
                 SizedBox(height: 20),
                 Text("E-mail"),
                 CustomTextForm(
+                  black: true,
                   icon: Icons.email,
+                  initialValue: user.email,
                 ),
                 SizedBox(height: 20),
                 Text("Telefone"),
                 CustomTextForm(
+                  black: true,
                   icon: Icons.phone,
+                  initialValue: user.phone,
                 ),
                 SizedBox(height: 20),
               ],
