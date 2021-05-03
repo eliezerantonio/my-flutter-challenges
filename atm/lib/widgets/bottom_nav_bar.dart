@@ -1,4 +1,5 @@
 import 'package:atm/screens/home_screen.dart';
+import 'package:atm/screens/moviment_screen.dart';
 import 'package:atm/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -14,9 +15,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 2;
   GlobalKey _bottomNavigationKey = GlobalKey();
   List<Widget> screens = [
-    Container(
-      color: Colors.blueAccent,
-    ),
+    MovimentScreen(),
     Container(
       color: Colors.yellow,
     ),

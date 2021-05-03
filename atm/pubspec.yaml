@@ -33,7 +33,7 @@ dependencies:
   curved_navigation_bar: ^0.3.4
   credit_card: ^0.1.6
   shared_preferences: ^0.5.7+3
-  charts_flutter: ^0.9.0
+  fl_chart: ^0.12.2
   
 
 dev_dependencies:
