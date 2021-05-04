@@ -18,7 +18,7 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     account = context.watch<AccountManager>().account;
-
+    final size = MediaQuery.of(context).size;
     final loading = context.watch<AccountManager>().loading;
     final _contollerBalance = TextEditingController();
     final primaryColor = Theme.of(context).primaryColor;
@@ -68,7 +68,7 @@ class PaymentScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: SizedBox(
                       width: 150,
-                      height: 800,
+                      height: size.height - 100,
                       child: GridView(
                         physics: NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -89,21 +89,25 @@ class PaymentScreen extends StatelessWidget {
                             ),
                           ),
                           StainImageWidget(
-                            image: "atelecom",
-                            name: "atelecom",
+                            image: "water",
+                            name: "Água",
                           ),
                           GestureDetector(
                             onTap: () {
                               push(context, PaymentScreen());
                             },
                             child: StainImageWidget(
-                              name: "dstv",
-                              image: "dstv",
+                              name: "internet",
+                              image: "internet",
                             ),
                           ),
                           StainImageWidget(
                             image: "ende",
                             name: "ende",
+                          ),
+                          StainImageWidget(
+                            image: "zap",
+                            name: "zap",
                           ),
                         ],
                       ),

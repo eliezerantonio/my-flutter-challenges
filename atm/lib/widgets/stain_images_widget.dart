@@ -10,8 +10,8 @@ class StainImageWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 150,
-            height: 150,
+            width: 140,
+            height: 140,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.grey[100],
