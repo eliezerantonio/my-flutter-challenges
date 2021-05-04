@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             child: CircleAvatar(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(user.pic),
+                child: Image.network(user?.pic),
               ),
             ),
           ),

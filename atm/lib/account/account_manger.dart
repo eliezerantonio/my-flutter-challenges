@@ -62,7 +62,12 @@ class AccountManager extends ChangeNotifier {
     try {
       loading = true;
       var url = '$BASE_URL/account/client/transfer/$currentAccount';
-      Map<String, String> headers = {"Content-type": "application/json"};
+      UserManager user = await UserManager();
+
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "x-access-token": "${user.user.token}"
+      };
 
       Map<String, dynamic> params = {"id": sendAccount, "balance": balance};
 
@@ -134,7 +139,12 @@ class AccountManager extends ChangeNotifier {
     try {
       loading = true;
       var url = '$BASE_URL/account/client/raise/$currentAccount';
-      Map<String, String> headers = {"Content-type": "application/json"};
+      UserManager user = await UserManager();
+
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "x-access-token": "${user.user.token}"
+      };
 
       Map<String, dynamic> params = {"balance": balance};
 

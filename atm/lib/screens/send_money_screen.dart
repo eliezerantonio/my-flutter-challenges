@@ -11,9 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SendMoneyScreen extends StatelessWidget {
-   SendMoneyScreen({Key key}) : super(key: key);
+  SendMoneyScreen({Key key}) : super(key: key);
 
- 
   Account account;
 
   @override
@@ -88,12 +87,13 @@ class SendMoneyScreen extends StatelessWidget {
               FlatButton(
                 onPressed: () async {
                   ApiResponse apiResponse =
-                      await context.read<AccountManager>().deponsit(
+                      await context.read<AccountManager>().sendMoney(
+                            sendAccount: sendAccount,
                             currentAccount: currentAccount,
                             balance: balance,
                           );
-                          
-                  Navigator.of(context).pop();
+
+                
 
                   if (apiResponse.ok) {
                     messenger(context, "Transferência realizada com sucesso");
