@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CustomTextForm extends StatelessWidget {
-  const CustomTextForm({
+class CustomTextForm2 extends StatelessWidget {
+  const CustomTextForm2({
     this.controller,
     this.icon,
     this.obscure = false,
     this.black = false,
     this.showPrefix = false,
+    this.initialValue = "",
   });
   final TextEditingController controller;
   final IconData icon;
   final bool obscure;
   final bool black;
   final bool showPrefix;
+  final String initialValue;
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -21,6 +23,7 @@ class CustomTextForm extends StatelessWidget {
       alignment: Alignment.center,
       height: 50,
       child: TextFormField(
+        initialValue: initialValue,
         keyboardType: TextInputType.number,
         obscureText: obscure,
         controller: controller,

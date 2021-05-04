@@ -1,5 +1,7 @@
 import 'package:atm/helpers/nav.dart';
 import 'package:atm/screens/edit_profile_screen.dart';
+import 'package:atm/screens/login_screem.dart';
+import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/widgets/info_profile_widget.dart';
 import 'package:atm/widgets/logo_widget.dart';
@@ -105,10 +107,16 @@ class ProfileScreen extends StatelessWidget {
               text: "Partilhar",
             ),
             Spacer(),
-            InfoWidget(
-              color: Colors.red,
-              icon: Icons.exit_to_app,
-              text: "Sair",
+            GestureDetector(
+              onTap: () {
+                context.read<User>().clear();
+                push(context, LoginScreen(), replace: true);
+              },
+              child: InfoWidget(
+                color: Colors.red,
+                icon: Icons.exit_to_app,
+                text: "Sair",
+              ),
             ),
           ],
         ),

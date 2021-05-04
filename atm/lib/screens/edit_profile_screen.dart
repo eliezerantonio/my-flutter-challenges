@@ -1,6 +1,7 @@
 import 'package:atm/user/user_manager.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
+import 'package:atm/widgets/custom_text_form2.dart';
 import 'package:atm/widgets/info_profile_widget.dart';
 import 'package:atm/widgets/logo_widget.dart';
 import 'package:flutter/material.dart';
@@ -68,21 +69,21 @@ class EditProfileScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 20),
                 Text("Nome"),
-                CustomTextForm(
+                CustomTextForm2(
                   black: true,
                   icon: Icons.person,
                   initialValue: user.name,
                 ),
                 SizedBox(height: 20),
                 Text("E-mail"),
-                CustomTextForm(
+                CustomTextForm2(
                   black: true,
                   icon: Icons.email,
                   initialValue: user.email,
                 ),
                 SizedBox(height: 20),
                 Text("Telefone"),
-                CustomTextForm(
+                CustomTextForm2(
                   black: true,
                   icon: Icons.phone,
                   initialValue: user.phone,

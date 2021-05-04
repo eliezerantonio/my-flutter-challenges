@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:atm/helpers/const.dart';
+import 'package:atm/user/user_manager.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:atm/account/account.dart';
@@ -22,8 +23,16 @@ class AccountManager extends ChangeNotifier {
 
   Future<ApiResponse<Account>> getAccount({int userId}) async {
     try {
-      var url = '$BASE_URL/account/$userId';
-      Map<String, String> headers = {"Content-type": "application/json"};
+      var url = '$BASE_URL/account/client/$userId';
+
+      UserManager user = await UserManager();
+
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "x-access-token": "${user.user.token}"
+      };
+
+      print(headers);
 
       var response = await http.get(url, headers: headers);
 
@@ -37,11 +46,11 @@ class AccountManager extends ChangeNotifier {
       }
       notifyListeners();
       return ApiResponse.error(mapRensponse["message"]);
-    } catch (e) {
+    } catch (e, ex) {
       print(
-        "Erro no login $e",
+        "Erro no login $e => $ex",
       );
-      return ApiResponse.error("Impossivel fazer login");
+      throw e;
     }
   }
 
@@ -52,7 +61,7 @@ class AccountManager extends ChangeNotifier {
   }) async {
     try {
       loading = true;
-      var url = '$BASE_URL/account/transfer/$currentAccount';
+      var url = '$BASE_URL/account/client/transfer/$currentAccount';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       Map<String, dynamic> params = {"id": sendAccount, "balance": balance};
@@ -124,7 +133,7 @@ class AccountManager extends ChangeNotifier {
   }) async {
     try {
       loading = true;
-      var url = '$BASE_URL/account/raise/$currentAccount';
+      var url = '$BASE_URL/account/client/raise/$currentAccount';
       Map<String, String> headers = {"Content-type": "application/json"};
 
       Map<String, dynamic> params = {"balance": balance};
