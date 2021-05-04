@@ -29,14 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-     Future<User> client = context.read<UserManager>().getUser();
+    Future<User> client = context.read<UserManager>().getUser();
     client.then((User value) {
       if (value != null) {
-         Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
-       } else {
-        print("oi eliezer");
-       }
-     });
+        Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
+      }
+    });
   }
 
   @override

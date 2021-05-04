@@ -66,6 +66,11 @@ class User extends ChangeNotifier {
     Prefs.setString("client.prefs", json);
   }
 
+  void clear() {
+    Prefs.setString("client.prefs", "");
+    notifyListeners();
+  }
+
   @override
   String toString() {
     return "User(id: $id, name: $name, pic: $pic genre: $genre, email $email, bi: $bi, birthDate: $birthDate, phone: $phone, token: $token)";

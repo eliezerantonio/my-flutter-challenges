@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Olá, ${user.name}",
+                  "Olá, ${user?.name}",
                   style: TextStyle(color: Colors.black, fontSize: 13),
                 ),
                 Text(
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             child: CircleAvatar(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(user.pic),
+                child: Image.network(user?.pic),
               ),
             ),
           ),

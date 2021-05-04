@@ -30,7 +30,6 @@ class ChargeAccountScreen extends StatelessWidget {
               currentAccount: currentAccount,
               balance: balance,
             );
-        Navigator.of(context).pop();
 
         if (apiResponse.ok) {
           messenger(context, "Deposito realizada com sucesso");
