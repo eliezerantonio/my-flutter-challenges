@@ -2,6 +2,7 @@ import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
 import 'package:atm/helpers/nav.dart';
+import 'package:atm/screens/services_screen.dart';
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
@@ -75,14 +76,26 @@ class PaymentScreen extends StatelessWidget {
                             crossAxisCount: 2),
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              push(
+                                  context,
+                                  ServicesScreen(
+                                    name: "unitel",
+                                  ));
+                            },
                             child: StainImageWidget(
                               image: "unitel",
                               name: "unitel",
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              push(
+                                  context,
+                                  ServicesScreen(
+                                    name: "movicel",
+                                  ));
+                            },
                             child: StainImageWidget(
                               image: "movicel",
                               name: "movicel",
@@ -92,14 +105,9 @@ class PaymentScreen extends StatelessWidget {
                             image: "water",
                             name: "Água",
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              push(context, PaymentScreen());
-                            },
-                            child: StainImageWidget(
-                              name: "internet",
-                              image: "internet",
-                            ),
+                          StainImageWidget(
+                            name: "internet",
+                            image: "internet",
                           ),
                           StainImageWidget(
                             image: "ende",
