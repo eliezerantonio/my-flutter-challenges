@@ -1,3 +1,4 @@
+import 'package:atm/screens/cards_screen.dart';
 import 'package:atm/screens/home_screen.dart';
 import 'package:atm/screens/moviment_screen.dart';
 import 'package:atm/screens/profile_screen.dart';
@@ -16,9 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   GlobalKey _bottomNavigationKey = GlobalKey();
   List<Widget> screens = [
     MovimentScreen(),
-    Container(
-      color: Colors.yellow,
-    ),
+    CardScreen(),
     HomeScreen(),
     Container(
       color: Colors.deepOrange,

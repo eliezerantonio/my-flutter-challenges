@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
+
+import 'package:pdf/widgets.dart' as pw;
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
@@ -175,7 +178,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   ),
                   SizedBox(height: 70),
                   CustomButton(
-                    onPressed: _onClickSend,
+                    onPressed: () async {
+                      pdf();
+                    },
                     text: "Confirmar",
                   ),
                 ],
@@ -280,5 +285,20 @@ class _ServicesScreenState extends State<ServicesScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> pdf() async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) => pw.Center(
+          child: pw.Text('Hello World!'),
+        ),
+      ),
+    );
+
+    final file = File('example.pdf');
+    await file.writeAsBytes(await pdf.save());
   }
 }
