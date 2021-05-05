@@ -9,6 +9,7 @@ class CardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
+        scrollDirection: Axis.horizontal,
         children: [
           MyCreditCard(),
           MyCreditCard(),
