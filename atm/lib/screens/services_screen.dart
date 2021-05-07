@@ -1,11 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 
-import 'package:pdf/widgets.dart' as pw;
+
 import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
@@ -14,6 +16,7 @@ import 'package:atm/widgets/stain_images_widget.dart';
 import 'package:atm/widgets/stain_images_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class ServicesScreen extends StatefulWidget {
   ServicesScreen({Key key, this.name}) : super(key: key);
@@ -179,6 +182,11 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   SizedBox(height: 70),
                   CustomButton(
                     onPressed: () async {
+                      // String message = "This is a test message!";
+                      // List<String> recipents = ["+244924033375", ];
+
+                      // _sendSMS(message, recipents);
+
                       pdf();
                     },
                     text: "Confirmar",
@@ -288,17 +296,24 @@ class _ServicesScreenState extends State<ServicesScreen> {
   }
 
   Future<void> pdf() async {
-    final pdf = pw.Document();
+// Create a new PDF document.
+final PdfDocument document = PdfDocument();
+// Add a PDF page and draw text.
+document.pages.add().graphics.drawString(
+    'Hello World!', PdfStandardFont(PdfFontFamily.helvetica, 12),
+    brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+    bounds: const Rect.fromLTWH(0, 0, 150, 20));
+// Save the document.
+File('HelloWorld.pdf').writeAsBytes(document.save());
+// Dispose the document.
+document.dispose();
+  }
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Center(
-          child: pw.Text('Hello World!'),
-        ),
-      ),
-    );
-
-    final file = File('example.pdf');
-    await file.writeAsBytes(await pdf.save());
+  void _sendSMS(String message, List<String> recipents) async {
+    String _result = await sendSMS(message: message, recipients: recipents)
+        .catchError((onError) {
+      print(onError);
+    });
+    print(_result);
   }
 }
