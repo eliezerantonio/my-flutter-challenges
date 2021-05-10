@@ -36,10 +36,11 @@ class DetailCoffeeScreen extends StatelessWidget {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.32,
                   child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: IconFavorite(
-                        opacity: !coffee.isFavorite ? 0.3 : 1,
-                      ),),
+                    alignment: Alignment.bottomLeft,
+                    child: IconFavorite(
+                      opacity: !coffee.isFavorite ? 0.3 : 1,
+                    ),
+                  ),
                 )
               ],
             ),

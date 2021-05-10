@@ -9,7 +9,7 @@ class SearchWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.14,
+            height: MediaQuery.of(context).size.height * 0.10,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.only(
