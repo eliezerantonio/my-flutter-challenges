@@ -8,8 +8,18 @@ class CardsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 350,
-      child: _Card(),
+      height: 370,
+      child: PageView(
+        controller: PageController(viewportFraction: 0.9),
+        children: [
+          _Card(),
+          _Card(),
+          _Card(),
+          _Card(),
+          _Card(),
+          _Card(),
+        ],
+      ),
     );
   }
 }
@@ -25,15 +35,16 @@ class _Card extends StatelessWidget {
           Row(
             children: [
               _PrimaryDescription(),
-              SizedBox(width: 13),
+              SizedBox(width: 55),
               _TarjetaDescription(),
             ],
           ),
           Positioned(
-            top: 90,
+            top: 65,
             left: 50,
             child: Image(
               image: AssetImage("assets/blue.png"),
+              width: 160,
             ),
           )
         ],
