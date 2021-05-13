@@ -1,4 +1,5 @@
 import 'package:beats_ui/src/widgets/buy_button.dart';
+import 'package:beats_ui/src/widgets/cards_view.dart';
 import 'package:beats_ui/src/widgets/circular_background.dart';
 import 'package:beats_ui/src/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   CustomAppBar(),
                   _Header(),
-                  
+                  CardsView()
                 ],
               ),
             ),
