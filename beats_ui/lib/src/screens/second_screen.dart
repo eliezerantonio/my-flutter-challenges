@@ -100,8 +100,8 @@ class _SecondScreenState extends State<SecondScreen> {
               bottom: 10,
               left: 10,
               child: SizedBox(
-                width: double.infinity,
-                height: 600,
+                width: 500,
+                height: 180,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   controller: ScrollController(initialScrollOffset: 0.5),

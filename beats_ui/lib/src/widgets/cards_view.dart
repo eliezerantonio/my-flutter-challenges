@@ -1,6 +1,7 @@
 import 'package:beats_ui/src/models/product_model.dart';
 import 'package:beats_ui/src/providers/products_providers.dart';
 import 'package:beats_ui/src/screens/second_screen.dart';
+import 'package:beats_ui/src/widgets/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,10 +36,11 @@ class _Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => SecondScreen(
-                  productoModel: productoModel,
-                )));
+        push(
+            context,
+            SecondScreen(
+              productoModel: productoModel,
+            ));
       },
       child: Container(
         child: Stack(

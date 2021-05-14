@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             title: "Buy",
           ),
           Positioned(
-            left: 7,
+            left: 20,
             bottom: 0,
             child: SizedBox(
               width: 300,
