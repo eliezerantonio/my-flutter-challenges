@@ -100,10 +100,11 @@ class _SecondScreenState extends State<SecondScreen> {
               bottom: 10,
               left: 10,
               child: SizedBox(
-                width: 500,
-                height: 180,
+                width: double.infinity,
+                height: 600,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
+                  controller: ScrollController(initialScrollOffset: 0.5),
                   children: [
                     PrincipalCard(widget: widget),
                     SizedBox(
@@ -194,12 +195,10 @@ class SecondCard extends StatelessWidget {
                       SizedBox(
                         width: 15,
                       ),
-                      Text(
-                        "Visa",
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
+                      Image.asset(
+                        "assets/visa.png",
+                        width: 40,
+                      )
                     ],
                   )
                 ],
@@ -263,10 +262,10 @@ class SecondCard2 extends StatelessWidget {
                       SizedBox(
                         width: 15,
                       ),
-                      Text(
-                        "Visa",
-                        style: TextStyle(fontSize: 12, color: Colors.white),
-                      ),
+                      Image.asset(
+                        "assets/visa.png",
+                        width: 30,
+                      )
                     ],
                   )
                 ],
