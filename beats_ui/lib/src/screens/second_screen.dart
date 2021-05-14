@@ -124,6 +124,18 @@ class _SecondScreenState extends State<SecondScreen> {
                     SecondCard2(
                       color: Colors.blue,
                     ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    SecondCard2(
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    SecondCard2(
+                      color: Colors.amberAccent,
+                    ),
                   ],
                 ),
               )),
@@ -198,7 +210,9 @@ class SecondCard extends StatelessWidget {
       ),
     );
   }
-}class SecondCard2 extends StatelessWidget {
+}
+
+class SecondCard2 extends StatelessWidget {
   const SecondCard2({Key key, this.color}) : super(key: key);
   final Color color;
   @override
@@ -220,6 +234,9 @@ class SecondCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "*** 4324",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
           Positioned(
@@ -230,6 +247,9 @@ class SecondCard extends StatelessWidget {
                 children: [
                   Text(
                     "*** 4324",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                   Row(
                     children: [
@@ -237,6 +257,7 @@ class SecondCard extends StatelessWidget {
                         "Debit",
                         style: TextStyle(
                           fontSize: 12,
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(
@@ -244,9 +265,7 @@ class SecondCard extends StatelessWidget {
                       ),
                       Text(
                         "Visa",
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                        style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
                     ],
                   )
