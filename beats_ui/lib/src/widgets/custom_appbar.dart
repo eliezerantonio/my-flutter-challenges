@@ -38,9 +38,12 @@ class CustomAppBar extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Container(
-              color: Colors.blue,
               width: 50,
               height: 50,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  image:
+                      DecorationImage(image: AssetImage("assets/user.jpeg"))),
             ),
           ),
           SizedBox(
