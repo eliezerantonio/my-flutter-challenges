@@ -1,18 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
-
 import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
-import 'package:flutter_sms/flutter_sms.dart';
-
-
-import 'package:atm/widgets/credit_card.dart';
 import 'package:atm/widgets/custom_button.dart';
 import 'package:atm/widgets/custom_text_form.dart';
 import 'package:atm/widgets/messenger.dart';
-import 'package:atm/widgets/stain_images_widget.dart';
 import 'package:atm/widgets/stain_images_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +30,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     'VOZ',
     'NET',
   ];
+
   List<String> _plains = [
     '1000KZ',
     '1500KZ',
@@ -78,13 +72,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 7,
-                ),
+                SizedBox(height: 7),
                 Text("Conta"),
-                SizedBox(
-                  height: 7,
-                ),
+                SizedBox(height: 7),
                 Text("0000.0000.$sendAccount"),
               ],
             ),
@@ -224,12 +214,14 @@ class _ServicesScreenState extends State<ServicesScreen> {
   List<DropdownMenuItem<String>> getOpcionesDropdown() {
     List<DropdownMenuItem<String>> lista = new List();
 
-    _poderes.forEach((poder) {
-      lista.add(DropdownMenuItem(
-        child: Text(poder),
-        value: poder,
-      ));
-    });
+    _poderes.forEach(
+      (poder) {
+        lista.add(DropdownMenuItem(
+          child: Text(poder),
+          value: poder,
+        ));
+      },
+    );
 
     return lista;
   }
@@ -297,23 +289,15 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
   Future<void> pdf() async {
 // Create a new PDF document.
-final PdfDocument document = PdfDocument();
+    final PdfDocument document = PdfDocument();
 // Add a PDF page and draw text.
-document.pages.add().graphics.drawString(
-    'Hello World!', PdfStandardFont(PdfFontFamily.helvetica, 12),
-    brush: PdfSolidBrush(PdfColor(0, 0, 0)),
-    bounds: const Rect.fromLTWH(0, 0, 150, 20));
+    document.pages.add().graphics.drawString(
+        'Hello World!', PdfStandardFont(PdfFontFamily.helvetica, 12),
+        brush: PdfSolidBrush(PdfColor(0, 0, 0)),
+        bounds: const Rect.fromLTWH(0, 0, 150, 20));
 // Save the document.
-File('HelloWorld.pdf').writeAsBytes(document.save());
+    File('HelloWorld.pdf').writeAsBytes(document.save());
 // Dispose the document.
-document.dispose();
-  }
-
-  void _sendSMS(String message, List<String> recipents) async {
-    String _result = await sendSMS(message: message, recipients: recipents)
-        .catchError((onError) {
-      print(onError);
-    });
-    print(_result);
+    document.dispose();
   }
 }

@@ -25,6 +25,7 @@ class SendMoneyScreen extends StatelessWidget {
     final primaryColor = Theme.of(context).primaryColor;
     final accentColor = Theme.of(context).accentColor;
 
+
     _onClickSend() async {
       int currentAccount = account.id;
       int sendAccount = int.parse(_contollerAccount.text);
@@ -53,7 +54,7 @@ class SendMoneyScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 7
                 ),
                 Text(
                   "$balance,00KZ",
@@ -69,7 +70,7 @@ class SendMoneyScreen extends StatelessWidget {
                 SizedBox(
                   height: 7,
                 ),
-                Text("0000.0000.$sendAccount"),
+                Text("0101.1010.$sendAccount"),
               ],
             ),
             actions: [
