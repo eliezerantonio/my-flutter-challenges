@@ -13,7 +13,7 @@ class CardsView extends StatelessWidget {
     final productsProv = Provider.of<ProductosProvider>(context);
     return Container(
       width: double.infinity,
-      height: 370,
+      height: 365,
       child: PageView(
         physics: BouncingScrollPhysics(),
         controller: PageController(viewportFraction: 0.9),

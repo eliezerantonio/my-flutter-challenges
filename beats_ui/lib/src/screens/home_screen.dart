@@ -18,15 +18,116 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [CustomAppBar(), _Header(), CardsView()],
+                children: [
+                  CustomAppBar(),
+                  _Header(),
+                  CardsView(),
+                ],
               ),
             ),
           ),
           BuyButton(
             title: "Buy",
-          )
+          ),
+          Positioned(
+            left: 7,
+            bottom: 0,
+            child: SizedBox(
+              width: 300,
+              height: 150,
+              child: ListView(
+                children: [
+                  Text(
+                    "Popular Beats Products",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.blueAccent,
+                    img: "gold",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.blueGrey,
+                    img: "red",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.grey,
+                    img: "blue",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.blueAccent,
+                    img: "gold",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.blueGrey,
+                    img: "red",
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  BeatsSmall(
+                    color: Colors.grey,
+                    img: "blue",
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
+    );
+  }
+}
+
+class BeatsSmall extends StatelessWidget {
+  const BeatsSmall({Key key, this.color = Colors.white, this.img = "black"})
+      : super(key: key);
+  final String img;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          padding: EdgeInsets.all(6),
+          decoration: BoxDecoration(
+              color: color, borderRadius: BorderRadius.circular(10)),
+          child: Image.asset(
+            "assets/$img.png",
+            width: 20,
+            height: 20,
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "The decade Collection",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text("\$300"),
+          ],
+        )
+      ],
     );
   }
 }
@@ -42,7 +143,7 @@ class _Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 45,
+            height: 35,
           ),
           Text(
             "Beats",
