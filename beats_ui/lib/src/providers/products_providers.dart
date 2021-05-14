@@ -12,6 +12,7 @@ class ProductosProvider extends ChangeNotifier {
 
   _cargarProductos() {
     final prod1 = new ProductoModel(
+        id: 1,
         nombre: 'Beats Studio3 Wireless',
         titulo: 'Warriors',
         subtitulo: 'Royal Blue',
@@ -22,6 +23,7 @@ class ProductosProvider extends ChangeNotifier {
         url: 'blue.png');
 
     final prod2 = new ProductoModel(
+        id: 2,
         nombre: 'Studio3 Wireless',
         titulo: 'Warriors',
         subtitulo: 'Royal Red',
@@ -32,6 +34,7 @@ class ProductosProvider extends ChangeNotifier {
         url: 'black-red.png');
 
     final prod3 = new ProductoModel(
+        id: 3,
         nombre: 'Beats Wireless',
         titulo: 'Fighter',
         subtitulo: 'Space Grey',
@@ -42,6 +45,7 @@ class ProductosProvider extends ChangeNotifier {
         url: 'black.png');
 
     final prod4 = new ProductoModel(
+        id: 4,
         nombre: 'Beats Studio3 Wireless',
         titulo: 'Finest',
         subtitulo: 'Royal Gold',
@@ -52,6 +56,7 @@ class ProductosProvider extends ChangeNotifier {
         url: 'gold.png');
 
     final prod5 = new ProductoModel(
+        id: 5,
         nombre: 'Beats Studio3',
         titulo: 'Warriors',
         subtitulo: 'Royal Red',
@@ -62,6 +67,7 @@ class ProductosProvider extends ChangeNotifier {
         url: 'red.png');
 
     final prod6 = new ProductoModel(
+      id: 6,
         nombre: 'Beats Studio3',
         titulo: 'Warriors',
         subtitulo: 'Royal Teal',

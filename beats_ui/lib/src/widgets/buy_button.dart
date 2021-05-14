@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BuyButton extends StatelessWidget {
-  const BuyButton({Key key}) : super(key: key);
-
+  const BuyButton(
+      {Key key, this.title = "Buy", this.color = Colors.red, this.color2})
+      : super(key: key);
+  final String title;
+  final Color color;
+  final int color2;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Stack(
       children: [
         Positioned(
@@ -16,7 +21,7 @@ class BuyButton extends StatelessWidget {
               width: size.width * 0.3,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: color == null ? Color(color2) : color,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
                 ),
@@ -25,7 +30,7 @@ class BuyButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Buy",
+                    "$title",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

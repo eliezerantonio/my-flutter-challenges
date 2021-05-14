@@ -18,15 +18,13 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomAppBar(),
-                  _Header(),
-                  CardsView()
-                ],
+                children: [CustomAppBar(), _Header(), CardsView()],
               ),
             ),
           ),
-          BuyButton()
+          BuyButton(
+            title: "Buy",
+          )
         ],
       ),
     );

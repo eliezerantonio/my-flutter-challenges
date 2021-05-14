@@ -11,7 +11,11 @@ class CustomAppBar extends StatelessWidget {
       color: Colors.transparent,
       child: Row(
         children: [
-          IconButton(icon: Icon(FontAwesomeIcons.arrowLeft), onPressed: () {}),
+          IconButton(
+              icon: Icon(FontAwesomeIcons.arrowLeft),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           Spacer(),
           IconButton(icon: Icon(FontAwesomeIcons.search), onPressed: () {}),
           Stack(
@@ -33,8 +37,9 @@ class CustomAppBar extends StatelessWidget {
             ],
           ),
           IconButton(
-              icon: Icon(FontAwesomeIcons.ellipsisV, size: 15),
-              onPressed: () {}),
+            icon: Icon(FontAwesomeIcons.ellipsisV, size: 15),
+            onPressed: () {},
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Container(

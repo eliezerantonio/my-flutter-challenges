@@ -1,5 +1,6 @@
 import 'package:beats_ui/src/models/product_model.dart';
 import 'package:beats_ui/src/providers/products_providers.dart';
+import 'package:beats_ui/src/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,29 +33,40 @@ class _Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              _PrimaryDescription(
-                productoModel: productoModel,
-              ),
-              SizedBox(width: 55),
-              _TarjetaDescription(
-                productoModel: productoModel,
-              ),
-            ],
-          ),
-          Positioned(
-            top: 65,
-            left: 50,
-            child: Image(
-              image: AssetImage("assets/${productoModel.url}"),
-              width: 160,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => SecondScreen(
+                  productoModel: productoModel,
+                )));
+      },
+      child: Container(
+        child: Stack(
+          children: [
+            Row(
+              children: [
+                _PrimaryDescription(
+                  productoModel: productoModel,
+                ),
+                SizedBox(width: 55),
+                _TarjetaDescription(
+                  productoModel: productoModel,
+                ),
+              ],
             ),
-          )
-        ],
+            Positioned(
+              top: 65,
+              left: 50,
+              child: Hero(
+                tag: productoModel.id,
+                child: Image(
+                  image: AssetImage("assets/${productoModel.url}"),
+                  width: 160,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
