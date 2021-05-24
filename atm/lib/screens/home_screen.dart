@@ -68,6 +68,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               MyCreditCard(),
               SizedBox(height: 7),

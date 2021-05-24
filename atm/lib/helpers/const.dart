@@ -1,2 +1,2 @@
-const PORT = "192.168.43.158";
-const BASE_URL = "http://$PORT:3000/api";
+const IP = "172.20.10.4";
+const BASE_URL = "http://$IP:3000/api";
