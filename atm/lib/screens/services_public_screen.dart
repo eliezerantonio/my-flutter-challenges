@@ -11,15 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-class ServicesScreen extends StatefulWidget {
-  ServicesScreen({Key key, this.name}) : super(key: key);
+class ServicesPublicScreen extends StatefulWidget {
+  ServicesPublicScreen({Key key, this.name}) : super(key: key);
   final String name;
 
   @override
-  _ServicesScreenState createState() => _ServicesScreenState();
+  _ServicesPublicScreenState createState() => _ServicesPublicScreenState();
 }
 
-class _ServicesScreenState extends State<ServicesScreen> {
+class _ServicesPublicScreenState extends State<ServicesPublicScreen> {
   String _opcionSeleccionada;
   String _opcionSeleccionada2;
 
@@ -49,7 +49,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     final primaryColor = Theme.of(context).primaryColor;
     final accentColor = Theme.of(context).accentColor;
 
-    Future<void> _onClickSend() async {
+    _onClickSend() async {
       int currentAccount = account.id;
       int sendAccount = int.parse(_contollerAccount.text);
       num balance = int.parse(_contollerBalance.text);
@@ -143,27 +143,23 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     name: "${widget.name}",
                   ),
                   SizedBox(height: 20),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _crearDropdown(),
-                        SizedBox(height: 20),
-                        _crearDropdown2(),
-                      ],
-                    ),
-                  ),
                   SizedBox(height: 20),
                   Align(
                     alignment: Alignment.center,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Numero"),
+                        Text("Numero de Conta"),
                         SizedBox(height: 10),
                         CustomTextForm(
-                          icon: Icons.phone,
+                          icon: Icons.format_list_numbered_rtl_outlined,
+                          controller: _contollerBalance,
+                        ),
+                        SizedBox(height: 30),
+                        Text("Valor"),
+                        SizedBox(height: 10),
+                        CustomTextForm(
+                          icon: Icons.attach_money,
                           controller: _contollerBalance,
                         ),
                       ],
@@ -224,67 +220,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
     );
 
     return lista;
-  }
-
-  List<DropdownMenuItem<String>> getOpcionesDropdown2() {
-    List<DropdownMenuItem<String>> lista = new List();
-
-    _plains.forEach((poder) {
-      lista.add(DropdownMenuItem(
-        child: Text(poder),
-        value: poder,
-      ));
-    });
-
-    return lista;
-  }
-
-  Widget _crearDropdown() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: DropdownButton(
-              value: _opcionSeleccionada,
-              hint: Text("Selecione o Pacote"),
-              elevation: 0,
-              isExpanded: true,
-              items: getOpcionesDropdown(),
-              onChanged: (opt) {
-                setState(() {
-                  _opcionSeleccionada = opt;
-                });
-              },
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _crearDropdown2() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: DropdownButton(
-              hint: Text("Selecione o Pacote"),
-              value: _opcionSeleccionada2,
-              elevation: 0,
-              isExpanded: true,
-              items: getOpcionesDropdown2(),
-              onChanged: (opt) {
-                setState(() {
-                  _opcionSeleccionada2 = opt;
-                });
-              },
-            ),
-          )
-        ],
-      ),
-    );
   }
 
   Future<void> pdf() async {

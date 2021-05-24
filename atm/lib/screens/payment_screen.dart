@@ -2,13 +2,11 @@ import 'package:atm/account/account.dart';
 import 'package:atm/account/account_manger.dart';
 import 'package:atm/helpers/api_response.dart';
 import 'package:atm/helpers/nav.dart';
+import 'package:atm/screens/services_public_screen.dart';
 import 'package:atm/screens/services_screen.dart';
 import 'package:atm/widgets/credit_card.dart';
-import 'package:atm/widgets/custom_button.dart';
-import 'package:atm/widgets/custom_text_form.dart';
 import 'package:atm/widgets/messenger.dart';
 import 'package:atm/widgets/stain_images_widget.dart';
-import 'package:atm/widgets/stain_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,6 +50,7 @@ class PaymentScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Stack(
           children: [
             Align(
@@ -91,31 +90,72 @@ class PaymentScreen extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               push(
-                                  context,
-                                  ServicesScreen(
-                                    name: "movicel",
-                                  ));
+                                context,
+                                ServicesScreen(
+                                  name: "movicel",
+                                ),
+                              );
                             },
                             child: StainImageWidget(
                               image: "movicel",
                               name: "movicel",
                             ),
                           ),
-                          StainImageWidget(
-                            image: "water",
-                            name: "Água",
+                          GestureDetector(
+                            onTap: () {
+                              push(
+                                context,
+                                ServicesPublicScreen(
+                                  name: "water",
+                                ),
+                              );
+                            },
+                            child: StainImageWidget(
+                              image: "water",
+                              name: "Água",
+                            ),
                           ),
-                          StainImageWidget(
-                            name: "internet",
-                            image: "internet",
+                          GestureDetector(
+                            onTap: () {
+                              push(
+                                context,
+                                ServicesPublicScreen(
+                                  name: "internet",
+                                ),
+                              );
+                            },
+                            child: StainImageWidget(
+                              name: "internet",
+                              image: "internet",
+                            ),
                           ),
-                          StainImageWidget(
-                            image: "ende",
-                            name: "ende",
+                          GestureDetector(
+                            onTap: () {
+                              push(
+                                context,
+                                ServicesPublicScreen(
+                                  name: "ende",
+                                ),
+                              );
+                            },
+                            child: StainImageWidget(
+                              image: "ende",
+                              name: "ende",
+                            ),
                           ),
-                          StainImageWidget(
-                            image: "zap",
-                            name: "zap",
+                          GestureDetector(
+                            onTap: () {
+                              push(
+                                context,
+                                ServicesPublicScreen(
+                                  name: "zap",
+                                ),
+                              );
+                            },
+                            child: StainImageWidget(
+                              image: "zap",
+                              name: "zap",
+                            ),
                           ),
                         ],
                       ),

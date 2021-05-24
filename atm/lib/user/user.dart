@@ -34,7 +34,7 @@ class User extends ChangeNotifier {
     this.bi = fromJSON["bi"];
     this.email = fromJSON["email"];
     this.genre = fromJSON["genre"];
-    this.pic = fromJSON["pic"].toString().replaceAll("localhost", "$PORT");
+    this.pic = fromJSON["pic"].toString().replaceAll("localhost", "$IP");
     this.phone = fromJSON["phone"];
     this.token = fromJSON["token"];
     //this.birthDate = DateTime.tryParse(fromJSON["birthDate"]);
