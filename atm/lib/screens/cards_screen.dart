@@ -1,5 +1,7 @@
-import 'package:atm/widgets/credit_card.dart';
+
 import 'package:flutter/material.dart';
+
+import '../widgets/credit_card.dart';
 
 class CardScreen extends StatelessWidget {
   const CardScreen({Key key}) : super(key: key);
