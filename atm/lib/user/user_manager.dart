@@ -31,8 +31,8 @@ class UserManager extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final client = User.fromJSON(mapRensponse);
-        client.save();
-        notifyListeners();
+        await client.save();
+
         return ApiResponse.ok(client);
       }
       notifyListeners();
@@ -62,6 +62,4 @@ class UserManager extends ChangeNotifier {
 
     return user;
   }
-
-
 }

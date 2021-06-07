@@ -13,15 +13,13 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _page = 2;
+  int _page = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
   List<Widget> screens = [
-    MovimentScreen(),
+  
     CardScreen(),
     HomeScreen(),
-    Container(
-      color: Colors.deepOrange,
-    ),
+
     ProfileScreen(),
   ];
 
@@ -31,13 +29,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
-          index: 2,
+          index: 1,
           height: 40.0,
           items: <Widget>[
-            Icon(Icons.compare_arrows, size: 30),
+         
             Icon(Icons.credit_card_rounded, size: 30),
             Icon(Icons.home, size: 30),
-            Icon(Icons.call_split, size: 30),
+         
             Icon(Icons.perm_identity, size: 30),
           ],
           color: Colors.white,
