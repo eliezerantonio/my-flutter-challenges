@@ -1,3 +1,4 @@
+import 'package:atm/credit_cards_concept/credit_cards_concept_page.dart';
 import 'package:atm/screens/cards_screen.dart';
 import 'package:atm/screens/home_screen.dart';
 import 'package:atm/screens/moviment_screen.dart';
@@ -16,10 +17,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _page = 1;
   GlobalKey _bottomNavigationKey = GlobalKey();
   List<Widget> screens = [
-  
-    CardScreen(),
+    CreditCardConceptPage(),
     HomeScreen(),
-
     ProfileScreen(),
   ];
 
@@ -32,10 +31,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           index: 1,
           height: 40.0,
           items: <Widget>[
-         
             Icon(Icons.credit_card_rounded, size: 30),
             Icon(Icons.home, size: 30),
-         
             Icon(Icons.perm_identity, size: 30),
           ],
           color: Colors.white,

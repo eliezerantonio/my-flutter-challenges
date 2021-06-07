@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:math';
+import 'package:atm/credit_cards_concept/credit_card.dart';
 import 'package:atm/helpers/const.dart';
 import 'package:atm/user/user_manager.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:atm/account/account.dart';
@@ -14,7 +17,7 @@ class AccountManager extends ChangeNotifier {
   }
 
   bool _isLoading = false;
-
+  var creditCards = [];
   bool get loading => _isLoading;
   set loading(bool value) {
     _isLoading = value;
@@ -40,6 +43,27 @@ class AccountManager extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         account = Account.fromJson(mapRensponse);
+
+        final Random random = new Random();
+
+        double doubleInRange(Random source, int start, int end) =>
+            source.nextDouble() * (end - start) + start;
+
+        int _intInRange(Random source, int start, int end) =>
+            start + source.nextInt(end - start);
+
+        String _getFourNumbers() => _intInRange(random, 1000, 9999).toString();
+
+        creditCards = List.generate(
+          3,
+          (index) => CreditCard(
+            ccv: _getFourNumbers(),
+            amount: double.tryParse(account.balance.toString()),
+            color: Colors.primaries[index % Colors.primaries.length],
+            number:
+                "${_getFourNumbers()} ${_getFourNumbers()} ${_getFourNumbers()} ${_getFourNumbers()}",
+          ),
+        );
 
         notifyListeners();
         return ApiResponse.ok(account);

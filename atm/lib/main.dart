@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'account/account_manger.dart';
@@ -27,6 +26,7 @@ void main() {
             int id = userManager.user.id;
 
             if (id != null) {
+                       
               return accountManager..getAccount(userId: userManager.user.id);
             }
           },
