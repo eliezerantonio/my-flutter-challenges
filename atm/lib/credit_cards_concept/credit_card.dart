@@ -6,7 +6,7 @@ class CreditCard extends ChangeNotifier {
   final Color color;
   final String number;
   final String ccv;
-  final double amount;
+  double amount;
 
   CreditCard({
     this.color,
@@ -16,23 +16,5 @@ class CreditCard extends ChangeNotifier {
   });
 }
 
-final Random random = new Random();
-
 double doubleInRange(Random source, int start, int end) =>
     source.nextDouble() * (end - start) + start;
-
-int _intInRange(Random source, int start, int end) =>
-    start + source.nextInt(end - start);
-
-String _getFourNumbers() => _intInRange(random, 1000, 9999).toString();
-
-final creditCards = List.generate(
-  2,
-  (index) => CreditCard(
-    amount: doubleInRange(random, 500, 20000),
-    ccv: _getFourNumbers(),
-    color: Colors.primaries[index % Colors.primaries.length],
-    number:
-        "${_getFourNumbers()} ${_getFourNumbers()} ${_getFourNumbers()} ${_getFourNumbers()}",
-  ),
-);
