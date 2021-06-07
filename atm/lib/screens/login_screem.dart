@@ -158,10 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
-    await Future.delayed(Duration(seconds: 1));
+
     ApiResponse apiResponse =
         await context.read<UserManager>().login(email, password);
-
+    await Future.delayed(Duration(seconds: 3));
     if (apiResponse.ok) {
       User user = apiResponse.result;
       if (user != null) {

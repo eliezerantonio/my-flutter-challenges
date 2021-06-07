@@ -57,17 +57,17 @@ class User extends ChangeNotifier {
     return data;
   }
 
-  void save() {
+  Future<void> save() async {
     Map map = toJson();
     //convertendo objecto/map para String
     //
     String json = convert.json.encode(map);
 
-    Prefs.setString("client.prefs", json);
+    await Prefs.setString("client.prefs", json);
   }
 
-  void clear() {
-    Prefs.setString("client.prefs", "");
+  Future<void> clear() async {
+    await Prefs.setString("client.prefs", "");
     notifyListeners();
   }
 

@@ -106,13 +106,7 @@ class HomeScreen extends StatelessWidget {
                           colorIcon: Colors.green,
                         ),
                       ),
-                      StainWidget(
-                        icon: Icons.search,
-                        title: "Consultar",
-                        subtitle: "Consultar dados",
-                        color: Colors.indigo[100],
-                        colorIcon: Colors.indigo,
-                      ),
+                 
                       GestureDetector(
                         onTap: () {
                           push(context, PaymentScreen());
@@ -125,13 +119,7 @@ class HomeScreen extends StatelessWidget {
                           colorIcon: Colors.amber,
                         ),
                       ),
-                      StainWidget(
-                        icon: Icons.shopping_cart_outlined,
-                        title: "Compras",
-                        subtitle: "Compras online",
-                        color: Colors.lightBlue[100],
-                        colorIcon: Colors.lightBlue,
-                      ),
+                   
                       GestureDetector(
                         onTap: () {
                           push(context, RaiseScreen());

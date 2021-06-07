@@ -108,8 +108,8 @@ class ProfileScreen extends StatelessWidget {
             ),
             Spacer(),
             GestureDetector(
-              onTap: () {
-                context.read<User>().clear();
+              onTap: () async {
+                await context.read<User>().clear();
                 push(context, LoginScreen(), replace: true);
               },
               child: InfoWidget(

@@ -1,10 +1,11 @@
-import 'package:atm/account/account_manger.dart';
-import 'package:atm/services/twilio_service.dart';
-import 'package:atm/user/user_manager.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:atm/user/user.dart';
+import 'account/account_manger.dart';
 import 'screens/login_screem.dart';
+import 'services/twilio_service.dart';
+import 'user/user.dart';
+import 'user/user_manager.dart';
 
 void main() {
   TwilioApi twilioApi = TwilioApi();
