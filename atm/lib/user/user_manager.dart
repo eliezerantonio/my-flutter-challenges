@@ -12,7 +12,7 @@ class UserManager extends ChangeNotifier {
   UserManager() {
     getUser();
   }
-  User user= User();
+  User user = User();
   Future<ApiResponse<User>> login(String email, String password) async {
     try {
       var url = '$BASE_URL/client/login';
@@ -31,7 +31,7 @@ class UserManager extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final client = User.fromJSON(mapRensponse);
-        await client.save();
+         client.save();
 
         return ApiResponse.ok(client);
       }
@@ -57,9 +57,8 @@ class UserManager extends ChangeNotifier {
       Map map = json?.decode(jsonS);
 
       user = User.fromJSONLocal(map);
-      print(user);
     }
-
+    notifyListeners();
     return user;
   }
 }

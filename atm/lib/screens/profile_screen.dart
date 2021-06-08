@@ -1,4 +1,5 @@
 import 'package:atm/helpers/nav.dart';
+import 'package:atm/helpers/prefs.dart';
 import 'package:atm/screens/edit_profile_screen.dart';
 import 'package:atm/screens/login_screem.dart';
 import 'package:atm/user/user.dart';
@@ -13,8 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final user = context.watch<UserManager>().user;
+    final user = context.watch<UserManager>();
     final primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
             child: CircleAvatar(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(user.pic),
+                child: Image.network(user.user.pic),
               ),
             ),
           ),
@@ -63,18 +63,18 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(60),
                 image: DecorationImage(
-                  image: NetworkImage(user.pic),
+                  image: NetworkImage(user.user.pic),
                 ),
               ),
             ),
             SizedBox(height: 7),
             Text(
-              user.name,
+              user.user.name,
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 7),
             Text(
-              user.email,
+              user.user.email,
               style: TextStyle(),
             ),
             SizedBox(height: 30),
@@ -109,7 +109,8 @@ class ProfileScreen extends StatelessWidget {
             Spacer(),
             GestureDetector(
               onTap: () async {
-                await context.read<User>().clear();
+                Prefs.setString("client.prefs", "");
+
                 push(context, LoginScreen(), replace: true);
               },
               child: InfoWidget(
