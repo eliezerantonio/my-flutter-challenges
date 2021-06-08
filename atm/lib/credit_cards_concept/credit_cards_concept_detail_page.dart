@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:atm/widgets/logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'credit_card.dart';
 import 'credit_card_widget.dart';
@@ -12,81 +13,105 @@ class CreditCardsConceptDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Theme(
-      data: ThemeData.dark().copyWith(
-        backgroundColor: Colors.black,
-        scaffoldBackgroundColor: Colors.black,
-      ),
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AppBar(
+              title: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    child: LogoWidget(),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    "Movimentos",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          Text(
-                            'Full card',
-                            textAlign: TextAlign.center,
-                            style: textTheme.headline6.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Rotable the card to view the security code',
-                            textAlign: TextAlign.center,
-                            style: textTheme.subtitle2.copyWith(
-                              color: Colors.grey[400],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                        ],
-                      ),
+              elevation: 0,
+              actions: [
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    SliverPersistentHeader(
-                      pinned: true,
-                      delegate: MyCardHeaderDelegate(card, 170.0),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 25.0),
-                        child: Text(
-                          'Hoje',
-                          textAlign: TextAlign.left,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        Text(
+                          'Full card',
+                          textAlign: TextAlign.center,
                           style: textTheme.headline6.copyWith(
                             color: Colors.white,
                           ),
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Rotable the card to view the security code',
+                          textAlign: TextAlign.center,
+                          style: textTheme.subtitle2.copyWith(
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 60,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: MyCardHeaderDelegate(card, 170.0),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 25.0),
+                      child: Text(
+                        'Hoje',
+                        textAlign: TextAlign.left,
+                        style: textTheme.headline6.copyWith(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return MovementWidget(
-                            index: index,
-                          );
-                        },
-                        childCount: 25,
-                      ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        return MovementWidget(
+                          index: index,
+                        );
+                      },
+                      childCount: 25,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -111,8 +136,8 @@ class MyCardHeaderDelegate extends SliverPersistentHeaderDelegate {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.black,
-            Colors.black87,
+            Colors.white,
+            Colors.white,
           ],
         ),
       ),
