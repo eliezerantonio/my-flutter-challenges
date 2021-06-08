@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             child: CircleAvatar(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(user?.pic),
+                child: Image.network(user?.pic ?? ""),
               ),
             ),
           ),
@@ -106,7 +106,6 @@ class HomeScreen extends StatelessWidget {
                           colorIcon: Colors.green,
                         ),
                       ),
-                 
                       GestureDetector(
                         onTap: () {
                           push(context, PaymentScreen());
@@ -119,7 +118,6 @@ class HomeScreen extends StatelessWidget {
                           colorIcon: Colors.amber,
                         ),
                       ),
-                   
                       GestureDetector(
                         onTap: () {
                           push(context, RaiseScreen());

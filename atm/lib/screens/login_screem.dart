@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
 
     Future<User> client = context.read<UserManager>().getUser();
-    client.then((User value) {
+    client.then((value) {
       if (value != null) {
         Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
       }

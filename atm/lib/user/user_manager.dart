@@ -12,7 +12,7 @@ class UserManager extends ChangeNotifier {
   UserManager() {
     getUser();
   }
-  User user;
+  User user= User();
   Future<ApiResponse<User>> login(String email, String password) async {
     try {
       var url = '$BASE_URL/client/login';

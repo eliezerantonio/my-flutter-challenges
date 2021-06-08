@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:atm/credit_cards_concept/credit_card.dart';
 import 'package:atm/helpers/const.dart';
+import 'package:atm/user/user.dart';
 import 'package:atm/user/user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -24,26 +25,26 @@ class AccountManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ApiResponse<Account>> getAccount({int userId}) async {
+  Future<ApiResponse<Account>> getAccount({int userId, User token}) async {
+    UserManager user = await UserManager();
+
+    user.getUser();
+
     try {
       var url = '$BASE_URL/account/client/$userId';
 
-      UserManager user = await UserManager();
-
       Map<String, String> headers = {
         "Content-type": "application/json",
-        "x-access-token": "${user.user.token}"
+        "x-access-token": "${user.user.token ?? token.token}"
       };
 
-      print(headers);
-
       var response = await http.get(url, headers: headers);
-
+      print("*******************${response.body}");
       Map mapRensponse = json.decode(response.body);
 
       if (response.statusCode == 200) {
         account = Account.fromJson(mapRensponse);
-
+        notifyListeners();
         final Random random = new Random();
 
         double doubleInRange(Random source, int start, int end) =>
@@ -55,7 +56,7 @@ class AccountManager extends ChangeNotifier {
         String _getFourNumbers() => _intInRange(random, 1000, 9999).toString();
 
         creditCards = List.generate(
-          3,
+          8,
           (index) => CreditCard(
             ccv: _getFourNumbers(),
             amount: double.tryParse(account.balance.toString()),
@@ -65,7 +66,6 @@ class AccountManager extends ChangeNotifier {
           ),
         );
 
-        notifyListeners();
         return ApiResponse.ok(account);
       }
       notifyListeners();
@@ -178,11 +178,13 @@ class AccountManager extends ChangeNotifier {
 
       Map mapRensponse = json.decode(response.body);
 
-      print(response.statusCode);
       if (response.statusCode == 200) {
         final account = Account.fromJson(mapRensponse);
+        UserManager user = await UserManager();
+
         loading = false;
-        getAccount(userId: account.clientId);
+        getAccount(userId: account.clientId, token: user.user);
+        notifyListeners();
         return ApiResponse.ok(account);
       }
 
