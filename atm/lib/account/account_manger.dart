@@ -127,7 +127,12 @@ class AccountManager extends ChangeNotifier {
     try {
       loading = true;
       var url = '$BASE_URL/account/deposit/$currentAccount';
-      Map<String, String> headers = {"Content-type": "application/json"};
+      UserManager user = await UserManager();
+
+      Map<String, String> headers = {
+        "Content-type": "application/json",
+        "x-access-token": "${user.user.token}"
+      };
 
       Map<String, dynamic> params = {"balance": balance};
 
