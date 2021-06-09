@@ -29,12 +29,15 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-    Future<User> client = context.read<UserManager>().getUser();
-    client.then((User value) {
-      if (value != null) {
-        Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
-      }
-    });
+    goHome();
+  }
+
+  void goHome() async {
+    final client = await context.read<UserManager>().getUser();
+
+    if (client != null) {
+      Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
+    }
   }
 
   @override
@@ -158,13 +161,13 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String email = _controllerEmail.text;
     String password = _controllerPassword.text;
-
     ApiResponse apiResponse =
         await context.read<UserManager>().login(email, password);
-    await Future.delayed(Duration(seconds: 3));
+
     if (apiResponse.ok) {
       User user = apiResponse.result;
       if (user != null) {
+        await Future.delayed(Duration(seconds: 6));
         Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
 
         return;

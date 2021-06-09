@@ -33,7 +33,7 @@ class CreditCardConceptPage extends StatelessWidget {
               width: 20,
             ),
             Text(
-              "Cartoes",
+              "Cartões",
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -64,7 +64,7 @@ class CreditCardConceptPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Bank Cards',
+                        'Cartões',
                         style: textTheme.headline4.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

@@ -32,11 +32,11 @@ class _ServicesScreenState extends State<ServicesScreen> {
   ];
 
   List<String> _plains = [
-    '1000KZ',
-    '1500KZ',
-    '2000KZ',
-    '2500KZ',
-    '3000KZ',
+    '1000 KZ',
+    '1500 KZ',
+    '2000 KZ',
+    '2500 KZ',
+    '3000 KZ',
   ];
 
   @override
@@ -44,79 +44,33 @@ class _ServicesScreenState extends State<ServicesScreen> {
     account = context.watch<AccountManager>().account;
 
     final loading = context.watch<AccountManager>().loading;
-    final _contollerAccount = TextEditingController();
     final _contollerBalance = TextEditingController();
     final primaryColor = Theme.of(context).primaryColor;
     final accentColor = Theme.of(context).accentColor;
 
-    Future<void> _onClickSend() async {
-      int currentAccount = account.id;
-      int sendAccount = int.parse(_contollerAccount.text);
-      num balance = int.parse(_contollerBalance.text);
-
-      if (sendAccount == currentAccount) {
-        messenger(context, "Operação não suportada!", error: true);
-        return;
-      }
-      showDialog(
-        builder: (_) {
-          return AlertDialog(
-            actionsPadding: EdgeInsets.symmetric(horizontal: 20),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Center(
-              child: Text("Recargas"),
-            ),
-            titleTextStyle: TextStyle(
-                color: primaryColor, fontWeight: FontWeight.bold, fontSize: 25),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 7),
-                Text("Conta"),
-                SizedBox(height: 7),
-                Text("0000.0000.$sendAccount"),
-              ],
-            ),
-            actions: [
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  "Cancelar",
-                  style: TextStyle(
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-              FlatButton(
-                onPressed: () async {
-                  ApiResponse apiResponse =
-                      await context.read<AccountManager>().sendMoney(
-                            sendAccount: sendAccount,
-                            currentAccount: currentAccount,
-                            balance: balance,
-                          );
-
-                  if (apiResponse.ok) {
-                    messenger(context, "Transferência realizada com sucesso");
-                  } else {
-                    messenger(context, apiResponse.msg, error: true);
-                  }
-                },
-                child: Text(
-                  "Confirmar",
-                  style: TextStyle(
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            ],
+    _onClickDeposit() async {
+      if (_contollerBalance.text.isNotEmpty ||
+          _opcionSeleccionada2.isNotEmpty ||
+          _opcionSeleccionada.isNotEmpty) {
+        int currentAccount = account.id;
+        final realValue = _opcionSeleccionada2.replaceAll(" KZ", "");
+        ApiResponse apiResponse = await context.read<AccountManager>().raise(
+              currentAccount: currentAccount,
+              balance: num.tryParse(realValue),
+            );
+        if (apiResponse.ok) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text("Plano carregado com sucesso"),
+                duration: Duration(seconds: 2),
+                backgroundColor: Colors.grey),
           );
-        },
-        context: context,
-      );
+        } else {
+          messenger(context, apiResponse.msg, error: true);
+        }
+      } else {
+        messenger(context, "Preencha  valor ", error: true);
+      }
     }
 
     return Scaffold(
@@ -171,14 +125,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   ),
                   SizedBox(height: 70),
                   CustomButton(
-                    onPressed: () async {
-                      // String message = "This is a test message!";
-                      // List<String> recipents = ["+244924033375", ];
-
-                      // _sendSMS(message, recipents);
-
-                      pdf();
-                    },
+                    onPressed: _onClickDeposit,
                     text: "Confirmar",
                   ),
                 ],
@@ -270,7 +217,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
         children: <Widget>[
           Expanded(
             child: DropdownButton(
-              hint: Text("Selecione o Pacote"),
+              hint: Text("Selecione o valor"),
               value: _opcionSeleccionada2,
               elevation: 0,
               isExpanded: true,
