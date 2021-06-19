@@ -44,9 +44,11 @@ class ProfileScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                user.user.pic,
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(user.user.pic),
               ),
             ),
           ),
@@ -61,10 +63,12 @@ class ProfileScreen extends StatelessWidget {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(60),
+                borderRadius: BorderRadius.circular(100),
                 image: DecorationImage(
-                  image: NetworkImage(user.user.pic),
-                ),
+                    image: NetworkImage(
+                      user.user.pic,
+                    ),
+                    fit: BoxFit.cover),
               ),
             ),
             SizedBox(height: 7),
