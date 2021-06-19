@@ -67,17 +67,7 @@ class CreditCardsConceptDetailPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Rotable the card to view the security code',
-                          textAlign: TextAlign.center,
-                          style: textTheme.subtitle2.copyWith(
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 60,
+                          height: 20,
                         ),
                       ],
                     ),
@@ -159,7 +149,7 @@ class MyCardHeaderDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
 }
 
-const categories = ['Shoes', 'Food', 'Restaurant', 'Hotel'];
+const categories = ['Tranferencia', 'Deposito', 'Levantamento', 'Pagamento'];
 final random = Random();
 
 class MovementWidget extends StatelessWidget {
@@ -171,7 +161,7 @@ class MovementWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        "Movement ${index + 1}",
+        "Movimento ${index + 1}",
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
