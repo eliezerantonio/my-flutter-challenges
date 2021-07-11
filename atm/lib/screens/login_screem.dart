@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (apiResponse.ok) {
       User user = apiResponse.result;
       if (user != null) {
-        await Future.delayed(Duration(seconds: 6));
+        await Future.delayed(Duration(seconds: 3));
         Navigator.pushReplacement(context, _crearRuta(BottomNavBar()));
 
         return;
