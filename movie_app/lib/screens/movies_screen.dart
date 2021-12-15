@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:nicolau/screens/details_movie_screen.dart';
 
 class MoviesScreen extends StatefulWidget {
   const MoviesScreen({Key? key}) : super(key: key);
@@ -98,102 +99,117 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
   Builder itemMovie(movie) {
     return Builder(builder: (context) {
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-        decoration: BoxDecoration(
-          color: darkMode ? Colors.black : Colors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              transitionDuration: const Duration(seconds: 2),
+              pageBuilder: (_, __, ___) => DetailsMovieScreen(
+                movie: movie,
+              ),
+            ),
+          );
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          decoration: BoxDecoration(
+            color: darkMode ? Colors.black : Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 1000),
-                height: 300,
-                child: Image.network(movie['image'], fit: BoxFit.cover),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: !darkMode ? Colors.black : Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                _movies[_current]["title"],
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: !darkMode ? Colors.grey[850] : Colors.white,
-                  fontWeight: FontWeight.bold,
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 1000),
+                  height: 300,
+                  child: Hero(
+                      tag: movie['id'],
+                      child: Image.network(movie['image'], fit: BoxFit.cover)),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: !darkMode ? Colors.black : Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 7),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  typeMovie("Action"),
-                  const SizedBox(width: 7),
-                  typeMovie("Drama"),
-                  const SizedBox(width: 7),
-                  typeMovie("History"),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 18,
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 18,
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 18,
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 18,
-                  ),
-                  Icon(
-                    Icons.star_border,
-                    color: Colors.grey,
-                    size: 18,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[850],
-                  ),
-                  onPressed: () {},
-                  child: Text("BUY TICKET"),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              const SizedBox(height: 20),
-            ],
+                Text(
+                  movie["title"],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: !darkMode ? Colors.grey[850] : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 7),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    typeMovie("Action"),
+                    const SizedBox(width: 7),
+                    typeMovie("Drama"),
+                    const SizedBox(width: 7),
+                    typeMovie("History"),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.grey,
+                      size: 18,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey[850],
+                    ),
+                    onPressed: () {},
+                    child: Text("BUY TICKET"),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       );
