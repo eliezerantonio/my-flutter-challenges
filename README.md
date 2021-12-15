@@ -12,3 +12,10 @@
 |[bfa_turismo_clone](bfa_turismo_clone)|
 |:-:|
 |![bfa_turismo_clone](bfa_turismo_clone/screen_shots/01gif.gif)
+
+
+|[auth_ui](auth_ui)|
+|:-:|
+|![auth_ui](auth_ui/auth.gif)
+
+
