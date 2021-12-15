@@ -22,7 +22,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: !widget.darkMode ? Colors.black : Colors.white,
+          color: !widget.darkMode ? Colors.black : Colors.grey[900],
           child: Stack(
             children: [
               Align(
@@ -37,7 +37,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
               ),
               IconButton(
                 icon: const Icon(Icons.close),
-                color: !widget.darkMode ? Colors.white : Colors.black,
+                color: Colors.white,
                 iconSize: 30,
                 onPressed: () {
                   Navigator.of(context).pop();
