@@ -104,7 +104,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              transitionDuration: const Duration(seconds: 2),
+              transitionDuration: const Duration(milliseconds: 300),
               pageBuilder: (_, __, ___) => DetailsMovieScreen(
                 movie: movie,
               ),
@@ -239,6 +239,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
     {
       'id': 1,
       'title': 'Spider-Man: No Way Home',
+      'diretor': 'Jon Watts',
+      'actores': [
+        'Tom Halland',
+        'Zendaya',
+        'Willem Dafoe',
+      ],
       'image':
           'https://www.moviepostersgallery.com/wp-content/uploads/2021/12/Spidermannowayhome2.jpg',
       'description': 'Spider-Man: No Way Home'
@@ -246,6 +252,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
     {
       'id': 2,
       'title': 'Black Widow',
+      'diretor': 'Cate Shortland',
+      'actores': [
+        'Scarlett Johansson',
+        'Florence Pugh',
+        'Rachel Weisz',
+      ],
       'image':
           'https://www.moviepostersgallery.com/wp-content/uploads/2020/08/Blackwidow2.jpg',
       'description': 'Black Widow'
@@ -253,6 +265,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
     {
       'id': 3,
       'title': 'The Matrix Resurrections',
+      'diretor': 'Lana Wachowski',
+      'actores': [
+        'Lana Wachowski',
+        'Carrie-Anne Moss',
+        'Priyanka Chopra',
+      ],
       'image':
           'https://www.moviepostersgallery.com/wp-content/uploads/2021/12/Matrixresurrections1.jpg',
       'description': 'The Matrix Resurrections'
@@ -260,6 +278,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
     {
       'id': 4,
       'title': 'Shang-Chi and the Legend of the Ten Rings',
+      'diretor': 'Destin Cretton',
+      'actores': [
+        'Simu Liu',
+        'Awkwafina',
+        'Tony Leung Chiu-Wai',
+      ],
       'image':
           'https://www.moviepostersgallery.com/wp-content/uploads/2021/09/Shangchi5.jpg',
       'description': 'Shang-Chi and the Legend of the Ten Rings'
