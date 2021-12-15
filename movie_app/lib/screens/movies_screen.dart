@@ -104,9 +104,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
           Navigator.push(
             context,
             PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 1000),
+              transitionDuration: const Duration(milliseconds: 300),
               pageBuilder: (_, __, ___) => DetailsMovieScreen(
                 movie: movie,
+                darkMode: darkMode
               ),
             ),
           );
@@ -288,7 +289,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
         'Lana Wachowski',
         'Carrie-Anne Moss',
         'Priyanka Chopra',
-        'Jessica Henwick','Daniel Bernhardt'
+        'Jessica Henwick',
+        'Daniel Bernhardt'
       ],
       'images': [
         'http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcRHpx4nrlQmqA83ImfeOvsRKcrB2NN15NHAvYWpBWobbDe0t8Fkza7gfUEX3GtA',
