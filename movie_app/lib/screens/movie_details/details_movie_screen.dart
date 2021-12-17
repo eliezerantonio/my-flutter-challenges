@@ -71,7 +71,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       const SizedBox(height: 20),
 
                       //text actores
-                      infoWidget("actores", darkMode),
+                      infoWidget("Actores", darkMode),
                       //actors list
                       actorsWidget(),
                       //text info
