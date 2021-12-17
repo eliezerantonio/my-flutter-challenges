@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nicolau/screens/movies_screen.dart';
+import 'package:nicolau/screens/movie_screen/movies_screen.dart';
 
 void main() => runApp(MyApp());
 
