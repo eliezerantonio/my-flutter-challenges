@@ -1,27 +1,38 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:nicolau/data/movies.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 
 import 'widgets/item_movie.dart';
 
-class MoviesScreen extends StatefulWidget {
-  const MoviesScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget with NavigationStates {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _MoviesScreenState createState() => _MoviesScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MoviesScreenState extends State<MoviesScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _current = 0;
 
   bool darkMode = false;
+  bool drawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: Colors.black,
+      //   elevation: 0,
+      //   title: const Text("No Cinema"),
+      //   centerTitle: true,
+      // ),
+      drawer: const Drawer(
+        backgroundColor: Colors.black,
+      ),
       body: SafeArea(
         child: SizedBox(
           height: size.height,
@@ -39,7 +50,49 @@ class _MoviesScreenState extends State<MoviesScreen> {
               carouselSlider(context),
 
               //switch dark and white mode
-              buttonDarkMode()
+              buttonDarkMode(),
+              AnimatedContainer(
+                height: MediaQuery.of(context).size.height,
+                width:
+                    !drawerOpen ? 0 : MediaQuery.of(context).size.height * 0.4,
+                margin: const EdgeInsets.only(top: 10),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                ),
+                duration: const Duration(milliseconds: 300),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    drawerOpen = !drawerOpen;
+                  });
+                },
+                onSecondaryLongPressEnd: (details) {
+                  drawerOpen = !drawerOpen;
+                },
+                child: AnimatedContainer(
+                  height: 40,
+                  width: 60,
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(
+                      top: 20,
+                      left: !drawerOpen
+                          ? 0
+                          : MediaQuery.of(context).size.height * 0.35),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      child: const Icon(Icons.menu, color: Colors.black)),
+                  duration: const Duration(milliseconds: 300),
+                ),
+              ),
             ],
           ),
         ),

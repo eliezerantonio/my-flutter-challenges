@@ -37,7 +37,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
             children: [
               //image movie
               imageMovieWidget(movie),
-              //icon or close screen
+              //icon for close screen
               iconCloseDetailScreen(context),
               Positioned(
                 bottom: 0,
