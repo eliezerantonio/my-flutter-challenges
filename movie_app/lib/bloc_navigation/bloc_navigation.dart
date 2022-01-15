@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nicolau/screens/briefly/briefly_screen.dart';
 import 'package:nicolau/screens/movie_screen/movies_screen.dart';
 
 enum NavigationEvents {
@@ -10,19 +11,22 @@ enum NavigationEvents {
 abstract class NavigationStates {}
 
 class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
-  NavigationBloc(NavigationStates initialState) : super(initialState);
+  NavigationBloc() : super(const HomeScreen()) {
+    on<NavigationEvents>(
+      (event, emit) {
+        switch (event) {
+          case NavigationEvents.HomePageChickedEvent:
+            emit(const HomeScreen());
+            break;
+          case NavigationEvents.AcccountPageChickedEvent:
+            emit(const BrieflyScreen());
+            break;
 
-  Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
-    switch (event) {
-      case NavigationEvents.HomePageChickedEvent:
-        yield const HomeScreen();
-        break;
-      case NavigationEvents.AcccountPageChickedEvent:
-        // yield AccountPage();
-        break;
-      case NavigationEvents.OrderPageChickedEvent:
-        // yield OrderPage();
-        break;
-    }
+          case NavigationEvents.OrderPageChickedEvent:
+            const BrieflyScreen();
+            break;
+        }
+      },
+    );
   }
 }

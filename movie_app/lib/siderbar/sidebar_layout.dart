@@ -10,7 +10,7 @@ class SidebarLayout extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: BlocProvider<NavigationBloc>(
-        create: (_) => NavigationBloc(const HomeScreen()),
+        create: (_) => NavigationBloc(),
         child: Stack(
           children: [
             BlocBuilder<NavigationBloc, NavigationStates>(
