@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nicolau/screens/movie_screen/movies_screen.dart';
 
+import 'siderbar/sidebar_layout.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -8,10 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       title: 'No Cinema',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SidebarLayout(),
     );
   }
 }

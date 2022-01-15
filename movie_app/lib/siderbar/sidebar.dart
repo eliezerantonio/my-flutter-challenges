@@ -16,7 +16,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
   late StreamController<bool> isSidebarOpenedStramController;
   late Stream<bool> isSidebarOpenedStream;
   late StreamSink<bool> isSidebarOpenedSink;
-  final bool isSidebarOpened = true;
+  bool isSidebarOpened = true;
   final _animationDuration = const Duration(milliseconds: 500);
 
   @override
@@ -57,99 +57,113 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
     return StreamBuilder(
       initialData: false,
       stream: isSidebarOpenedStream,
-      builder: (context, isSiderBarOpenedAsync) {
+      builder: (context, AsyncSnapshot<bool?> isSiderBarOpenedAsync) {
+        late final value;
+
+        if (isSiderBarOpenedAsync.data != null) {
+          value = isSiderBarOpenedAsync.data;
+        }
+
         return AnimatedPositioned(
           duration: _animationDuration,
           top: 0,
           bottom: 0,
-          left: isSiderBarOpenedAsync.data != null ? 0 : -screenWidth,
-          right: isSiderBarOpenedAsync.data != null ? 0 : screenWidth - 45,
+          left: value ? 0 : -screenWidth,
+          right: value ? 0 : screenWidth - 45,
           child: Row(
             children: [
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  color: Color(0xFF262AAA),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 100,
-                      ),
-                      const ListTile(
-                        title: Text('Higino Luis',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w800)),
-                        subtitle: Text('goncalveshino@gmail.com',
-                            style: TextStyle(
-                                fontSize: 20, color: Color(0xFF1BB5FD))),
-                        leading: CircleAvatar(
-                          child: Icon(
-                            Icons.perm_identity,
-                            color: Colors.white,
+                  color: Colors.grey[850],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 100),
+                        const ListTile(
+                          title: Text('Higino Luis',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w800)),
+                          subtitle: Text('goncalveshino@gmail.com',
+                              style: TextStyle(
+                                  fontSize: 20, color: Color(0xFF1BB5FD))),
+                          leading: CircleAvatar(
+                            child: Icon(
+                              Icons.perm_identity,
+                              color: Colors.white,
+                            ),
+                            radius: 40,
                           ),
-                          radius: 40,
                         ),
-                      ),
-                      Divider(
-                        height: 64,
-                        thickness: 0.5,
-                        indent: 32,
-                        endIndent: 32,
-                        color: Colors.white.withOpacity(0.3),
-                      ),
-                      MenuItem(
-                        icon: Icons.home,
-                        title: "Home ",
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.HomePageChickedEvent);
-                        },
-                      ),
-                      MenuItem(
-                        icon: Icons.person,
-                        title: "My Account ",
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.AcccountPageChickedEvent);
-                        },
-                      ),
-                      MenuItem(
-                        icon: Icons.shopping_basket,
-                        title: "My Order",
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.OrderPageChickedEvent);
-                        },
-                      ),
-                      MenuItem(
-                        icon: Icons.card_giftcard,
-                        title: "Wishlist",
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigationEvents.OrderPageChickedEvent);
-                        },
-                      ),
-                      Divider(
-                        height: 64,
-                        thickness: 0.5,
-                        indent: 32,
-                        endIndent: 32,
-                        color: Colors.white.withOpacity(0.3),
-                      ),
-                      MenuItem(icon: Icons.settings, title: "Settings"),
-                      MenuItem(icon: Icons.exit_to_app, title: "Logout"),
-                    ],
+                        Divider(
+                          height: 64,
+                          thickness: 0.5,
+                          indent: 32,
+                          endIndent: 32,
+                          color: Colors.white.withOpacity(0.3),
+                        ),
+                        MenuItem(
+                          icon: Icons.home,
+                          title: "Home ",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.HomePageChickedEvent);
+                          },
+                        ),
+                        MenuItem(
+                          icon: Icons.person,
+                          title: "My Account ",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.AcccountPageChickedEvent);
+                          },
+                        ),
+                        MenuItem(
+                          icon: Icons.shopping_basket,
+                          title: "My Order",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.OrderPageChickedEvent);
+                          },
+                        ),
+                        MenuItem(
+                          icon: Icons.card_giftcard,
+                          title: "Wishlist",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context)
+                                .add(NavigationEvents.OrderPageChickedEvent);
+                          },
+                        ),
+                        Divider(
+                          height: 64,
+                          thickness: 0.5,
+                          indent: 32,
+                          endIndent: 32,
+                          color: Colors.white.withOpacity(0.3),
+                        ),
+                        MenuItem(
+                          icon: Icons.settings,
+                          title: "Settings",
+                          onTap: () {},
+                        ),
+                        MenuItem(
+                          icon: Icons.exit_to_app,
+                          title: "Logout",
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               Align(
-                alignment: Alignment(0, -0.9),
+                alignment: const Alignment(0, -0.9),
                 child: GestureDetector(
                   onTap: () {
                     onIconPressed();
@@ -159,12 +173,12 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                     child: Container(
                       width: 35,
                       height: 110,
-                      color: Color(0xFF262AAA),
+                      color: Colors.grey[850],
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                           progress: _animationController.view,
                           icon: AnimatedIcons.menu_close,
-                          color: Color(0xFF1BB5FD),
+                          color: Colors.white,
                           size: 25),
                     ),
                   ),

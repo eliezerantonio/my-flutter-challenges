@@ -3,17 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuItem extends StatelessWidget {
-  MenuItem({required this.icon, required this.title, required this.page, required this.onTap});
+  MenuItem(
+      {required this.icon,
+      required this.title,
+       this.page,
+      this.onTap});
 
   final IconData icon;
   final String title;
-  final int page;
+  final int? page;
   final Function? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+      
+      },
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
