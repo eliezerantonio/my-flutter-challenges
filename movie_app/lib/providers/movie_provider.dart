@@ -10,7 +10,6 @@ class MoviesProvider with ChangeNotifier {
   MoviesProvider() {
     getEnCine();
     getPopulares();
-    print(_populares);
   }
   final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
   final String _url = 'api.themoviedb.org';
@@ -27,7 +26,7 @@ class MoviesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  final List<Movie> _populares = [];
+  List<Movie> populares = [];
 
   Future<List<Movie>> getEnCine() async {
     final url = Uri.http(
@@ -56,7 +55,7 @@ class MoviesProvider with ChangeNotifier {
     );
 
     final resp = await _processarResposta(url);
-    _populares.addAll(resp);
+    populares = resp;
 
     loading = false;
     return resp;
@@ -65,6 +64,7 @@ class MoviesProvider with ChangeNotifier {
   ///r
   Future<List<Movie>> _processarResposta(Uri url) async {
     final resp = await http.get(url);
+    print(resp.statusCode);
     final decodeData = json.decode(resp.body);
     final movies = Movies.fromJsonList(decodeData['results']);
     return movies.items;

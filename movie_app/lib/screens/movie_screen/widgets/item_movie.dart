@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 
 class ItemMovie extends StatelessWidget {
-  const ItemMovie({Key? key, this.darkMode = false, this.movie})
+  const ItemMovie({Key? key, this.darkMode = false, required this.movie})
       : super(key: key);
   final bool darkMode;
-  final movie;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,9 @@ class ItemMovie extends StatelessWidget {
                 duration: const Duration(milliseconds: 1000),
                 height: 300,
                 child: Hero(
-                    tag: movie['id'],
-                    child: Image.network(movie['image'], fit: BoxFit.cover)),
+                    tag: movie.id,
+                    child:
+                        Image.network(movie.getPosterImg(), fit: BoxFit.cover)),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   color: !darkMode ? Colors.black : Colors.white,
@@ -52,7 +54,7 @@ class ItemMovie extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
-                  movie["title"],
+                  movie.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

@@ -2,8 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:nicolau/data/movies.dart';
+import 'package:nicolau/models/movie_model.dart';
+import 'package:nicolau/providers/movie_provider.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/item_movie.dart';
 
@@ -23,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final movies = Provider.of<MoviesProvider>(context).populares;
     return Scaffold(
       drawer: const Drawer(
         backgroundColor: Colors.black,
@@ -32,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: size.height,
           child: Stack(
             children: [
-              Image.network(movies[_current]["image"], fit: BoxFit.cover),
+              // Image.network(movies[_current].getPosterImg(), fit: BoxFit.cover),
               //backround color
               BackgroundGradiante(
                 darkMode: darkMode,
@@ -41,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               //carousel movies
-              carouselSlider(context),
+              carouselSlider(context, movies),
 
               //switch dark and white mode
               buttonDarkMode(),
@@ -83,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Positioned carouselSlider(BuildContext context) {
+  Positioned carouselSlider(BuildContext context, List<Movie> movies) {
     return Positioned(
       bottom: 0,
       height: MediaQuery.of(context).size.height * 0.7,
