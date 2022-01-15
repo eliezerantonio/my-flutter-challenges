@@ -1,18 +1,31 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nicolau/models/actor_model.dart';
 import 'package:nicolau/models/movie_model.dart';
 
 class MoviesProvider with ChangeNotifier {
+  MoviesProvider() {
+    getEnCine();
+    getPopulares();
+    print(_populares);
+  }
   final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
   int _popularesPage = 0;
-  bool _carregando = false;
+
+  bool _loading = false;
+
+  bool get loading => _loading;
+
+  set loading(bool value) {
+    _loading = true;
+    notifyListeners();
+  }
 
   final List<Movie> _populares = [];
 
@@ -27,9 +40,9 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<List<Movie>> getPopulares() async {
-    if (_carregando) return []; //se esta carregando dados para
+    if (_loading) return []; //se esta carregando dados para
 
-    _carregando = true;
+    loading = true;
     _popularesPage++;
 
     final url = Uri.https(
@@ -45,7 +58,7 @@ class MoviesProvider with ChangeNotifier {
     final resp = await _processarResposta(url);
     _populares.addAll(resp);
 
-    _carregando = false;
+    loading = false;
     return resp;
   }
 

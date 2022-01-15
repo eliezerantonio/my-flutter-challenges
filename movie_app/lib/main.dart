@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nicolau/providers/movie_provider.dart';
 import 'package:nicolau/screens/movie_screen/movies_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'bloc_navigation/bloc_navigation.dart';
 import 'siderbar/sidebar_layout.dart';
@@ -12,13 +14,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'No Cinema',
-      debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-          create: (BuildContext context) => NavigationBloc(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
           lazy: false,
-          child: SidebarLayout()),
+          create: (context) => MoviesProvider(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'No Cinema',
+        debugShowCheckedModeBanner: false,
+        home: BlocProvider(
+            create: (BuildContext context) => NavigationBloc(),
+            lazy: false,
+            child: SidebarLayout()),
+      ),
     );
   }
 }
