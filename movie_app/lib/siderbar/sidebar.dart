@@ -53,6 +53,8 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    
 
     return StreamBuilder(
       initialData: false,
@@ -75,6 +77,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
+                  height: screenHeight,
                   color: Colors.grey[850],
                   child: SingleChildScrollView(
                     child: Column(
@@ -147,16 +150,6 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           endIndent: 32,
                           color: Colors.white.withOpacity(0.3),
                         ),
-                        MenuItem(
-                          icon: Icons.settings,
-                          title: "Settings",
-                          onTap: () {},
-                        ),
-                        MenuItem(
-                          icon: Icons.exit_to_app,
-                          title: "Logout",
-                          onTap: () {},
-                        ),
                       ],
                     ),
                   ),
@@ -171,7 +164,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                   child: ClipPath(
                     clipper: CustomMenuclipper(),
                     child: Container(
-                    width: 35,
+                      width: 35,
                       height: 110,
                       color: Colors.grey[850],
                       alignment: Alignment.centerLeft,
