@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: size.height,
           child: Stack(
             children: [
-              // Image.network(movies[_current].getPosterImg(), fit: BoxFit.cover),
+              Image.network(movies[_current].getPosterImg(), fit: BoxFit.cover),
               //backround color
               BackgroundGradiante(
                 darkMode: darkMode,
@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Positioned carouselSlider(BuildContext context, List<Movie> movies) {
+    print("filmes ${movies}");
     return Positioned(
       bottom: 0,
       height: MediaQuery.of(context).size.height * 0.7,

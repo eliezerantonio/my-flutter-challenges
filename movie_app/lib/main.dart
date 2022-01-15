@@ -24,10 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'No Cinema',
         debugShowCheckedModeBanner: false,
-        home: BlocProvider(
-            create: (BuildContext context) => NavigationBloc(),
-            lazy: false,
-            child: SidebarLayout()),
+        home: SidebarLayout(),
       ),
     );
   }

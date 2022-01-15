@@ -4,10 +4,10 @@ class Cast {
   Cast.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
-    jsonList.forEach((item) {
+    for (var item in jsonList) {
       final actor = Actor.fromJsonMap(item);
       actores.add(actor);
-    });
+    }
   }
 }
 
