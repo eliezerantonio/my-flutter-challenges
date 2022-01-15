@@ -1,19 +1,19 @@
-class Filmes {
-  List<Filme> items = [];
+class Movies {
+  List<Movie> items = [];
 
-  Filmes();
+  Movies();
 
-  Filmes.fromJsonList(List<dynamic> jsonList) {
+  Movies.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
-      final filme = new Filme.fromJsonMap(item);
-      items.add(filme);
+      final movie = new Movie.fromJsonMap(item);
+      items.add(movie);
     }
   }
 }
 
-class Filme {
+class Movie {
   late String uiniqueId;
 
   late String releaseDate;
@@ -31,7 +31,7 @@ class Filme {
   late bool adult;
   late String overview;
 
-  Filme({
+  Movie({
     required this.voteCount,
     required this.id,
     required this.video,
@@ -48,7 +48,7 @@ class Filme {
     required this.releaseDate,
   });
 
-  Filme.fromJsonMap(Map<String, dynamic> json) {
+  Movie.fromJsonMap(Map<String, dynamic> json) {
     voteCount = json['vote_count'];
     id = json['id'];
     video = json['video'];

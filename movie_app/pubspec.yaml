@@ -35,6 +35,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^7.3.3
   flutter_svg: ^1.0.0
+  http: ^0.13.4
+  provider: ^6.0.2
   rxdart: ^0.27.3
 
 dev_dependencies:
