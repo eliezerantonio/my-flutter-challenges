@@ -34,7 +34,7 @@ dependencies:
   dio: ^4.0.4
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.3.3
+  flutter_bloc: ^8.0.1
   flutter_svg: ^1.0.0
   http: ^0.13.4
   percent_indicator: ^3.4.0

@@ -19,13 +19,11 @@ class DetailsMovieScreen extends StatefulWidget {
 
 class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   late final Movie movie;
-  late final darkMode;
 
   @override
   void initState() {
     super.initState();
     movie = widget.movie;
-    darkMode = widget.darkMode;
   }
 
   @override
@@ -34,7 +32,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: !darkMode ? Colors.black : Colors.grey[900],
+          color: Colors.black,
           child: Stack(
             children: [
               //image movie
@@ -46,12 +44,12 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                 child: Container(
                   width: size.width,
                   height: size.height * 0.8,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
-                    color: !darkMode ? Colors.white : Colors.black,
+                    color: Colors.white,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +58,9 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                         height: 20,
                       ),
                       //title movie
-                      titleMovieWidget(movie, darkMode),
+                      titleMovieWidget(
+                        movie,
+                      ),
                       const SizedBox(height: 7),
                       //type movies, action, history etc..
                       typeMovieWidget(),
@@ -73,16 +73,20 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       const SizedBox(height: 20),
 
                       //text actores
-                      infoWidget("Actores", darkMode),
+                      infoWidget(
+                        "Actores",
+                      ),
                       //actors list
                       // actorsWidget(),
                       //text info
 
-                      infoWidget("History", darkMode),
+                      infoWidget(
+                        "History",
+                      ),
 
                       //about movie
                       Expanded(
-                        child: informationMovie(darkMode),
+                        child: informationMovie(),
                       ),
                       const CustomButton(),
                       const SizedBox(height: 20),
@@ -110,7 +114,9 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  Center titleMovieWidget(movie, bool darkMode) {
+  Center titleMovieWidget(
+    movie,
+  ) {
     return Center(
       child: Text(
         widget.movie.title,
@@ -118,7 +124,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 20,
-          color: !darkMode ? Colors.grey[850] : Colors.white,
+          color: Colors.grey[850],
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -154,7 +160,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
         text,
         style: TextStyle(
           fontSize: 10,
-          color: !darkMode ? Colors.grey[850] : Colors.white,
+          color: Colors.grey[850],
         ),
       ),
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),

@@ -1,51 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
+import 'package:nicolau/utils/myBackgroundColors.dart';
+import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ItemMovie extends StatelessWidget {
-  const ItemMovie({Key? key, this.darkMode = false, required this.movie})
-      : super(key: key);
-  final bool darkMode;
+  const ItemMovie({Key? key, required this.movie}) : super(key: key);
   final Movie movie;
 
   @override
   Widget build(BuildContext context) {
     final percent = ((movie.voteAverage * 100) / 10);
     movie.uiniqueId = '${movie.id}-card';
+    //responsive
+    final responsive = Responsive.of(context);
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           PageRouteBuilder(
             transitionDuration: const Duration(milliseconds: 300),
-            pageBuilder: (_, __, ___) =>
-                DetailsMovieScreen(movie: movie, darkMode: darkMode),
+            pageBuilder: (_, __, ___) => DetailsMovieScreen(
+              movie: movie,
+            ),
           ),
         );
       },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-        decoration: BoxDecoration(
-          color: darkMode ? Colors.black : Colors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
+      child: _itemMovie(context, responsive, percent),
+    );
+  }
+
+  Widget _itemMovie(
+      BuildContext context, Responsive responsive, double percent) {
+    return Container(
+      width: 380,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Column(
-                children: [
-                  const SizedBox(height: 20),
-                  AnimatedContainer(
+      ),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              children: [
+                SizedBox(height: responsive.hp(2)),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: AnimatedContainer(
                     duration: const Duration(milliseconds: 1000),
+                    margin: const EdgeInsets.all(8),
                     height: 300,
+                    width: responsive.wp(52),
                     child: Hero(
                         tag: movie.uiniqueId,
                         child: FadeInImage(
@@ -55,111 +70,75 @@ class ItemMovie extends StatelessWidget {
                         )),
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
-                      color: !darkMode ? Colors.black : Colors.white,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      movie.title,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: !darkMode ? Colors.grey[850] : Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  typeMovie(movie.releaseDate),
-                  const SizedBox(height: 20),
-                ],
-              ),
-              Positioned(
-                bottom: 82,
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
+                ),
+                SizedBox(
+                  height: responsive.hp(5),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    movie.title,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: responsive.dp(2.5),
                       color: Colors.grey[850],
-                      borderRadius: BorderRadius.circular(30)),
-                  child: CircularPercentIndicator(
-                    radius: 45.0,
-                    animation: true,
-                    lineWidth: 4.0,
-                    animateFromLastPercent: true,
-                    animationDuration: 1000,
-                    percent: (movie.voteAverage * 0.1),
-                    center: Text(
-                      "${percent.toStringAsFixed(0)}%",
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
                     ),
-                    progressColor: getColor(percent),
                   ),
                 ),
-              ),
-            ],
-          ),
+                SizedBox(height: responsive.hp(1)),
+                typeMovie(responsive, movie.releaseDate),
+              ],
+            ),
+            _percent(responsive, percent),
+          ],
         ),
       ),
     );
   }
 
-  MaterialColor getColor(double percent) {
-    if (percent > 66) {
-      return Colors.green;
-    } else if (percent < 50) {
-      return Colors.red;
-    } else {
-      return Colors.yellow;
-    }
-  }
-
-  Row stars() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Icon(
-          Icons.star,
-          color: Colors.amber,
-          size: 18,
+  Positioned _percent(Responsive responsive, double percent) {
+    return Positioned(
+      bottom: responsive.dp(8.5),
+      child: Container(
+        width: responsive.dp(6),
+        height: responsive.dp(6),
+        decoration: BoxDecoration(
+            color: Colors.grey[850],
+            borderRadius: BorderRadius.circular(responsive.hp(10))),
+        child: CircularPercentIndicator(
+          radius: responsive.dp(5),
+          animation: true,
+          lineWidth: 4.0,
+          animateFromLastPercent: true,
+          animationDuration: 2000,
+          percent: (movie.voteAverage * 0.1),
+          center: Text(
+            "${percent.toStringAsFixed(0)}%",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: responsive.dp(1.5)),
+          ),
+          progressColor: getColor(percent),
         ),
-        Icon(
-          Icons.star,
-          color: Colors.amber,
-          size: 18,
-        ),
-        Icon(
-          Icons.star,
-          color: Colors.amber,
-          size: 18,
-        ),
-        Icon(
-          Icons.star,
-          color: Colors.amber,
-          size: 18,
-        ),
-        Icon(
-          Icons.star_border,
-          color: Colors.grey,
-          size: 18,
-        ),
-      ],
+      ),
     );
   }
 
-  Container typeMovie(String text) {
+  Container typeMovie(Responsive responsive, String text) {
     return Container(
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 14,
-          color: !darkMode ? Colors.grey[850] : Colors.white,
+          fontSize: responsive.wp(3),
+          color: Colors.grey[850],
         ),
       ),
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
