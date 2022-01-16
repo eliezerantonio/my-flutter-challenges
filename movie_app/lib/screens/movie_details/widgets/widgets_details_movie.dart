@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 
 class ActorWidget extends StatelessWidget {
@@ -137,13 +138,13 @@ FadeInUpBig infoWidget(String text, bool darkMode) {
   );
 }
 
-Align imageMovieWidget(movie) {
+Align imageMovieWidget(Movie movie) {
   return Align(
     alignment: Alignment.topCenter,
     child: Hero(
-      tag: movie['id'],
+      tag: movie.uiniqueId,
       child: Image.network(
-        movie['image'],
+        movie.getPosterImg(),
         height: 400,
       ),
     ),

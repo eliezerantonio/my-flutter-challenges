@@ -1,14 +1,16 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 
 import 'widgets/widgets_details_movie.dart';
 
 class DetailsMovieScreen extends StatefulWidget {
-  final movie;
+  final Movie movie;
   final bool darkMode;
 
-  const DetailsMovieScreen({Key? key, this.movie, this.darkMode = false})
+  const DetailsMovieScreen(
+      {Key? key, required this.movie, this.darkMode = false})
       : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class DetailsMovieScreen extends StatefulWidget {
 }
 
 class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
-  late final movie;
+  late final Movie movie;
   late final darkMode;
 
   @override
@@ -67,13 +69,13 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       classificationWidget(),
 
                       //director name
-                      Center(child: Text(movie["diretor"])),
+                      Center(child: Text(movie.originalTitle)),
                       const SizedBox(height: 20),
 
                       //text actores
                       infoWidget("Actores", darkMode),
                       //actors list
-                      actorsWidget(),
+                      // actorsWidget(),
                       //text info
 
                       infoWidget("History", darkMode),
@@ -111,7 +113,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   Center titleMovieWidget(movie, bool darkMode) {
     return Center(
       child: Text(
-        widget.movie["title"],
+        widget.movie.title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
@@ -123,28 +125,28 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  Expanded actorsWidget() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemCount: 5,
-          itemBuilder: (_, index) {
-            final image = movie["images"][index];
-            final actor = movie["actores"][index];
-            return FadeInUpBig(
-              delay: const Duration(milliseconds: 3),
-              duration: const Duration(milliseconds: 2000),
-              child:
-                  ActorWidget(actor: actor, image: image, darkMode: darkMode),
-            );
-          },
-        ),
-      ),
-    );
-  }
+  // Expanded actorsWidget() {
+  //   return Expanded(
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: 30),
+  //       child: ListView.builder(
+  //         physics: const BouncingScrollPhysics(),
+  //         scrollDirection: Axis.horizontal,
+  //         itemCount: 5,
+  //         itemBuilder: (_, index) {
+  //           final image = movie["images"][index];
+  //           final actor = movie["actores"][index];
+  //           return FadeInUpBig(
+  //             delay: const Duration(milliseconds: 3),
+  //             duration: const Duration(milliseconds: 2000),
+  //             child:
+  //                 ActorWidget(actor: actor, image: image, darkMode: darkMode),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Container typeMovie(String text) {
     return Container(

@@ -54,7 +54,6 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    
 
     return StreamBuilder(
       initialData: false,
@@ -78,6 +77,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   height: screenHeight,
+                 
                   color: Colors.grey[850],
                   child: SingleChildScrollView(
                     child: Column(
@@ -89,9 +89,13 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                                   color: Colors.white,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w800)),
-                          subtitle: Text('goncalveshino@gmail.com',
-                              style: TextStyle(
-                                  fontSize: 20, color: Color(0xFF1BB5FD))),
+                          subtitle: Text(
+                            'goncalveshino@gmail.com',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Color(0xFF1BB5FD),
+                            ),
+                          ),
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.perm_identity,

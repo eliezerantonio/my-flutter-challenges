@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class ItemMovie extends StatelessWidget {
   const ItemMovie({Key? key, this.darkMode = false, required this.movie})
@@ -11,6 +12,8 @@ class ItemMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final percent = ((movie.voteAverage * 100) / 10);
+    movie.uiniqueId = '{$movie.id}-card';
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -34,57 +37,87 @@ class ItemMovie extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Column(
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              const SizedBox(height: 20),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 1000),
-                height: 300,
-                child: Hero(
-                    tag: movie.id,
-                    child:
-                        Image.network(movie.getPosterImg(), fit: BoxFit.cover)),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: !darkMode ? Colors.black : Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
+              Column(
+                children: [
+                  const SizedBox(height: 20),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 1000),
+                    height: 300,
+                    child: Hero(
+                        tag: movie.uiniqueId,
+                        child: FadeInImage(
+                          image: NetworkImage(movie.getPosterImg()),
+                          placeholder: const AssetImage('assets/no-image.jpg'),
+                          fit: BoxFit.cover,
+                        )),
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: !darkMode ? Colors.black : Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      movie.title,
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: !darkMode ? Colors.grey[850] : Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  typeMovie(movie.releaseDate),
+                  const SizedBox(height: 20),
+                ],
               ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  movie.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: !darkMode ? Colors.grey[850] : Colors.white,
-                    fontWeight: FontWeight.bold,
+              Positioned(
+                bottom: 82,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[850],
+                      borderRadius: BorderRadius.circular(30)),
+                  child: CircularPercentIndicator(
+                    radius: 45.0,
+                    animation: true,
+                    lineWidth: 4.0,
+                    animateFromLastPercent: true,
+                    animationDuration: 1000,
+                    percent: (movie.voteAverage * 0.1),
+                    center: Text(
+                      "${percent.toStringAsFixed(0)}%",
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    progressColor: getColor(percent),
                   ),
                 ),
               ),
-              const SizedBox(height: 7),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  typeMovie("Action"),
-                  const SizedBox(width: 7),
-                  typeMovie("Drama"),
-                  const SizedBox(width: 7),
-                  typeMovie("History"),
-                ],
-              ),
-              const SizedBox(height: 10),
-              stars(),
-              const SizedBox(height: 10),
-              const CustomButton(),
-              const SizedBox(height: 20),
             ],
           ),
         ),
       ),
     );
+  }
+
+  MaterialColor getColor(double percent) {
+    if (percent > 66) {
+      return Colors.green;
+    } else if (percent < 50) {
+      return Colors.red;
+    } else {
+      return Colors.yellow;
+    }
   }
 
   Row stars() {
@@ -125,7 +158,7 @@ class ItemMovie extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 10,
+          fontSize: 14,
           color: !darkMode ? Colors.grey[850] : Colors.white,
         ),
       ),

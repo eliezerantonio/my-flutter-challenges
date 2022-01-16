@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
           primary: Colors.grey[850],
         ),
         onPressed: () {},
-        child: const Text("BUY TICKET"),
+        child: const Text("DETALHES"),
       ),
     );
   }

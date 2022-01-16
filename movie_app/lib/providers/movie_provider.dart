@@ -22,7 +22,7 @@ class MoviesProvider with ChangeNotifier {
   bool get loading => _loading;
 
   set loading(bool value) {
-    _loading = true;
+    _loading = value;
     notifyListeners();
   }
 

@@ -37,8 +37,10 @@ dependencies:
   flutter_bloc: ^7.3.3
   flutter_svg: ^1.0.0
   http: ^0.13.4
+  percent_indicator: ^3.4.0
   provider: ^6.0.2
   rxdart: ^0.27.3
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
