@@ -13,7 +13,7 @@ class ItemMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final percent = ((movie.voteAverage * 100) / 10);
-    movie.uiniqueId = '{$movie.id}-card';
+    movie.uiniqueId = '${movie.id}-card';
     return GestureDetector(
       onTap: () {
         Navigator.push(

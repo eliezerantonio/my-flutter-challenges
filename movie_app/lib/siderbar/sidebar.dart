@@ -59,7 +59,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
       initialData: false,
       stream: isSidebarOpenedStream,
       builder: (context, AsyncSnapshot<bool?> isSiderBarOpenedAsync) {
-        late final value;
+        late final  value;
 
         if (isSiderBarOpenedAsync.data != null) {
           value = isSiderBarOpenedAsync.data;
