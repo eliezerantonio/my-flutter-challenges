@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
-import 'package:nicolau/data/movies.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
