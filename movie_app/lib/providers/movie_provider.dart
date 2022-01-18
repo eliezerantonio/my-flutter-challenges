@@ -27,6 +27,7 @@ class MoviesProvider with ChangeNotifier {
   }
 
   List<Movie> populares = [];
+  List<Movie> now_playings = [];
 
   Future<List<Movie>> getEnCine() async {
     final url = Uri.http(
@@ -35,12 +36,12 @@ class MoviesProvider with ChangeNotifier {
       {'api_key': _apikey, 'language': _language},
     );
 
-    return await _processarResposta(url);
+    final resp = await _processarResposta(url);
+    now_playings.addAll(resp);
+    return resp;
   }
 
   Future<List<Movie>> getPopulares() async {
-    // if (loading) return []; //se esta carregando dados para
-
     loading = true;
     _popularesPage++;
 

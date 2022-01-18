@@ -59,7 +59,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
       initialData: false,
       stream: isSidebarOpenedStream,
       builder: (context, AsyncSnapshot<bool?> isSiderBarOpenedAsync) {
-        late final  value;
+        late final value;
 
         if (isSiderBarOpenedAsync.data != null) {
           value = isSiderBarOpenedAsync.data;
@@ -77,28 +77,21 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   height: screenHeight,
-                 
                   color: Colors.grey[850],
                   child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 100),
                         const ListTile(
-                          title: Text('Higino Luis',
+                          title: Text('No Cinema',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w800)),
-                          subtitle: Text(
-                            'goncalveshino@gmail.com',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Color(0xFF1BB5FD),
-                            ),
-                          ),
                           leading: CircleAvatar(
                             child: Icon(
-                              Icons.perm_identity,
+                              Icons.movie_filter_outlined,
                               color: Colors.white,
                             ),
                             radius: 40,
@@ -112,39 +105,30 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           color: Colors.white.withOpacity(0.3),
                         ),
                         MenuItem(
-                          icon: Icons.home,
-                          title: "Home ",
+                          icon: Icons.movie,
+                          title: "Populares ",
                           onTap: () {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.HomePageChickedEvent);
+                                .add(NavigationEvents.HomeScreenChickedEvent);
                           },
                         ),
                         MenuItem(
-                          icon: Icons.person,
-                          title: "My Account ",
+                          icon: Icons.play_arrow,
+                          title: "Exibição",
                           onTap: () {
                             onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.AcccountPageChickedEvent);
-                          },
-                        ),
-                        MenuItem(
-                          icon: Icons.shopping_basket,
-                          title: "My Order",
-                          onTap: () {
-                            onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.OrderPageChickedEvent);
+                            BlocProvider.of<NavigationBloc>(context).add(
+                                NavigationEvents.ExhibitionScreenChickedEvent);
                           },
                         ),
                         MenuItem(
                           icon: Icons.card_giftcard,
-                          title: "Wishlist",
+                          title: "Brevemente",
                           onTap: () {
                             onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.OrderPageChickedEvent);
+                            BlocProvider.of<NavigationBloc>(context).add(
+                                NavigationEvents.BrieflyScreenChickedEvent);
                           },
                         ),
                         Divider(
@@ -153,6 +137,15 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           indent: 32,
                           endIndent: 32,
                           color: Colors.white.withOpacity(0.3),
+                        ),
+                        ListTile(
+                          title: const Text("Modo Escuro",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 26,
+                                  color: Colors.white)),
+                          leading:
+                              Switch(value: false, onChanged: (bool value) {}),
                         ),
                       ],
                     ),

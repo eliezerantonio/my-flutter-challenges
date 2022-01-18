@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
+import 'package:nicolau/screens/exhibition/widgets/item_movie.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'widgets/item_movie.dart';
 
 class HomeScreen extends StatefulWidget with NavigationStates {
   const HomeScreen({Key? key}) : super(key: key);
