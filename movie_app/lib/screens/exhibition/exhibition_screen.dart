@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
+import 'package:nicolau/shared/widgets/percent_widget.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -76,7 +77,7 @@ class _PinterestItem extends StatelessWidget {
                 height: 300,
                 width: responsive.wp(52),
                 child: Hero(
-                  tag:movie.uiniqueId,
+                  tag: movie.uiniqueId,
                   child: FadeInImage(
                     image: NetworkImage(movie.getPosterImg()),
                     placeholder: const AssetImage('assets/no-image.jpg'),
@@ -90,9 +91,9 @@ class _PinterestItem extends StatelessWidget {
                 ),
               ),
             ),
-           
           ),
-          _percent(responsive, percent),
+          percentWidget(
+              responsive: responsive, percent: percent, movie: movie, value: 1),
         ],
       ),
     );
@@ -126,6 +127,7 @@ class _PinterestItem extends StatelessWidget {
       ),
     );
   }
+
   Padding _title(Responsive responsive) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
