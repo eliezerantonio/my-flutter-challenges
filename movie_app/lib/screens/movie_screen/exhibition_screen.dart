@@ -11,14 +11,14 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 
-class HomeScreen extends StatefulWidget with NavigationStates {
-  const HomeScreen({Key? key}) : super(key: key);
+class ExhibitionScreen extends StatefulWidget with NavigationStates {
+  const ExhibitionScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ExhibitionScreenState createState() => _ExhibitionScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ExhibitionScreenState extends State<ExhibitionScreen> {
   int _current = 0;
 
   bool darkMode = false;
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
 
-    final movies = Provider.of<MoviesProvider>(context).populares;
+    final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
       body: SafeArea(
         child: movies.isNotEmpty

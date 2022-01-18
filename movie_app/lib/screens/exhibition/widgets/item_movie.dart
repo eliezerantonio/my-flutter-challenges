@@ -4,10 +4,7 @@ import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 import 'package:nicolau/shared/widgets/date_release_widget.dart';
 import 'package:nicolau/shared/widgets/percent_widget.dart';
 import 'package:nicolau/shared/widgets/title_widget.dart';
-import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
-import 'package:nicolau/widgets/custom_widgets.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class ItemMovie extends StatelessWidget {
   ItemMovie({Key? key, required this.movie}) : super(key: key);

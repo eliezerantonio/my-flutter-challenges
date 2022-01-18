@@ -10,6 +10,7 @@ class MoviesProvider with ChangeNotifier {
   MoviesProvider() {
     getEnCine();
     getPopulares();
+    getBriefly();
   }
   final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
   final String _url = 'api.themoviedb.org';
@@ -28,6 +29,19 @@ class MoviesProvider with ChangeNotifier {
 
   List<Movie> populares = [];
   List<Movie> now_playings = [];
+  List<Movie> upcomings = [];
+
+  Future<List<Movie>> getBriefly() async {
+    final url = Uri.http(
+      _url,
+      '3/movie/upcoming',
+      {'api_key': _apikey, 'language': _language},
+    );
+
+    final resp = await _proccessResponse(url);
+    upcomings.addAll(resp);
+    return resp;
+  }
 
   Future<List<Movie>> getEnCine() async {
     final url = Uri.http(
@@ -36,7 +50,7 @@ class MoviesProvider with ChangeNotifier {
       {'api_key': _apikey, 'language': _language},
     );
 
-    final resp = await _processarResposta(url);
+    final resp = await _proccessResponse(url);
     now_playings.addAll(resp);
     return resp;
   }
@@ -55,7 +69,7 @@ class MoviesProvider with ChangeNotifier {
       },
     );
 
-    final resp = await _processarResposta(url);
+    final resp = await _proccessResponse(url);
     populares.addAll(resp);
 
     loading = false;
@@ -63,7 +77,7 @@ class MoviesProvider with ChangeNotifier {
   }
 
   ///r
-  Future<List<Movie>> _processarResposta(Uri url) async {
+  Future<List<Movie>> _proccessResponse(Uri url) async {
     final resp = await http.get(url);
     final decodeData = json.decode(resp.body);
     final movies = Movies.fromJsonList(decodeData['results']);
@@ -84,13 +98,13 @@ class MoviesProvider with ChangeNotifier {
     return cast.actores;
   }
 
-  Future<List<Movie>> busarFilme(String query) async {
+  Future<List<Movie>> searchMovie(String query) async {
     final url = Uri.https(
       _url,
       '3/search/movie',
       {'api_key': _apikey, 'language': _language, 'query': query},
     );
 
-    return await _processarResposta(url);
+    return await _proccessResponse(url);
   }
 }

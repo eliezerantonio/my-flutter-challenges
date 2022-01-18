@@ -12,16 +12,33 @@ import 'package:nicolau/utils/responsive.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class ExhibitionScreen extends StatelessWidget with NavigationStates {
+class PopularScreen extends StatefulWidget with NavigationStates {
+  @override
+  State<PopularScreen> createState() => _PopularScreenState();
+}
+
+class _PopularScreenState extends State<PopularScreen> {
   final List<int> items = List.generate(200, (index) => index);
+  final _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        context.read<MoviesProvider>().getPopulares();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final playing = context.watch<MoviesProvider>().now_playings;
+    final playing = context.watch<MoviesProvider>().populares;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: StaggeredGridView.countBuilder(
         physics: BouncingScrollPhysics(),
+        controller: _scrollController,
         crossAxisCount: 4,
         itemCount: playing.length,
         itemBuilder: (BuildContext context, int index) =>

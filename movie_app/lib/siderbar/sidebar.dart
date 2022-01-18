@@ -105,21 +105,21 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           color: Colors.white.withOpacity(0.3),
                         ),
                         MenuItem(
-                          icon: Icons.movie,
-                          title: "Populares ",
-                          onTap: () {
-                            onIconPressed();
-                            BlocProvider.of<NavigationBloc>(context)
-                                .add(NavigationEvents.HomeScreenChickedEvent);
-                          },
-                        ),
-                        MenuItem(
                           icon: Icons.play_arrow,
                           title: "Exibição",
                           onTap: () {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(
                                 NavigationEvents.ExhibitionScreenChickedEvent);
+                          },
+                        ),
+                        MenuItem(
+                          icon: Icons.movie,
+                          title: "Populares ",
+                          onTap: () {
+                            onIconPressed();
+                            BlocProvider.of<NavigationBloc>(context).add(
+                                NavigationEvents.PopularScreenChickedEvent);
                           },
                         ),
                         MenuItem(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nicolau/providers/movie_provider.dart';
-import 'package:nicolau/screens/movie_screen/movies_screen.dart';
+import 'package:nicolau/screens/movie_screen/exhibition_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc_navigation/bloc_navigation.dart';
