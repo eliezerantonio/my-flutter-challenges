@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
@@ -9,7 +10,6 @@ import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
 
 class ExhibitionScreen extends StatefulWidget with NavigationStates {
   const ExhibitionScreen({Key? key}) : super(key: key);
@@ -36,12 +36,19 @@ class _ExhibitionScreenState extends State<ExhibitionScreen> {
                 width: responsive.wp(100),
                 child: Stack(
                   children: [
-                    FadeInImage(
-                      image: NetworkImage(movies[_current].getPosterImg()),
-                      placeholder: const AssetImage('assets/no-image.jpg'),
-                      fit: BoxFit.cover,
+                    //carousel
+
+                    CachedNetworkImage(
                       height: responsive.hp(100),
                       width: responsive.wp(100),
+                      imageUrl: movies[_current].getPosterImg(),
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Image.asset(
+                        "assets/no-image.jpg",
+                        fit: BoxFit.cover,
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      fit: BoxFit.cover,
                     ),
                     // backround color
                     BackgroundGradiante(

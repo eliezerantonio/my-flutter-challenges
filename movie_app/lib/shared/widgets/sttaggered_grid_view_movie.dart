@@ -1,49 +1,32 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nicolau/models/movie_model.dart';
-import 'package:nicolau/providers/movie_provider.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 import 'package:nicolau/shared/widgets/percent_widget.dart';
-import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:provider/provider.dart';
 
-class PopularScreen extends StatefulWidget with NavigationStates {
-  @override
-  State<PopularScreen> createState() => _PopularScreenState();
-}
+class StaggeredGridViewMovie extends StatelessWidget {
+  const StaggeredGridViewMovie({
+    Key? key,
+    required ScrollController scrollController,
+    required this.movies,
+  }) : _scrollController = scrollController, super(key: key);
 
-class _PopularScreenState extends State<PopularScreen> {
-  final List<int> items = List.generate(200, (index) => index);
-  final _scrollController = ScrollController();
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 200) {
-        context.read<MoviesProvider>().getPopulares();
-      }
-    });
-  }
+  final ScrollController _scrollController;
+  final List<Movie> movies;
 
   @override
   Widget build(BuildContext context) {
-    final playing = context.watch<MoviesProvider>().populares;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: StaggeredGridView.countBuilder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         controller: _scrollController,
         crossAxisCount: 4,
-        itemCount: playing.length,
+        itemCount: movies.length,
         itemBuilder: (BuildContext context, int index) =>
-            _PinterestItem(movie: playing[index]),
+            _PinterestItem(movie: movies[index]),
         staggeredTileBuilder: (int index) =>
             StaggeredTile.count(2, index.isEven ? 2 : 3),
         mainAxisSpacing: 4.0,
@@ -83,7 +66,7 @@ class _PinterestItem extends StatelessWidget {
         children: [
           Container(
             height: 300,
-            margin: EdgeInsets.only(bottom: 20),
+            margin: const EdgeInsets.only(bottom: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
             ),

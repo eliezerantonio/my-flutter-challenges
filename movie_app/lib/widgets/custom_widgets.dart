@@ -38,6 +38,7 @@ class BackgroundGradiante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final mode = Theme.of(context);
     return Positioned(
       top: 0,
       left: 0,
@@ -50,12 +51,12 @@ class BackgroundGradiante extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: darkMode ? backgroundDarkMode : backgroundWhiteMode,
+            colors: mode == mode.brightness
+                ? backgroundDarkMode
+                : backgroundWhiteMode,
           ),
         ),
       ),
     );
   }
 }
-
-

@@ -17,6 +17,7 @@ class MoviesProvider with ChangeNotifier {
   final String _language = 'pt-PT';
 
   int _popularesPage = 0;
+  int _upcomingsPage = 0;
 
   bool _loading = false;
 
@@ -32,26 +33,38 @@ class MoviesProvider with ChangeNotifier {
   List<Movie> upcomings = [];
 
   Future<List<Movie>> getBriefly() async {
+    loading = true;
+    _upcomingsPage++;
     final url = Uri.http(
       _url,
       '3/movie/upcoming',
-      {'api_key': _apikey, 'language': _language},
+      {
+        'api_key': _apikey,
+        // 'language': _language,
+        'page': _upcomingsPage.toString(),
+      },
     );
 
     final resp = await _proccessResponse(url);
     upcomings.addAll(resp);
+    loading = false;
     return resp;
   }
 
   Future<List<Movie>> getEnCine() async {
+    loading = true;
     final url = Uri.http(
       _url,
       '3/movie/now_playing',
-      {'api_key': _apikey, 'language': _language},
+      {
+        'api_key': _apikey,
+        'language': _language,
+      },
     );
 
     final resp = await _proccessResponse(url);
     now_playings.addAll(resp);
+    loading = false;
     return resp;
   }
 

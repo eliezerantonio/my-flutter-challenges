@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
@@ -80,12 +81,18 @@ class ItemMovie extends StatelessWidget {
         height: 300,
         width: responsive.wp(52),
         child: Hero(
-            tag: movie.uiniqueId,
-            child: FadeInImage(
-              image: NetworkImage(movie.getPosterImg()),
-              placeholder: const AssetImage('assets/no-image.jpg'),
+          tag: movie.uiniqueId,
+          child: CachedNetworkImage(
+            imageUrl: movie.getPosterImg(),
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                Image.asset(
+              "assets/no-image.jpg",
               fit: BoxFit.cover,
-            )),
+            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+            fit: BoxFit.cover,
+          ),
+        ),
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: Colors.white,
