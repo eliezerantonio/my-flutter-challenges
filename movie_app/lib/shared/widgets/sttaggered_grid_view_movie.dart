@@ -26,7 +26,7 @@ class StaggeredGridViewMovie extends StatelessWidget {
         crossAxisCount: 4,
         itemCount: movies.length,
         itemBuilder: (BuildContext context, int index) =>
-            _PinterestItem(movie: movies[index]),
+            _StaggeredItem(movie: movies[index]),
         staggeredTileBuilder: (int index) =>
             StaggeredTile.count(2, index.isEven ? 2 : 3),
         mainAxisSpacing: 4.0,
@@ -36,10 +36,10 @@ class StaggeredGridViewMovie extends StatelessWidget {
   }
 }
 
-class _PinterestItem extends StatelessWidget {
+class _StaggeredItem extends StatelessWidget {
   final Movie movie;
 
-  const _PinterestItem({Key? key, required this.movie}) : super(key: key);
+  const _StaggeredItem({Key? key, required this.movie}) : super(key: key);
   final BorderRadius borderRadius = const BorderRadius.only(
     topLeft: Radius.circular(20),
     topRight: Radius.circular(20),
