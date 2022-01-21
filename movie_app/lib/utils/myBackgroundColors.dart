@@ -19,3 +19,13 @@ final List<Color> backgroundWhiteMode = [
   Colors.grey.shade50.withOpacity(1),
   Colors.grey.shade50.withOpacity(1),
 ];
+
+MaterialColor getColor(double percent) {
+  if (percent > 66) {
+    return Colors.green;
+  } else if (percent < 50) {
+    return Colors.red;
+  } else {
+    return Colors.yellow;
+  }
+}
