@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -11,26 +12,29 @@ class StaggeredGridViewMovie extends StatelessWidget {
     Key? key,
     required ScrollController scrollController,
     required this.movies,
-  }) : _scrollController = scrollController, super(key: key);
+  })  : _scrollController = scrollController,
+        super(key: key);
 
   final ScrollController _scrollController;
   final List<Movie> movies;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: StaggeredGridView.countBuilder(
-        physics: const BouncingScrollPhysics(),
-        controller: _scrollController,
-        crossAxisCount: 4,
-        itemCount: movies.length,
-        itemBuilder: (BuildContext context, int index) =>
-            _StaggeredItem(movie: movies[index]),
-        staggeredTileBuilder: (int index) =>
-            StaggeredTile.count(2, index.isEven ? 2 : 3),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
+    return FadeInUp(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: StaggeredGridView.countBuilder(
+          physics: const BouncingScrollPhysics(),
+          controller: _scrollController,
+          crossAxisCount: 4,
+          itemCount: movies.length,
+          itemBuilder: (BuildContext context, int index) =>
+              _StaggeredItem(movie: movies[index]),
+          staggeredTileBuilder: (int index) =>
+              StaggeredTile.count(2, index.isEven ? 2 : 3),
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
+        ),
       ),
     );
   }

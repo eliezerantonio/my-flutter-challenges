@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
@@ -145,9 +146,16 @@ Align imageMovieWidget(Movie movie) {
     alignment: Alignment.topCenter,
     child: Hero(
       tag: movie.uiniqueId,
-      child: Image.network(
-        movie.getPosterImg(),
+      child: CachedNetworkImage(
         height: 400,
+        imageUrl: movie.getPosterImg(),
+        progressIndicatorBuilder: (context, url, downloadProgress) =>
+            Image.asset(
+          "assets/no-image.jpg",
+          fit: BoxFit.cover,
+        ),
+        errorWidget: (context, url, error) => Icon(Icons.error),
+        fit: BoxFit.cover,
       ),
     ),
   );

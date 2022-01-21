@@ -15,7 +15,6 @@ class PopularScreen extends StatefulWidget with NavigationStates {
 }
 
 class _PopularScreenState extends State<PopularScreen> {
-  final List<int> items = List.generate(200, (index) => index);
   final _scrollController = ScrollController();
   @override
   void initState() {
