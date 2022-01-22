@@ -99,6 +99,7 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<void> getCast(String movieID) async {
+    actores.clear();
     final url = Uri.https(_url, '3/movie/$movieID/credits', {
       'api_key': _apikey,
       'language': _language,
@@ -109,7 +110,6 @@ class MoviesProvider with ChangeNotifier {
 
     final cast = Cast.fromJsonList(decodedData['cast']);
     actores.addAll(cast.actores);
-    print(actores);
     notifyListeners();
   }
 

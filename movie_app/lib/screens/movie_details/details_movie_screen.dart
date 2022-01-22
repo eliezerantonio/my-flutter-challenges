@@ -8,6 +8,7 @@ import 'package:nicolau/shared/widgets/percent_widget.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'widgets/widgets_details_movie.dart';
 
@@ -88,7 +89,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
 
                       //text actores
                       infoWidget(
-                        "Actores",
+                        "Elenco Principal",
                       ),
                       _crearCasting(movie),
 
@@ -147,8 +148,33 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     if (actores.isNotEmpty) {
       return _createActoresPageView(actores);
     } else {
-      return const Center(child: CircularProgressIndicator());
+      return Expanded(
+        child: _shimmer(),
+      );
     }
+  }
+
+  PageView _shimmer() {
+    return PageView.builder(
+        physics: const BouncingScrollPhysics(),
+        pageSnapping: false,
+        controller: PageController(viewportFraction: 0.3, initialPage: 1),
+        itemCount: 20,
+        itemBuilder: (context, i) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.asset(
+                    "assets/no-image.jpg",
+                    fit: BoxFit.cover,
+                    height: 150,
+                  ),
+                ),
+              ),
+            ));
   }
 
   Widget _createActoresPageView(List<Actor> actores) {
@@ -166,6 +192,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
 
   Widget _actorCard(Actor actor) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
