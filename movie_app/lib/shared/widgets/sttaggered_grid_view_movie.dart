@@ -102,8 +102,11 @@ class _StaggeredItem extends StatelessWidget {
               ),
             ),
           ),
-          percentWidget(
-              responsive: responsive, percent: percent, movie: movie, value: 1),
+          Positioned(
+            bottom: responsive.dp(1),
+            child: percentWidget(
+                responsive: responsive, percent: percent, movie: movie, ),
+          ),
         ],
       ),
     );

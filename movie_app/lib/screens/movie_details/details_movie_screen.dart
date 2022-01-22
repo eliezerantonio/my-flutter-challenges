@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nicolau/models/actor_model.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
+import 'package:nicolau/shared/widgets/date_release_widget.dart';
 import 'package:nicolau/shared/widgets/percent_widget.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
@@ -42,73 +43,79 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
       body: SafeArea(
         child: Container(
           color: Colors.black,
-          child: Stack(
-            children: [
-              //image movie
-              imageMovieWidget(movie),
-              //icon for close screen
-              iconCloseDetailScreen(context),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: responsive.wp(100),
-                  height: responsive.hp(80),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    color: Colors.white,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      //title movie
-                      titleMovieWidget(
-                        movie,
-                      ),
-                      const SizedBox(height: 7),
-                      Center(
-                        child: percentWidget(
-                            responsive: responsive,
-                            percent: percent,
-                            movie: movie,
-                            value: 0),
-                      ),
-                      const SizedBox(height: 7),
-                      //type movies, action, history etc..
-                      typeMovieWidget(),
-                      const SizedBox(height: 10),
-                      //stars
-                      //director name
-                      Center(child: Text(movie.originalTitle)),
-                      const SizedBox(height: 20),
-
-                      //text actores
-                      infoWidget(
-                        "Elenco Principal",
-                      ),
-                      _crearCasting(movie),
-
-                      infoWidget(
-                        "History",
-                      ),
-
-                      //about movie
-                      Expanded(
-                        child: informationMovie(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: newMethod(context, responsive, percent),
         ),
       ),
+    );
+  }
+
+  Stack newMethod(BuildContext context, Responsive responsive, double percent) {
+    return Stack(
+      children: [
+        //image movie
+        imageMovieWidget(movie),
+        //icon for close screen
+        iconCloseDetailScreen(context),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: responsive.wp(100),
+            height: responsive.hp(80),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                //title movie
+                titleMovieWidget(
+                  movie,
+                ),
+                const SizedBox(height: 7),
+                Center(
+                  child: percentWidget(
+                    responsive: responsive,
+                    percent: percent,
+                    movie: movie,
+                  ),
+                ),
+                const SizedBox(height: 7),
+                //type movies, action, history etc..
+                typeMovieWidget(),
+                const SizedBox(height: 10),
+                //stars
+                //director name
+                Center(child: Text(movie.originalTitle)),
+                const SizedBox(height: 20),
+                Center(
+                    child: dateReleaseWidget(
+                        responsive, movie.releaseDate.toString())),
+                //text actores
+                infoWidget(
+                  "Elenco Principal",
+                ),
+                _crearCasting(movie),
+
+                infoWidget(
+                  "Sinopse",
+                ),
+
+                //about movie
+                Expanded(
+                  child: informationMovie(movie.overview),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -148,9 +155,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     if (actores.isNotEmpty) {
       return _createActoresPageView(actores);
     } else {
-      return Expanded(
-        child: _shimmer(),
-      );
+      return Expanded(child: _shimmer());
     }
   }
 

@@ -61,11 +61,14 @@ class ItemMovie extends StatelessWidget {
                 dateReleaseWidget(responsive, movie.releaseDate),
               ],
             ),
-            percentWidget(
+            Positioned(
+              bottom: responsive.dp(8.5),
+              child: percentWidget(
                 responsive: responsive,
                 percent: percent,
                 movie: movie,
-                value: 8.5),
+              ),
+            ),
           ],
         ),
       ),
