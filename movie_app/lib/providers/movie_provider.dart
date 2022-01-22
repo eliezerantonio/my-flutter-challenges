@@ -31,6 +31,7 @@ class MoviesProvider with ChangeNotifier {
   List<Movie> populares = [];
   List<Movie> now_playings = [];
   List<Movie> upcomings = [];
+  List<Actor> actores = [];
 
   Future<List<Movie>> getBriefly() async {
     loading = true;
@@ -40,7 +41,7 @@ class MoviesProvider with ChangeNotifier {
       '3/movie/upcoming',
       {
         'api_key': _apikey,
-        // 'language': _language,
+        'language': _language,
         'page': _upcomingsPage.toString(),
       },
     );
@@ -97,7 +98,7 @@ class MoviesProvider with ChangeNotifier {
     return movies.items;
   }
 
-  Future<List<Actor>> getCast(String movieID) async {
+  Future<void> getCast(String movieID) async {
     final url = Uri.https(_url, '3/movie/$movieID/credits', {
       'api_key': _apikey,
       'language': _language,
@@ -107,8 +108,9 @@ class MoviesProvider with ChangeNotifier {
     final decodedData = json.decode(resp.body);
 
     final cast = Cast.fromJsonList(decodedData['cast']);
-
-    return cast.actores;
+    actores.addAll(cast.actores);
+    print(actores);
+    notifyListeners();
   }
 
   Future<List<Movie>> searchMovie(String query) async {

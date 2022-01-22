@@ -40,10 +40,11 @@ class Actor {
     id = json['id'];
     name = json['name'];
     order = json['order'];
-    profilePath = json['profile_path'];
+    profilePath = json['profile_path'] ??
+        "http://forum.spaceengine.org/styles/se/theme/images/no_avatar.jpg";
   }
 
-  getFoto() {
+  getPhoto() {
     if (profilePath == null) {
       return 'http://forum.spaceengine.org/styles/se/theme/images/no_avatar.jpg';
     } else {

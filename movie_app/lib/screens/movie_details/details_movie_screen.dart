@@ -1,7 +1,13 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:nicolau/models/actor_model.dart';
 import 'package:nicolau/models/movie_model.dart';
+import 'package:nicolau/providers/movie_provider.dart';
+import 'package:nicolau/shared/widgets/percent_widget.dart';
+import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/widgets_details_movie.dart';
 
@@ -24,11 +30,13 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   void initState() {
     super.initState();
     movie = widget.movie;
+    context.read<MoviesProvider>().getCast(movie.id.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final responsive = Responsive.of(context);
+    final percent = ((movie.voteAverage * 100) / 10);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -42,8 +50,8 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  width: size.width,
-                  height: size.height * 0.8,
+                  width: responsive.wp(100),
+                  height: responsive.hp(80),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -62,12 +70,18 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                         movie,
                       ),
                       const SizedBox(height: 7),
+                      Center(
+                        child: percentWidget(
+                            responsive: responsive,
+                            percent: percent,
+                            movie: movie,
+                            value: 0),
+                      ),
+                      const SizedBox(height: 7),
                       //type movies, action, history etc..
                       typeMovieWidget(),
                       const SizedBox(height: 10),
                       //stars
-                      classificationWidget(),
-
                       //director name
                       Center(child: Text(movie.originalTitle)),
                       const SizedBox(height: 20),
@@ -76,9 +90,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       infoWidget(
                         "Actores",
                       ),
-                      //actors list
-                      // actorsWidget(),
-                      //text info
+                      _crearCasting(movie),
 
                       infoWidget(
                         "History",
@@ -88,8 +100,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       Expanded(
                         child: informationMovie(),
                       ),
-                      const CustomButton(),
-                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -131,28 +141,53 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  // Expanded actorsWidget() {
-  //   return Expanded(
-  //     child: Padding(
-  //       padding: const EdgeInsets.symmetric(horizontal: 30),
-  //       child: ListView.builder(
-  //         physics: const BouncingScrollPhysics(),
-  //         scrollDirection: Axis.horizontal,
-  //         itemCount: 5,
-  //         itemBuilder: (_, index) {
-  //           final image = movie["images"][index];
-  //           final actor = movie["actores"][index];
-  //           return FadeInUpBig(
-  //             delay: const Duration(milliseconds: 3),
-  //             duration: const Duration(milliseconds: 2000),
-  //             child:
-  //                 ActorWidget(actor: actor, image: image, darkMode: darkMode),
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget _crearCasting(Movie movie) {
+    final actores = context.watch<MoviesProvider>().actores;
+
+    if (actores.isNotEmpty) {
+      return _createActoresPageView(actores);
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
+  }
+
+  Widget _createActoresPageView(List<Actor> actores) {
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        physics: const BouncingScrollPhysics(),
+        pageSnapping: false,
+        controller: PageController(viewportFraction: 0.3, initialPage: 1),
+        itemCount: actores.length,
+        itemBuilder: (context, i) => _actorCard(actores[i]),
+      ),
+    );
+  }
+
+  Widget _actorCard(Actor actor) {
+    return Column(
+      children: <Widget>[
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: CachedNetworkImage(
+            height: 150,
+            imageUrl: actor.getPhoto(),
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                Image.asset(
+              "assets/no-image.jpg",
+              fit: BoxFit.cover,
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            fit: BoxFit.cover,
+          ),
+        ),
+        Text(
+          actor.name,
+          overflow: TextOverflow.ellipsis,
+        )
+      ],
+    );
+  }
 
   Container typeMovie(String text) {
     return Container(
