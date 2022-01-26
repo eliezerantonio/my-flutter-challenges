@@ -6,6 +6,7 @@ import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
 import 'package:nicolau/shared/widgets/percent_widget.dart';
 import 'package:nicolau/utils/responsive.dart';
+import 'package:shimmer/shimmer.dart';
 
 class StaggeredGridViewMovie extends StatelessWidget {
   const StaggeredGridViewMovie({
@@ -27,9 +28,10 @@ class StaggeredGridViewMovie extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           controller: _scrollController,
           crossAxisCount: 4,
-          itemCount: movies.length,
-          itemBuilder: (BuildContext context, int index) =>
-              _StaggeredItem(movie: movies[index]),
+          itemCount: movies.isNotEmpty ? movies.length : 50,
+          itemBuilder: (BuildContext context, int index) => movies.isNotEmpty
+              ? _StaggeredItem(movie: movies[index])
+              : _ShimmerItem(index: index),
           staggeredTileBuilder: (int index) =>
               StaggeredTile.count(2, index.isEven ? 2 : 3),
           mainAxisSpacing: 4.0,
@@ -105,9 +107,40 @@ class _StaggeredItem extends StatelessWidget {
           Positioned(
             bottom: responsive.dp(1),
             child: percentWidget(
-                responsive: responsive, percent: percent, movie: movie, ),
+              responsive: responsive,
+              percent: percent,
+              movie: movie,
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ShimmerItem extends StatelessWidget {
+  final int index;
+
+  const _ShimmerItem({Key? key, required this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      enabled: true,
+      child: Container(
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.blueGrey,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Center(
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Text('$index'),
+          ),
+        ),
       ),
     );
   }

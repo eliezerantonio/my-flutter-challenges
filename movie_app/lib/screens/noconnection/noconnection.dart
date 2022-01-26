@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
-class NoConnection extends StatefulWidget {
-  const NoConnection({Key? key}) : super(key: key);
-
-  @override
-  _NoConnectionState createState() => _NoConnectionState();
-}
-
-class _NoConnectionState extends State<NoConnection> {
-  @override
+class NoConnection extends StatelessWidget {
+  const NoConnection({Key? key, required this.tryConnection}) : super(key: key);
+  final Function tryConnection;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -39,13 +33,15 @@ class _NoConnectionState extends State<NoConnection> {
               height: 60,
             ),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                tryConnection();
+              },
               height: 45,
               padding: const EdgeInsets.symmetric(horizontal: 50),
               elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              color: Colors.grey.shade400,
+              color: Colors.grey[800],
               child: const Text(
                 "Tentar de novo",
                 style: TextStyle(color: Colors.white),

@@ -1,17 +1,23 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nicolau/providers/movie_provider.dart';
-import 'package:nicolau/screens/movie_screen/exhibition_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc_navigation/bloc_navigation.dart';
 import 'siderbar/sidebar_layout.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -23,9 +29,16 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'No Cinema',
+        color: Colors.grey,
         debugShowCheckedModeBanner: false,
         home: SidebarLayout(),
       ),
     );
+  }
+}
+
+extension ParseToString on ConnectivityResult {
+  String toValue() {
+    return this.toString().split('.').last;
   }
 }
