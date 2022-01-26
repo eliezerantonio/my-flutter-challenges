@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
-import 'package:nicolau/screens/exhibition/widgets/item_movie.dart';
+import 'package:nicolau/screens/popular/widgets/item_movie.dart';
 import 'package:nicolau/shared/widgets/sttaggered_grid_view_movie.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
@@ -26,24 +26,22 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
 
   bool carroulse = true;
   final _scrollController = ScrollController();
-  late AnimationController controller;
+
 
   @override
   void initState() {
     super.initState();
-    late Animation<double> moveRight;
-    late Animation<double> moveLeft;
+  
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 300) {
-        context.read<MoviesProvider>().getPopulares();
+          _scrollController.position.maxScrollExtent - 900) {
+        context.read<MoviesProvider>().getEnCine();
       }
     });
 
-    controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1500));
 
-    moveRight = Tween(begin: -570.0, end: 570.0).animate(controller);
+    //carrousell  
+
   }
 
   @override

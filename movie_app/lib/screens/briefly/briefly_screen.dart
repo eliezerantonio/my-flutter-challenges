@@ -23,7 +23,7 @@ class _BrieflyScreenState extends State<BrieflyScreen> {
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 200) {
+          _scrollController.position.maxScrollExtent - 900) {
         context.read<MoviesProvider>().getBriefly();
       }
     });

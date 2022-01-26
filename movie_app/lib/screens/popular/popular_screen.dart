@@ -21,7 +21,7 @@ class _PopularScreenState extends State<PopularScreen> {
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 300) {
+          _scrollController.position.maxScrollExtent - 900) {
         context.read<MoviesProvider>().getPopulares();
       }
     });
