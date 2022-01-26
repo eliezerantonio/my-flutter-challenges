@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
+import 'package:nicolau/search/search_delegate.dart';
 import 'package:nicolau/siderbar/menu_item.dart';
 import 'package:nicolau/utils/custom_clipper.dart';
 import 'package:rxdart/rxdart.dart';
@@ -130,6 +131,17 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(
                                 NavigationEvents.BrieflyScreenChickedEvent);
+                          },
+                        ),
+                        MenuItem(
+                          icon: Icons.search,
+                          title: "Filtros",
+                          onTap: () {
+                            onIconPressed();
+                            showSearch(
+                                context: context,
+                                delegate: DataSerach(),
+                                query: '');
                           },
                         ),
                         Divider(

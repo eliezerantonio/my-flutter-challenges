@@ -10,6 +10,7 @@ import 'package:nicolau/shared/widgets/sttaggered_grid_view_movie.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -27,11 +28,10 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
   bool carroulse = true;
   final _scrollController = ScrollController();
 
-
   @override
   void initState() {
     super.initState();
-  
+
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 900) {
@@ -39,9 +39,7 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
       }
     });
 
-
-    //carrousell  
-
+    //carrousell
   }
 
   @override
@@ -50,6 +48,7 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
 
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: movies.isNotEmpty
             ? GestureDetector(
@@ -95,54 +94,7 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
                   ),
                 ),
               )
-            : CircularProgressIndicator(),
-      ),
-    );
-  }
-
-  Shimmer _shimmer(Responsive responsive) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      enabled: true,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            bottom: 0,
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: responsive.hp(50),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: responsive.hp(70),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: responsive.hp(50),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+            : Center(child: CircularProgressIndicator(color: Colors.grey[800])),
       ),
     );
   }
