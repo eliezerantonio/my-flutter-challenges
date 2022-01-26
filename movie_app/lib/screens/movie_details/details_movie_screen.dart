@@ -196,28 +196,31 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   }
 
   Widget _actorCard(Actor actor) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: CachedNetworkImage(
-            height: 150,
-            imageUrl: actor.getPhoto(),
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Image.asset(
-              "assets/no-image.jpg",
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: CachedNetworkImage(
+              height: 150,
+              imageUrl: actor.getPhoto(),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  Image.asset(
+                "assets/no-image.jpg",
+                fit: BoxFit.cover,
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
             ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            fit: BoxFit.cover,
           ),
-        ),
-        Text(
-          actor.name,
-          overflow: TextOverflow.ellipsis,
-        )
-      ],
+          Text(
+            actor.name,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 

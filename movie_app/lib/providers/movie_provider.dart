@@ -18,6 +18,7 @@ class MoviesProvider with ChangeNotifier {
 
   int _popularesPage = 0;
   int _upcomingsPage = 0;
+  int _playing = 0;
 
   bool _loading = false;
 
@@ -54,12 +55,14 @@ class MoviesProvider with ChangeNotifier {
 
   Future<List<Movie>> getEnCine() async {
     loading = true;
+    _playing++;
     final url = Uri.http(
       _url,
       '3/movie/now_playing',
       {
         'api_key': _apikey,
         'language': _language,
+        'page': _playing.toString(),
       },
     );
 
