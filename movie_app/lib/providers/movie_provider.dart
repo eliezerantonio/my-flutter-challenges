@@ -12,11 +12,13 @@ class MoviesProvider with ChangeNotifier {
     getPopulares();
     getBriefly();
   }
-  final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
+  final String _apikey = 'your key';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
   int _popularesPage = 0;
+  int _upcomingsPage = 0;
+  int _playing = 0;
 
   bool _loading = false;
 
@@ -30,28 +32,43 @@ class MoviesProvider with ChangeNotifier {
   List<Movie> populares = [];
   List<Movie> now_playings = [];
   List<Movie> upcomings = [];
+  List<Actor> actores = [];
 
   Future<List<Movie>> getBriefly() async {
+    loading = true;
+    _upcomingsPage++;
     final url = Uri.http(
       _url,
       '3/movie/upcoming',
-      {'api_key': _apikey, 'language': _language},
+      {
+        'api_key': _apikey,
+        'language': _language,
+        'page': _upcomingsPage.toString(),
+      },
     );
 
     final resp = await _proccessResponse(url);
     upcomings.addAll(resp);
+    loading = false;
     return resp;
   }
 
   Future<List<Movie>> getEnCine() async {
+    loading = true;
+    _playing++;
     final url = Uri.http(
       _url,
       '3/movie/now_playing',
-      {'api_key': _apikey, 'language': _language},
+      {
+        'api_key': _apikey,
+        'language': _language,
+        'page': _playing.toString(),
+      },
     );
 
     final resp = await _proccessResponse(url);
     now_playings.addAll(resp);
+    loading = false;
     return resp;
   }
 
@@ -84,7 +101,8 @@ class MoviesProvider with ChangeNotifier {
     return movies.items;
   }
 
-  Future<List<Actor>> getCast(String movieID) async {
+  Future<void> getCast(String movieID) async {
+    actores.clear();
     final url = Uri.https(_url, '3/movie/$movieID/credits', {
       'api_key': _apikey,
       'language': _language,
@@ -94,8 +112,8 @@ class MoviesProvider with ChangeNotifier {
     final decodedData = json.decode(resp.body);
 
     final cast = Cast.fromJsonList(decodedData['cast']);
-
-    return cast.actores;
+    actores.addAll(cast.actores);
+    notifyListeners();
   }
 
   Future<List<Movie>> searchMovie(String query) async {

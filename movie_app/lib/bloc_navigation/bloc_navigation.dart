@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nicolau/screens/briefly/briefly_screen.dart';
-import 'package:nicolau/screens/exhibition/popular_screen.dart';
 import 'package:nicolau/screens/movie_screen/exhibition_screen.dart';
+import 'package:nicolau/screens/popular/popular_screen.dart';
 
 enum NavigationEvents {
   PopularScreenChickedEvent,
@@ -24,7 +24,7 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
             break;
 
           case NavigationEvents.BrieflyScreenChickedEvent:
-            BrieflyScreen();
+            emit(BrieflyScreen());
             break;
         }
       },

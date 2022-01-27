@@ -1,15 +1,18 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:nicolau/bloc_navigation/bloc_navigation.dart';
 import 'package:nicolau/models/movie_model.dart';
 import 'package:nicolau/providers/movie_provider.dart';
-import 'package:nicolau/screens/exhibition/widgets/item_movie.dart';
+import 'package:nicolau/screens/popular/widgets/item_movie.dart';
+import 'package:nicolau/shared/widgets/sttaggered_grid_view_movie.dart';
 import 'package:nicolau/utils/myBackgroundColors.dart';
 import 'package:nicolau/utils/responsive.dart';
 import 'package:nicolau/widgets/custom_widgets.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
 
 class ExhibitionScreen extends StatefulWidget with NavigationStates {
   const ExhibitionScreen({Key? key}) : super(key: key);
@@ -18,10 +21,26 @@ class ExhibitionScreen extends StatefulWidget with NavigationStates {
   _ExhibitionScreenState createState() => _ExhibitionScreenState();
 }
 
-class _ExhibitionScreenState extends State<ExhibitionScreen> {
+class _ExhibitionScreenState extends State<ExhibitionScreen>
+    with SingleTickerProviderStateMixin {
   int _current = 0;
 
-  bool darkMode = false;
+  bool carroulse = true;
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 900) {
+        context.read<MoviesProvider>().getEnCine();
+      }
+    });
+
+    //carrousell
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,80 +48,53 @@ class _ExhibitionScreenState extends State<ExhibitionScreen> {
 
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: movies.isNotEmpty
-            ? SizedBox(
-                height: responsive.hp(100),
-                width: responsive.wp(100),
-                child: Stack(
-                  children: [
-                    FadeInImage(
-                      image: NetworkImage(movies[_current].getPosterImg()),
-                      placeholder: const AssetImage('assets/no-image.jpg'),
-                      fit: BoxFit.cover,
-                      height: responsive.hp(100),
-                      width: responsive.wp(100),
-                    ),
-                    // backround color
-                    BackgroundGradiante(
-                      darkMode: darkMode,
-                      backgroundDarkMode: backgroundDarkMode,
-                      backgroundWhiteMode: backgroundWhiteMode,
-                    ),
+            ? GestureDetector(
+                onDoubleTap: () {
+                  carroulse = !carroulse;
+                  setState(() {});
+                },
+                child: SizedBox(
+                  height: responsive.hp(100),
+                  width: responsive.wp(100),
+                  child: Stack(
+                    children: [
+                      //carousel
 
-                    //carousel movies
-                    carouselSlider(context, movies, responsive),
-                  ],
+                      if (carroulse) ...[
+                        CachedNetworkImage(
+                          height: responsive.hp(100),
+                          width: responsive.wp(100),
+                          imageUrl: movies[_current].getPosterImg(),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Image.asset(
+                            "assets/no-image.jpg",
+                            fit: BoxFit.cover,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          fit: BoxFit.cover,
+                        ),
+                        // backround color
+                        BackgroundGradiante(
+                          darkMode: false,
+                          backgroundDarkMode: backgroundDarkMode,
+                          backgroundWhiteMode: backgroundWhiteMode,
+                        ),
+                      ],
+                      //carousel movies
+                      carroulse
+                          ? carouselSlider(context, movies, responsive)
+                          : StaggeredGridViewMovie(
+                              scrollController: _scrollController,
+                              movies: movies),
+                    ],
+                  ),
                 ),
               )
-            : _shimmer(responsive),
-      ),
-    );
-  }
-
-  Shimmer _shimmer(Responsive responsive) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      enabled: true,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            bottom: 0,
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: responsive.hp(50),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: responsive.hp(70),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: responsive.hp(50),
-                  width: responsive.wp(60),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+            : Center(child: CircularProgressIndicator(color: Colors.grey[800])),
       ),
     );
   }
@@ -113,27 +105,29 @@ class _ExhibitionScreenState extends State<ExhibitionScreen> {
       bottom: 0,
       height: responsive.hp(70),
       width: responsive.wp(100),
-      child: CarouselSlider(
-        options: CarouselOptions(
-          height: responsive.hp(65),
-          aspectRatio: 16 / 9,
-          viewportFraction: 0.70,
-          enlargeCenterPage: true,
-          onPageChanged: (index, reason) {
-            setState(() {
-              _current = index;
-            });
-          },
+      child: FadeInUp(
+        child: CarouselSlider(
+          options: CarouselOptions(
+            height: responsive.hp(65),
+            aspectRatio: 16 / 9,
+            viewportFraction: 0.70,
+            enlargeCenterPage: true,
+            onPageChanged: (index, reason) {
+              setState(() {
+                _current = index;
+              });
+            },
+          ),
+          items: movies
+              .map(
+                (movie) => Builder(builder: (context) {
+                  return ItemMovie(
+                    movie: movie,
+                  );
+                }),
+              )
+              .toList(),
         ),
-        items: movies
-            .map(
-              (movie) => Builder(builder: (context) {
-                return ItemMovie(
-                  movie: movie,
-                );
-              }),
-            )
-            .toList(),
       ),
     );
   }
