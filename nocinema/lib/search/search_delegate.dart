@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nicolau/models/movie_model.dart';
-import 'package:nicolau/providers/movie_provider.dart';
-import 'package:nicolau/screens/movie_details/details_movie_screen.dart';
+import 'package:nocinema/models/movie_model.dart';
+import 'package:nocinema/providers/movie_provider.dart';
+import 'package:nocinema/screens/movie_details/details_movie_screen.dart';
 
 class DataSerach extends SearchDelegate {
   final filmes = [
