@@ -48,7 +48,6 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
 
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: movies.isNotEmpty
             ? GestureDetector(
@@ -99,7 +98,7 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
                   ),
                 ),
               )
-            : Center(child: CircularProgressIndicator(color: Colors.grey[800])),
+            : Center(child: CircularProgressIndicator(color: Colors.grey[700])),
       ),
     );
   }

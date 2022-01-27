@@ -27,15 +27,17 @@ class _MyAppState extends State<MyApp> {
           create: (context) => MoviesProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ThemeChanger(2),
+          create: (_) => ThemeChanger(1),
         )
       ],
       child: Builder(builder: (context) {
-        final appTheme = context.watch<ThemeChanger>().currentTheme;
+        var appTheme = context.watch<ThemeChanger>().currentTheme;
+   
         return MaterialApp(
           title: 'NoCinema'.toUpperCase(),
           color: Colors.grey,
           theme: appTheme,
+          themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
           home: SidebarLayout(),
         );

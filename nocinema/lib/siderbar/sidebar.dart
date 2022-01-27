@@ -6,6 +6,7 @@ import 'package:nocinema/bloc_navigation/bloc_navigation.dart';
 import 'package:nocinema/search/search_delegate.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/custom_clipper.dart';
+import 'package:nocinema/utils/myBackgroundColors.dart';
 import 'package:provider/provider.dart';
 
 import 'package:rxdart/rxdart.dart';
@@ -89,18 +90,15 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 100),
-                        ListTile(
-                          title: const Text('NOCINEMA',
-                              style: TextStyle(
-                                  fontSize: 30, fontWeight: FontWeight.w800)),
-                          leading: CircleAvatar(
-                            backgroundColor: secondary,
-                            child: const Icon(
-                              Icons.movie_filter_outlined,
-                              color: Colors.white,
+                        const SizedBox(height: 40),
+                        Center(
+                          child: ClipOval(
+                            child: Image.asset(
+                              "assets/icon.png",
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
                             ),
-                            radius: 40,
                           ),
                         ),
                         Divider(
@@ -108,7 +106,9 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           thickness: 0.5,
                           indent: 32,
                           endIndent: 32,
-                          color: secondary,
+                          color: appTheme.darkTheme
+                              ? Color(darkCustomColor)
+                              : secondary,
                         ),
                         MenuItem(
                           icon: Icons.play_arrow,
@@ -153,7 +153,9 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           thickness: 0.5,
                           indent: 32,
                           endIndent: 32,
-                          color: secondary,
+                          color: appTheme.darkTheme
+                              ? Color(darkCustomColor)
+                              : secondary,
                         ),
                         ListTile(
                           title: const Text("Modo Escuro",
@@ -161,7 +163,15 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                                 fontWeight: FontWeight.w300,
                                 fontSize: 26,
                               )),
-                          leading: Switch.adaptive(
+                          leading: Icon(Icons.lightbulb_outline,
+                              color: appTheme.darkTheme
+                                  ? Color(darkCustomColor)
+                                  : secondary,
+                              size: 30),
+                          trailing: Switch.adaptive(
+                            activeColor: appTheme.darkTheme
+                                ? Color(darkCustomColor)
+                                : secondary,
                             value: appTheme.darkTheme,
                             onChanged: (bool value) {
                               appTheme.darkTheme = value;

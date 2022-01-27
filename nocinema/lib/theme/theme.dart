@@ -7,7 +7,7 @@ class ThemeChanger with ChangeNotifier {
         _darkTheme = false;
         _currentTheme = ThemeData.light();
         break;
-      case 2: //dark
+      case 2: //darknunca
         _darkTheme = true;
         _currentTheme = ThemeData.dark();
         break;
