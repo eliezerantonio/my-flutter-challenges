@@ -207,9 +207,13 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
               height: 150,
               imageUrl: actor.getPhoto(),
               progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  Image.asset(
-                "assets/no-image.jpg",
-                fit: BoxFit.cover,
+                  Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Image.asset(
+                  "assets/no-image.jpg",
+                  fit: BoxFit.cover,
+                ),
               ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,

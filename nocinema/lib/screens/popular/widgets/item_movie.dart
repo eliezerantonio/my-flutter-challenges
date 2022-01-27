@@ -6,7 +6,7 @@ import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/shared/widgets/title_widget.dart';
 import 'package:nocinema/utils/responsive.dart';
-
+import 'package:shimmer/shimmer.dart';
 
 class ItemMovie extends StatelessWidget {
   ItemMovie({Key? key, required this.movie}) : super(key: key);
@@ -89,9 +89,13 @@ class ItemMovie extends StatelessWidget {
           child: CachedNetworkImage(
             imageUrl: movie.getPosterImg(),
             progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Image.asset(
-              "assets/no-image.jpg",
-              fit: BoxFit.cover,
+                Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Image.asset(
+                "assets/no-image.jpg",
+                fit: BoxFit.cover,
+              ),
             ),
             errorWidget: (context, url, error) => Icon(Icons.error),
             fit: BoxFit.cover,

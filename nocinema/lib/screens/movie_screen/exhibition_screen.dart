@@ -69,9 +69,14 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
                           width: responsive.wp(100),
                           imageUrl: movies[_current].getPosterImg(),
                           progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Image.asset(
-                            "assets/no-image.jpg",
-                            fit: BoxFit.cover,
+                              (context, url, downloadProgress) =>
+                                  Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Image.asset(
+                              "assets/no-image.jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
