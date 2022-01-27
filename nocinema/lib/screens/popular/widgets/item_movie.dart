@@ -5,7 +5,9 @@ import 'package:nocinema/screens/movie_details/details_movie_screen.dart';
 import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/shared/widgets/title_widget.dart';
+import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/responsive.dart';
+import 'package:provider/src/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ItemMovie extends StatelessWidget {
@@ -21,6 +23,7 @@ class ItemMovie extends StatelessWidget {
     movie.uiniqueId = '${movie.id}-card';
     //responsive
     final responsive = Responsive.of(context);
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -39,10 +42,11 @@ class ItemMovie extends StatelessWidget {
 
   Widget _itemMovie(
       BuildContext context, Responsive responsive, double percent) {
+    final appTheme = context.watch<ThemeChanger>();
     return Container(
       width: 380,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
         borderRadius: borderRadius,
       ),
       child: SingleChildScrollView(

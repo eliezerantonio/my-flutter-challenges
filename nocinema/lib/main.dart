@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:nocinema/theme/theme.dart';
 import 'package:provider/provider.dart';
-
 
 import 'providers/movie_provider.dart';
 import 'siderbar/sidebar_layout.dart';
@@ -25,17 +25,21 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           lazy: false,
           create: (context) => MoviesProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeChanger(2),
         )
       ],
-      child: MaterialApp(
-        title: 'No Cinema',
-        color: Colors.grey,
-        debugShowCheckedModeBanner: false,
-        home: SidebarLayout(),
-      ),
+      child: Builder(builder: (context) {
+        final appTheme = context.watch<ThemeChanger>().currentTheme;
+        return MaterialApp(
+          title: 'NoCinema'.toUpperCase(),
+          color: Colors.grey,
+          theme: appTheme,
+          debugShowCheckedModeBanner: false,
+          home: SidebarLayout(),
+        );
+      }),
     );
   }
 }
-
-
-

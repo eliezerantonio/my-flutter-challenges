@@ -1,25 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nocinema/theme/theme.dart';
+import 'package:provider/src/provider.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey[850],
-        ),
-        onPressed: () {},
-        child: const Text("DETALHES"),
-      ),
-    );
-  }
-}
 
 //gradiante background
 
@@ -37,6 +19,9 @@ class BackgroundGradiante extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final appTheme = context.watch<ThemeChanger>();
+    final secondary = appTheme.currentTheme?.colorScheme.secondary;
+   
     final size = MediaQuery.of(context).size;
     final mode = Theme.of(context);
     return Positioned(
@@ -51,7 +36,7 @@ class BackgroundGradiante extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: mode == mode.brightness
+            colors: appTheme.darkTheme
                 ? backgroundDarkMode
                 : backgroundWhiteMode,
           ),

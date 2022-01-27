@@ -6,6 +6,7 @@ import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
+import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/responsive.dart';
 
 import 'package:provider/provider.dart';
@@ -39,17 +40,20 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
     final percent = ((movie.voteAverage * 100) / 10);
+    final appTheme = context.watch<ThemeChanger>();
+    final secondary = appTheme.currentTheme?.colorScheme.secondary;
     return Scaffold(
       body: SafeArea(
         child: Container(
           color: Colors.black,
-          child: newMethod(context, responsive, percent),
+          child: newMethod(context, responsive, percent, appTheme),
         ),
       ),
     );
   }
 
-  Stack newMethod(BuildContext context, Responsive responsive, double percent) {
+  Stack newMethod(BuildContext context, Responsive responsive, double percent,
+      ThemeChanger appTheme) {
     return Stack(
       children: [
         //image movie
@@ -61,12 +65,12 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
           child: Container(
             width: responsive.wp(100),
             height: responsive.hp(80),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
               ),
-              color: Colors.white,
+              color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +146,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 20,
-          color: Colors.grey[850],
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -215,7 +218,8 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) =>
+                  Center(child: const Icon(Icons.error)),
               fit: BoxFit.cover,
             ),
           ),
@@ -234,7 +238,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
         text,
         style: TextStyle(
           fontSize: 10,
-          color: Colors.grey[850],
         ),
       ),
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
