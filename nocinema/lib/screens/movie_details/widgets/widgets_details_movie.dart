@@ -10,9 +10,6 @@ informationMovie(String text) {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Text(
         text,
-        style: TextStyle(
-          color: Colors.grey[850],
-        ),
       ),
     ),
   );
@@ -38,7 +35,6 @@ Padding infoWidget(
       text,
       textAlign: TextAlign.justify,
       style: TextStyle(
-        color: Colors.grey[850],
         fontWeight: FontWeight.bold,
       ),
     ),

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nocinema/bloc_navigation/bloc_navigation.dart';
 import 'package:nocinema/search/search_delegate.dart';
+import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/custom_clipper.dart';
+import 'package:provider/provider.dart';
 
 import 'package:rxdart/rxdart.dart';
 
@@ -58,7 +60,8 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    final appTheme = context.watch<ThemeChanger>();
+    final secondary = appTheme.currentTheme?.colorScheme.secondary;
     return StreamBuilder(
       initialData: false,
       stream: isSidebarOpenedStream,
@@ -81,20 +84,19 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   height: screenHeight,
-                  color: Colors.grey[850],
+                  color: appTheme.darkTheme ? Colors.grey[800] : Colors.white,
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 100),
-                        const ListTile(
-                          title: Text('No Cinema',
+                        ListTile(
+                          title: const Text('NOCINEMA',
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w800)),
+                                  fontSize: 30, fontWeight: FontWeight.w800)),
                           leading: CircleAvatar(
-                            child: Icon(
+                            backgroundColor: secondary,
+                            child: const Icon(
                               Icons.movie_filter_outlined,
                               color: Colors.white,
                             ),
@@ -106,7 +108,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           thickness: 0.5,
                           indent: 32,
                           endIndent: 32,
-                          color: Colors.white.withOpacity(0.3),
+                          color: secondary,
                         ),
                         MenuItem(
                           icon: Icons.play_arrow,
@@ -114,7 +116,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           onTap: () {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(
-                                NavigationEvents.ExhibitionScreenChickedEvent);
+                                NavigationEvents.exhibitionScreenChickedEvent);
                           },
                         ),
                         MenuItem(
@@ -123,7 +125,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           onTap: () {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(
-                                NavigationEvents.PopularScreenChickedEvent);
+                                NavigationEvents.popularScreenChickedEvent);
                           },
                         ),
                         MenuItem(
@@ -132,7 +134,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           onTap: () {
                             onIconPressed();
                             BlocProvider.of<NavigationBloc>(context).add(
-                                NavigationEvents.BrieflyScreenChickedEvent);
+                                NavigationEvents.brieflyScreenChickedEvent);
                           },
                         ),
                         MenuItem(
@@ -151,16 +153,20 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           thickness: 0.5,
                           indent: 32,
                           endIndent: 32,
-                          color: Colors.white.withOpacity(0.3),
+                          color: secondary,
                         ),
                         ListTile(
                           title: const Text("Modo Escuro",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 26,
-                                  color: Colors.white)),
-                          leading:
-                              Switch(value: false, onChanged: (bool value) {}),
+                                fontWeight: FontWeight.w300,
+                                fontSize: 26,
+                              )),
+                          leading: Switch.adaptive(
+                            value: appTheme.darkTheme,
+                            onChanged: (bool value) {
+                              appTheme.darkTheme = value;
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -178,12 +184,12 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                     child: Container(
                       width: 35,
                       height: 110,
-                      color: Colors.grey[850],
+                      color:
+                          appTheme.darkTheme ? Colors.grey[800] : Colors.white,
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                           progress: _animationController.view,
                           icon: AnimatedIcons.menu_close,
-                          color: Colors.white,
                           size: 25),
                     ),
                   ),

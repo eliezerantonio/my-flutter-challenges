@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/screens/movie_details/details_movie_screen.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DataSerach extends SearchDelegate {
   final filmes = [
@@ -85,9 +86,14 @@ class DataSerach extends SearchDelegate {
                           width: 50,
                           imageUrl: movie.getPosterImg(),
                           progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Image.asset(
-                            "assets/no-image.jpg",
-                            fit: BoxFit.cover,
+                              (context, url, downloadProgress) =>
+                                  Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Image.asset(
+                              "assets/no-image.jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
