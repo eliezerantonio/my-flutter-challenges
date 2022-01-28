@@ -11,6 +11,7 @@ informationMovie(String text) {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Text(
         text,
+        textAlign: TextAlign.justify,
       ),
     ),
   );
@@ -69,11 +70,14 @@ Align imageMovieWidget(Movie movie, BuildContext context) {
               ),
             ),
             actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Fechar"))
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: Colors.grey,
+                iconSize: 30,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
             ],
           ),
         );

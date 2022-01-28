@@ -7,7 +7,6 @@ import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/responsive.dart';
-import 'package:photo_view/photo_view.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -177,7 +176,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                   child: Image.asset(
                     "assets/no-image.jpg",
                     fit: BoxFit.cover,
-                    height: 150,
+                    height: 200,
                   ),
                 ),
               ),
@@ -215,6 +214,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                 child: Image.asset(
                   "assets/no-image.jpg",
                   fit: BoxFit.cover,
+                  height: 200,
                 ),
               ),
               errorWidget: (context, url, error) =>
