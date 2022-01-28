@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nocinema/models/movie_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 informationMovie(String text) {
   return SingleChildScrollView(
@@ -41,21 +42,55 @@ Padding infoWidget(
   );
 }
 
-Align imageMovieWidget(Movie movie) {
+Align imageMovieWidget(Movie movie, BuildContext context) {
   return Align(
     alignment: Alignment.topCenter,
-    child: Hero(
-      tag: movie.uiniqueId,
-      child: CachedNetworkImage(
-        height: 400,
-        imageUrl: movie.getPosterImg(),
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            Image.asset(
-          "assets/no-image.jpg",
+    child: GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            content: Hero(
+              tag: movie.uiniqueId,
+              child: CachedNetworkImage(
+                height: 400,
+                imageUrl: movie.getPosterImg(),
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Shimmer.fromColors(
+                  baseColor: Colors.grey[300]!,
+                  highlightColor: Colors.grey[100]!,
+                  child: Image.asset(
+                    "assets/no-image.jpg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+                fit: BoxFit.cover,
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Fechar"))
+            ],
+          ),
+        );
+      },
+      child: Hero(
+        tag: movie.uiniqueId,
+        child: CachedNetworkImage(
+          height: 400,
+          imageUrl: movie.getPosterImg(),
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              Image.asset(
+            "assets/no-image.jpg",
+            fit: BoxFit.cover,
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
           fit: BoxFit.cover,
         ),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-        fit: BoxFit.cover,
       ),
     ),
   );

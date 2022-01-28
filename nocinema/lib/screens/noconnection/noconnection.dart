@@ -5,7 +5,6 @@ class NoConnection extends StatelessWidget {
   final Function tryConnection;
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         width: double.infinity,
         child: Column(
@@ -14,9 +13,9 @@ class NoConnection extends StatelessWidget {
             const Text(
               "Ooops! 😓",
               style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black),
+                fontSize: 32,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(
               height: 15,
@@ -25,7 +24,6 @@ class NoConnection extends StatelessWidget {
               "Por favor, verifique sua conexão com a Internet",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.black,
                 fontSize: 16,
               ),
             ),

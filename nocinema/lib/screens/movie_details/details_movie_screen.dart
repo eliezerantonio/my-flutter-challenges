@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nocinema/models/actor_model.dart';
@@ -8,6 +7,7 @@ import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/responsive.dart';
+import 'package:photo_view/photo_view.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -41,7 +41,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     final responsive = Responsive.of(context);
     final percent = ((movie.voteAverage * 100) / 10);
     final appTheme = context.watch<ThemeChanger>();
-    final secondary = appTheme.currentTheme?.colorScheme.secondary;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -57,7 +56,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     return Stack(
       children: [
         //image movie
-        imageMovieWidget(movie),
+        imageMovieWidget(movie, context),
         //icon for close screen
         iconCloseDetailScreen(context),
         Align(

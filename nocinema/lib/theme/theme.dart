@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nocinema/services/local_storage.dart';
 
 class ThemeChanger with ChangeNotifier {
   ThemeChanger(int theme) {
@@ -29,8 +30,10 @@ class ThemeChanger with ChangeNotifier {
 
     if (value) {
       _currentTheme = ThemeData.dark();
+      LocalStorage.prefs.setInt('darkTheme', 2);
     } else {
       _currentTheme = ThemeData.light();
+      LocalStorage.prefs.setInt('darkTheme', 1);
     }
 
     notifyListeners();
