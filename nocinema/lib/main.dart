@@ -6,9 +6,15 @@ import 'package:nocinema/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/movie_provider.dart';
+import 'services/local_storage.dart';
 import 'siderbar/sidebar_layout.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage?.configurePrefs();
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -20,6 +26,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final darkMode = LocalStorage.prefs.getInt("darkTheme");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -27,15 +34,17 @@ class _MyAppState extends State<MyApp> {
           create: (context) => MoviesProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ThemeChanger(2),
+          create: (_) => ThemeChanger(darkMode ?? 1),
         )
       ],
       child: Builder(builder: (context) {
-        final appTheme = context.watch<ThemeChanger>().currentTheme;
+        var appTheme = context.watch<ThemeChanger>().currentTheme;
+
         return MaterialApp(
           title: 'NoCinema'.toUpperCase(),
           color: Colors.grey,
           theme: appTheme,
+          themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
           home: SidebarLayout(),
         );

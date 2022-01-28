@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:nocinema/models/Genre.dart';
 import 'package:nocinema/models/actor_model.dart';
 import 'package:nocinema/models/movie_model.dart';
-
 
 class MoviesProvider with ChangeNotifier {
   MoviesProvider() {
@@ -13,7 +13,14 @@ class MoviesProvider with ChangeNotifier {
     getPopulares();
     getBriefly();
   }
-  final String _apikey = 'your key';
+
+  getAllMovies() {
+    getEnCine();
+    getPopulares();
+    getBriefly();
+  }
+
+  final String _apikey = '';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
@@ -34,6 +41,7 @@ class MoviesProvider with ChangeNotifier {
   List<Movie> now_playings = [];
   List<Movie> upcomings = [];
   List<Actor> actores = [];
+  List<Genres> genres = [];
 
   Future<List<Movie>> getBriefly() async {
     loading = true;
@@ -114,6 +122,23 @@ class MoviesProvider with ChangeNotifier {
 
     final cast = Cast.fromJsonList(decodedData['cast']);
     actores.addAll(cast.actores);
+    notifyListeners();
+  }
+
+  Future<void> getGenres(String movieID) async {
+    genres.clear();
+
+    final url = Uri.http(_url, '3/movie/$movieID', {
+      'api_key': _apikey,
+      'language': _language,
+    });
+
+    final resp = await http.get(url);
+
+    final decodeData = json.decode(resp.body);
+
+    final genre = Genre.fromJson(decodeData);
+    genres.addAll(genre.genres);
     notifyListeners();
   }
 

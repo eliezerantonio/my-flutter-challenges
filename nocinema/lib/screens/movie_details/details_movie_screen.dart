@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nocinema/models/actor_model.dart';
@@ -41,7 +40,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     final responsive = Responsive.of(context);
     final percent = ((movie.voteAverage * 100) / 10);
     final appTheme = context.watch<ThemeChanger>();
-    final secondary = appTheme.currentTheme?.colorScheme.secondary;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -57,7 +55,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     return Stack(
       children: [
         //image movie
-        imageMovieWidget(movie),
+        imageMovieWidget(movie, context),
         //icon for close screen
         iconCloseDetailScreen(context),
         Align(
@@ -178,7 +176,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                   child: Image.asset(
                     "assets/no-image.jpg",
                     fit: BoxFit.cover,
-                    height: 150,
+                    height: 200,
                   ),
                 ),
               ),
@@ -216,6 +214,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                 child: Image.asset(
                   "assets/no-image.jpg",
                   fit: BoxFit.cover,
+                  height: 200,
                 ),
               ),
               errorWidget: (context, url, error) =>

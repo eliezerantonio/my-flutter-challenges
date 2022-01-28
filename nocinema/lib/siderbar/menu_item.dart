@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nocinema/theme/theme.dart';
+import 'package:nocinema/utils/myBackgroundColors.dart';
 import 'package:provider/src/provider.dart';
 
 class MenuItem extends StatelessWidget {
@@ -16,14 +17,18 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = context.watch<ThemeChanger>().currentTheme;
+    final appTheme = context.watch<ThemeChanger>();
     return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Icon(icon, color: appTheme?.colorScheme.secondary, size: 30),
+            Icon(icon,
+                color: appTheme.darkTheme
+                    ? Color(darkCustomColor)
+                    : appTheme.currentTheme!.colorScheme.secondary,
+                size: 30),
             const SizedBox(
               width: 20,
             ),
