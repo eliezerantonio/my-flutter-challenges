@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nocinema/providers/trailer_provider.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,13 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
   @override
   Widget build(BuildContext context) {
     final darkMode = LocalStorage.prefs.getInt("darkTheme");

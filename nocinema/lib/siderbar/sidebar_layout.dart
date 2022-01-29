@@ -22,7 +22,7 @@ class _SidebarLayoutState extends State<SidebarLayout> {
   @override
   initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     Future.delayed(const Duration(milliseconds: 10), () {
       _tryConnection();
     });

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:nocinema/models/Genre.dart';
 import 'package:nocinema/models/actor_model.dart';
 import 'package:nocinema/models/movie_model.dart';
-import 'package:nocinema/models/trailer.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/providers/trailer_provider.dart';
 import 'package:nocinema/screens/play/play_trailer.dart';
@@ -15,7 +14,6 @@ import 'package:nocinema/utils/responsive.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'widgets/widgets_details_movie.dart';
 
 class DetailsMovieScreen extends StatefulWidget {
@@ -76,6 +74,8 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
                     children: [
+
+
                       const SizedBox(
                         height: 20,
                       ),
@@ -116,7 +116,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                                 child: Text("Ver Trailer"),
                               ),
                             )
-                          : Text("..."),
+                          : Center(child: Text("...")),
 
                       //text actores
                       infoWidget("Elenco Principal"),
