@@ -20,7 +20,7 @@ class MoviesProvider with ChangeNotifier {
     getBriefly();
   }
 
-  final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
+  final String _apikey = 'your key';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 

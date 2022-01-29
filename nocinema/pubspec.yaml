@@ -45,7 +45,8 @@ dependencies:
   shimmer: ^2.0.0
   splash_screen_view: ^3.0.0
   upgrader: ^3.12.1
-  youtube_player_flutter: ^8.0.0
+  # youtube_player_flutter: ^8.0.0
+  youtube_player_iframe: ^2.2.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.9.2"
