@@ -20,7 +20,7 @@ class MoviesProvider with ChangeNotifier {
     getBriefly();
   }
 
-  final String _apikey = '';
+  final String _apikey = 'Your Key';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
@@ -44,8 +44,8 @@ class MoviesProvider with ChangeNotifier {
   List<Genres> genres = [];
 
   Future<List<Movie>> getBriefly() async {
-    loading = true;
     _upcomingsPage++;
+    loading = true;
     final url = Uri.http(
       _url,
       '3/movie/upcoming',
@@ -63,8 +63,8 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<List<Movie>> getEnCine() async {
-    loading = true;
     _playing++;
+    loading = true;
     final url = Uri.http(
       _url,
       '3/movie/now_playing',
@@ -82,8 +82,8 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<List<Movie>> getPopulares() async {
-    loading = true;
     _popularesPage++;
+    loading = true;
 
     final url = Uri.https(
       _url,

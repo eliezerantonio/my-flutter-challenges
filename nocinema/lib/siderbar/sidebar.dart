@@ -161,7 +161,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           title: const Text("Modo Escuro",
                               style: TextStyle(
                                 fontWeight: FontWeight.w300,
-                                fontSize: 26,
+                                fontSize: 17,
                               )),
                           leading: Icon(Icons.lightbulb_outline,
                               color: appTheme.darkTheme

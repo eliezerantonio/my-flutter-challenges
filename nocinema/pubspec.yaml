@@ -43,6 +43,7 @@ dependencies:
   rxdart: ^0.27.3
   shared_preferences: ^2.0.12
   shimmer: ^2.0.0
+  splash_screen_view: ^3.0.0
   upgrader: ^3.12.1
 
 dev_dependencies:

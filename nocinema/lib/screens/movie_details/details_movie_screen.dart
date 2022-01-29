@@ -1,5 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:nocinema/models/Genre.dart';
 import 'package:nocinema/models/actor_model.dart';
 import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
@@ -33,6 +35,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     super.initState();
     movie = widget.movie;
     context.read<MoviesProvider>().getCast(movie.id.toString());
+    context.read<MoviesProvider>().getGenres(movie.id.toString());
   }
 
   @override
@@ -52,6 +55,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
 
   Stack newMethod(BuildContext context, Responsive responsive, double percent,
       ThemeChanger appTheme) {
+    final actores = context.watch<MoviesProvider>().actores;
     return Stack(
       children: [
         //image movie
@@ -70,8 +74,9 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
               ),
               color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               children: [
                 const SizedBox(
                   height: 20,
@@ -90,7 +95,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                 ),
                 const SizedBox(height: 7),
                 //type movies, action, history etc..
-                typeMovieWidget(),
+                Center(child: _crearGenres(movie)),
                 const SizedBox(height: 10),
                 //stars
                 //director name
@@ -103,16 +108,14 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                 infoWidget(
                   "Elenco Principal",
                 ),
-                _crearCasting(movie),
+                actores.isNotEmpty ? _crearCasting(movie) : _shimmer(),
 
                 infoWidget(
                   "Sinopse",
                 ),
 
                 //about movie
-                Expanded(
-                  child: informationMovie(movie.overview),
-                ),
+                informationMovie(movie.overview),
               ],
             ),
           ),
@@ -153,20 +156,27 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   Widget _crearCasting(Movie movie) {
     final actores = context.watch<MoviesProvider>().actores;
 
-    if (actores.isNotEmpty) {
-      return _createActoresPageView(actores);
+    return _createActoresPageView(actores);
+  }
+
+  Widget _crearGenres(Movie movie) {
+    final genres = context.watch<MoviesProvider>().genres;
+
+    if (genres.isNotEmpty) {
+      return _createGenres(genres);
     } else {
-      return Expanded(child: _shimmer());
+      return Text("...");
     }
   }
 
-  PageView _shimmer() {
-    return PageView.builder(
-        physics: const BouncingScrollPhysics(),
-        pageSnapping: false,
-        controller: PageController(viewportFraction: 0.3, initialPage: 1),
-        itemCount: 20,
-        itemBuilder: (context, i) => Padding(
+  Widget _shimmer() {
+    return SizedBox(
+      height: 160,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          for (var i = 0; i < 20; i++)
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
@@ -176,11 +186,13 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                   child: Image.asset(
                     "assets/no-image.jpg",
                     fit: BoxFit.cover,
-                    height: 200,
                   ),
                 ),
               ),
-            ));
+            ),
+        ],
+      ),
+    );
   }
 
   Widget _createActoresPageView(List<Actor> actores) {
@@ -231,18 +243,29 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  Container typeMovie(String text) {
-    return Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 10,
+  Widget _createGenres(List<Genres> genres) {
+    return Wrap(
+      children: [
+        for (var i = 0; i < genres.length; i++) typeMovie(genres[i].name!)
+      ],
+    );
+  }
+
+  Widget typeMovie(String text) {
+    return FadeIn(
+      child: Container(
+        margin: EdgeInsets.all(2),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 10,
+          ),
         ),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(30)),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(30)),
     );
   }
 }

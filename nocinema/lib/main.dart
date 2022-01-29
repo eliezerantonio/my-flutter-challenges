@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
           title: 'NoCinema'.toUpperCase(),
           color: Colors.grey,
           theme: appTheme,
-          themeMode: ThemeMode.system,
+        
           debugShowCheckedModeBanner: false,
           home: SidebarLayout(),
         );
@@ -52,3 +52,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+

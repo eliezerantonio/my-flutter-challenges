@@ -22,7 +22,7 @@ class _SidebarLayoutState extends State<SidebarLayout> {
   initState() {
     super.initState();
 
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 10), () {
       _tryConnection();
     });
   }

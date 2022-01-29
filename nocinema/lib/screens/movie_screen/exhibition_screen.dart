@@ -7,6 +7,7 @@ import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/screens/popular/widgets/item_movie.dart';
 import 'package:nocinema/shared/widgets/sttaggered_grid_view_movie.dart';
+import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/myBackgroundColors.dart';
 import 'package:nocinema/utils/responsive.dart';
 import 'package:nocinema/widgets/custom_widgets.dart';
@@ -45,7 +46,7 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
   @override
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
-
+    final appTheme = context.watch<ThemeChanger>();
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
       body: SafeArea(
@@ -98,7 +99,9 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
                   ),
                 ),
               )
-            : Center(child: CircularProgressIndicator(color: Colors.grey[700])),
+            : Center(
+                child: CircularProgressIndicator(
+                    color: Colors.grey[700],),),
       ),
     );
   }
@@ -109,29 +112,27 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
       bottom: 0,
       height: responsive.hp(70),
       width: responsive.wp(100),
-      child: FadeInUp(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            height: responsive.hp(65),
-            aspectRatio: 16 / 9,
-            viewportFraction: 0.70,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
-            },
-          ),
-          items: movies
-              .map(
-                (movie) => Builder(builder: (context) {
-                  return ItemMovie(
-                    movie: movie,
-                  );
-                }),
-              )
-              .toList(),
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: responsive.hp(65),
+          aspectRatio: 16 / 9,
+          viewportFraction: 0.70,
+          enlargeCenterPage: true,
+          onPageChanged: (index, reason) {
+            setState(() {
+              _current = index;
+            });
+          },
         ),
+        items: movies
+            .map(
+              (movie) => Builder(builder: (context) {
+                return ItemMovie(
+                  movie: movie,
+                );
+              }),
+            )
+            .toList(),
       ),
     );
   }
