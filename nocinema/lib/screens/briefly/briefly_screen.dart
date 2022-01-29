@@ -1,5 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:nocinema/bloc_navigation/bloc_navigation.dart';
 import 'package:nocinema/providers/movie_provider.dart';

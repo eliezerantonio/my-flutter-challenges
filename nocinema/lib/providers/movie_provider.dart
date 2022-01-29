@@ -20,7 +20,7 @@ class MoviesProvider with ChangeNotifier {
     getBriefly();
   }
 
-  final String _apikey = '';
+  final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
@@ -44,15 +44,15 @@ class MoviesProvider with ChangeNotifier {
   List<Genres> genres = [];
 
   Future<List<Movie>> getBriefly() async {
-    loading = true;
     _upcomingsPage++;
+    loading = true;
     final url = Uri.http(
       _url,
       '3/movie/upcoming',
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _upcomingsPage.toString(),
+        'page':_popularesPage == null ? 2 :  _upcomingsPage.toString(),
       },
     );
 
@@ -63,15 +63,15 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<List<Movie>> getEnCine() async {
-    loading = true;
     _playing++;
+    loading = true;
     final url = Uri.http(
       _url,
       '3/movie/now_playing',
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _playing.toString(),
+        'page':_popularesPage == null ? 2 :  _playing.toString(),
       },
     );
 
@@ -82,8 +82,8 @@ class MoviesProvider with ChangeNotifier {
   }
 
   Future<List<Movie>> getPopulares() async {
-    loading = true;
     _popularesPage++;
+    loading = true;
 
     final url = Uri.https(
       _url,
@@ -91,7 +91,7 @@ class MoviesProvider with ChangeNotifier {
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _popularesPage.toString()
+        'page': _popularesPage == null ? 2 : _popularesPage.toString()
       },
     );
 

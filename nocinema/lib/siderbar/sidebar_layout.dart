@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nocinema/bloc_navigation/bloc_navigation.dart';
 import 'package:nocinema/providers/movie_provider.dart';
@@ -21,8 +22,8 @@ class _SidebarLayoutState extends State<SidebarLayout> {
   @override
   initState() {
     super.initState();
-
-    Future.delayed(const Duration(milliseconds: 100), () {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    Future.delayed(const Duration(milliseconds: 10), () {
       _tryConnection();
     });
   }
@@ -51,11 +52,10 @@ class _SidebarLayoutState extends State<SidebarLayout> {
         body: SafeArea(
       child: _isConnectionSuccessful
           ? UpgradeAlert(
-            countryCode: "pt",
-            
-            showIgnore: false,
-            showLater: false,
-            child: BlocProvider<NavigationBloc>(
+              countryCode: "pt",
+              showIgnore: false,
+              showLater: false,
+              child: BlocProvider<NavigationBloc>(
                 create: (_) => NavigationBloc(),
                 child: Stack(
                   children: [
@@ -68,7 +68,7 @@ class _SidebarLayoutState extends State<SidebarLayout> {
                   ],
                 ),
               ),
-          )
+            )
           : NoConnection(tryConnection: _tryConnection),
     ));
   }

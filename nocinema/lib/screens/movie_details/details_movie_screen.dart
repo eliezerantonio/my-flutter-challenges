@@ -1,8 +1,13 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:nocinema/models/Genre.dart';
 import 'package:nocinema/models/actor_model.dart';
 import 'package:nocinema/models/movie_model.dart';
+import 'package:nocinema/models/trailer.dart';
 import 'package:nocinema/providers/movie_provider.dart';
+import 'package:nocinema/providers/trailer_provider.dart';
+import 'package:nocinema/screens/play/play_trailer.dart';
 import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/theme/theme.dart';
@@ -10,7 +15,7 @@ import 'package:nocinema/utils/responsive.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'widgets/widgets_details_movie.dart';
 
 class DetailsMovieScreen extends StatefulWidget {
@@ -33,6 +38,8 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     super.initState();
     movie = widget.movie;
     context.read<MoviesProvider>().getCast(movie.id.toString());
+    context.read<MoviesProvider>().getGenres(movie.id.toString());
+    context.read<TrailerProvider>().search(movie.originalTitle);
   }
 
   @override
@@ -40,84 +47,93 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     final responsive = Responsive.of(context);
     final percent = ((movie.voteAverage * 100) / 10);
     final appTheme = context.watch<ThemeChanger>();
+    final actores = context.watch<MoviesProvider>().actores;
+    final trailers = context.watch<TrailerProvider>().trailers;
+
     return Scaffold(
       body: SafeArea(
         child: Container(
           color: Colors.black,
-          child: newMethod(context, responsive, percent, appTheme),
-        ),
-      ),
-    );
-  }
+          child: Stack(
+            children: [
+              //image movie
+              imageMovieWidget(movie, context),
+              //icon for close screen
+              iconCloseDetailScreen(context),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: responsive.wp(100),
+                  height: responsive.hp(80),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
+                  ),
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      //title movie
+                      titleMovieWidget(
+                        movie,
+                      ),
+                      const SizedBox(height: 7),
+                      Center(
+                        child: percentWidget(
+                          responsive: responsive,
+                          percent: percent,
+                          movie: movie,
+                        ),
+                      ),
+                      const SizedBox(height: 7),
+                      //type movies, action, history etc..
+                      Center(child: _crearGenres(movie)),
+                      const SizedBox(height: 10),
+                      //stars
+                      //director name
+                      Center(child: Text(movie.originalTitle)),
+                      const SizedBox(height: 10),
+                      Center(
+                          child: dateReleaseWidget(
+                              responsive, movie.releaseDate.toString())),
+                      const SizedBox(height: 10),
+                      trailers.isNotEmpty
+                          ? FadeIn(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              PlayTrailer(id: trailers[0].id)));
+                                },
+                                child: Text("Ver Trailer"),
+                              ),
+                            )
+                          : Text("..."),
 
-  Stack newMethod(BuildContext context, Responsive responsive, double percent,
-      ThemeChanger appTheme) {
-    return Stack(
-      children: [
-        //image movie
-        imageMovieWidget(movie, context),
-        //icon for close screen
-        iconCloseDetailScreen(context),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: responsive.wp(100),
-            height: responsive.hp(80),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                //title movie
-                titleMovieWidget(
-                  movie,
-                ),
-                const SizedBox(height: 7),
-                Center(
-                  child: percentWidget(
-                    responsive: responsive,
-                    percent: percent,
-                    movie: movie,
+                      //text actores
+                      infoWidget("Elenco Principal"),
+                      actores.isNotEmpty ? _crearCasting(movie) : _shimmer(),
+
+                      infoWidget("Sinopse"),
+
+                      //about movie
+                      informationMovie(movie.overview),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 7),
-                //type movies, action, history etc..
-                typeMovieWidget(),
-                const SizedBox(height: 10),
-                //stars
-                //director name
-                Center(child: Text(movie.originalTitle)),
-                const SizedBox(height: 20),
-                Center(
-                    child: dateReleaseWidget(
-                        responsive, movie.releaseDate.toString())),
-                //text actores
-                infoWidget(
-                  "Elenco Principal",
-                ),
-                _crearCasting(movie),
-
-                infoWidget(
-                  "Sinopse",
-                ),
-
-                //about movie
-                Expanded(
-                  child: informationMovie(movie.overview),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 
@@ -153,20 +169,27 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   Widget _crearCasting(Movie movie) {
     final actores = context.watch<MoviesProvider>().actores;
 
-    if (actores.isNotEmpty) {
-      return _createActoresPageView(actores);
+    return _createActoresPageView(actores);
+  }
+
+  Widget _crearGenres(Movie movie) {
+    final genres = context.watch<MoviesProvider>().genres;
+
+    if (genres.isNotEmpty) {
+      return _createGenres(genres);
     } else {
-      return Expanded(child: _shimmer());
+      return Text("...");
     }
   }
 
-  PageView _shimmer() {
-    return PageView.builder(
-        physics: const BouncingScrollPhysics(),
-        pageSnapping: false,
-        controller: PageController(viewportFraction: 0.3, initialPage: 1),
-        itemCount: 20,
-        itemBuilder: (context, i) => Padding(
+  Widget _shimmer() {
+    return SizedBox(
+      height: 160,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          for (var i = 0; i < 20; i++)
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
@@ -176,11 +199,13 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                   child: Image.asset(
                     "assets/no-image.jpg",
                     fit: BoxFit.cover,
-                    height: 200,
                   ),
                 ),
               ),
-            ));
+            ),
+        ],
+      ),
+    );
   }
 
   Widget _createActoresPageView(List<Actor> actores) {
@@ -231,18 +256,29 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  Container typeMovie(String text) {
-    return Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 10,
+  Widget _createGenres(List<Genres> genres) {
+    return Wrap(
+      children: [
+        for (var i = 0; i < genres.length; i++) typeMovie(genres[i].name!)
+      ],
+    );
+  }
+
+  Widget typeMovie(String text) {
+    return FadeIn(
+      child: Container(
+        margin: EdgeInsets.all(2),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 10,
+          ),
         ),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(30)),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(30)),
     );
   }
 }

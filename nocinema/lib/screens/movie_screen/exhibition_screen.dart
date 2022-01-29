@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,6 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
   @override
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
-
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
       body: SafeArea(
@@ -98,7 +96,9 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
                   ),
                 ),
               )
-            : Center(child: CircularProgressIndicator(color: Colors.grey[700])),
+            : Center(
+                child: CircularProgressIndicator(
+                    color: Colors.grey[700],),),
       ),
     );
   }
@@ -109,29 +109,27 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
       bottom: 0,
       height: responsive.hp(70),
       width: responsive.wp(100),
-      child: FadeInUp(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            height: responsive.hp(65),
-            aspectRatio: 16 / 9,
-            viewportFraction: 0.70,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
-            },
-          ),
-          items: movies
-              .map(
-                (movie) => Builder(builder: (context) {
-                  return ItemMovie(
-                    movie: movie,
-                  );
-                }),
-              )
-              .toList(),
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: responsive.hp(65),
+          aspectRatio: 16 / 9,
+          viewportFraction: 0.70,
+          enlargeCenterPage: true,
+          onPageChanged: (index, reason) {
+            setState(() {
+              _current = index;
+            });
+          },
         ),
+        items: movies
+            .map(
+              (movie) => Builder(builder: (context) {
+                return ItemMovie(
+                  movie: movie,
+                );
+              }),
+            )
+            .toList(),
       ),
     );
   }

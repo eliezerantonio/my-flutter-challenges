@@ -7,7 +7,6 @@ import 'package:nocinema/search/search_delegate.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/custom_clipper.dart';
 import 'package:nocinema/utils/myBackgroundColors.dart';
-import 'package:provider/provider.dart';
 
 import 'package:rxdart/rxdart.dart';
 
@@ -161,7 +160,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           title: const Text("Modo Escuro",
                               style: TextStyle(
                                 fontWeight: FontWeight.w300,
-                                fontSize: 26,
+                                fontSize: 17,
                               )),
                           leading: Icon(Icons.lightbulb_outline,
                               color: appTheme.darkTheme
@@ -176,6 +175,26 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                             onChanged: (bool value) {
                               appTheme.darkTheme = value;
                             },
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) => alertAbout(context),
+                            );
+                          },
+                          child: ListTile(
+                            title: const Text("Sobre",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 17,
+                                )),
+                            leading: Icon(Icons.info,
+                                color: appTheme.darkTheme
+                                    ? Color(darkCustomColor)
+                                    : secondary,
+                                size: 30),
                           ),
                         ),
                       ],
@@ -209,6 +228,38 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
           ),
         );
       },
+    );
+  }
+
+  AlertDialog alertAbout(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: const Text(
+        "Sobre",
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Desenvolvedor: Eliezer António"),
+          SizedBox(
+            height: 7,
+          ),
+          Text("Contactos: "),
+          Text("+244 924 033 375"),
+          Text("eliezerfernandoantonio@gmail.com"),
+          SizedBox(height: 14),
+          Text("Designer: Adilson Chameia", style: TextStyle()),
+        ],
+      ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.close, color: Colors.grey),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
     );
   }
 }
