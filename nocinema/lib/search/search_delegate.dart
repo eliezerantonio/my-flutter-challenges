@@ -53,14 +53,9 @@ class DataSerach extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     //cria os resultado que vamos mostrar
 
-    return Center(
-      child: Container(
-        height: 100.0,
-        width: 100.0,
-        color: Colors.blueAccent,
-        child: Text(selecao),
-      ),
-    );
+    //print("resultado: pesquisa realizada");
+    close(context, query);
+    return Container();
   }
 
   @override

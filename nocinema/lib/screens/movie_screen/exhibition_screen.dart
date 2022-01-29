@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/screens/popular/widgets/item_movie.dart';
 import 'package:nocinema/shared/widgets/sttaggered_grid_view_movie.dart';
-import 'package:nocinema/theme/theme.dart';
 import 'package:nocinema/utils/myBackgroundColors.dart';
 import 'package:nocinema/utils/responsive.dart';
 import 'package:nocinema/widgets/custom_widgets.dart';
@@ -46,7 +44,6 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
   @override
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
-    final appTheme = context.watch<ThemeChanger>();
     final movies = Provider.of<MoviesProvider>(context).now_playings;
     return Scaffold(
       body: SafeArea(

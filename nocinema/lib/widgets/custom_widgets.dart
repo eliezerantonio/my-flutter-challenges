@@ -20,10 +20,8 @@ class BackgroundGradiante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final appTheme = context.watch<ThemeChanger>();
-    final secondary = appTheme.currentTheme?.colorScheme.secondary;
    
     final size = MediaQuery.of(context).size;
-    final mode = Theme.of(context);
     return Positioned(
       top: 0,
       left: 0,

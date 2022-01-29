@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:nocinema/providers/trailer_provider.dart';
 import 'package:nocinema/theme/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +33,8 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeChanger(darkMode ?? 1),
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => TrailerProvider())
       ],
       child: Builder(builder: (context) {
         var appTheme = context.watch<ThemeChanger>().currentTheme;
@@ -44,7 +43,6 @@ class _MyAppState extends State<MyApp> {
           title: 'NoCinema'.toUpperCase(),
           color: Colors.grey,
           theme: appTheme,
-        
           debugShowCheckedModeBanner: false,
           home: SidebarLayout(),
         );
@@ -52,4 +50,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

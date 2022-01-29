@@ -20,7 +20,7 @@ class MoviesProvider with ChangeNotifier {
     getBriefly();
   }
 
-  final String _apikey = 'Your Key';
+  final String _apikey = 'f50f2a9733f4a09c546a75bd6a80e915';
   final String _url = 'api.themoviedb.org';
   final String _language = 'pt-PT';
 
@@ -52,7 +52,7 @@ class MoviesProvider with ChangeNotifier {
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _upcomingsPage.toString(),
+        'page':_popularesPage == null ? 2 :  _upcomingsPage.toString(),
       },
     );
 
@@ -71,7 +71,7 @@ class MoviesProvider with ChangeNotifier {
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _playing.toString(),
+        'page':_popularesPage == null ? 2 :  _playing.toString(),
       },
     );
 
@@ -91,7 +91,7 @@ class MoviesProvider with ChangeNotifier {
       {
         'api_key': _apikey,
         'language': _language,
-        'page': _popularesPage.toString()
+        'page': _popularesPage == null ? 2 : _popularesPage.toString()
       },
     );
 
