@@ -22,13 +22,13 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
+
   @override
   Widget build(BuildContext context) {
     final darkMode = LocalStorage.prefs.getInt("darkTheme");

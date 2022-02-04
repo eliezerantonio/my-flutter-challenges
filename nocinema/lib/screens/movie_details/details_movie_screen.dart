@@ -1,15 +1,18 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nocinema/models/Genre.dart';
 import 'package:nocinema/models/actor_model.dart';
 import 'package:nocinema/models/movie_model.dart';
 import 'package:nocinema/providers/movie_provider.dart';
 import 'package:nocinema/providers/trailer_provider.dart';
 import 'package:nocinema/screens/play/play_trailer.dart';
+import 'package:nocinema/screens/trailers_screen/trailers_screen.dart';
 import 'package:nocinema/shared/widgets/date_release_widget.dart';
 import 'package:nocinema/shared/widgets/percent_widget.dart';
 import 'package:nocinema/theme/theme.dart';
+import 'package:nocinema/utils/myBackgroundColors.dart';
 import 'package:nocinema/utils/responsive.dart';
 
 import 'package:provider/provider.dart';
@@ -35,6 +38,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
   void initState() {
     super.initState();
     movie = widget.movie;
+
     context.read<MoviesProvider>().getCast(movie.id.toString());
     context.read<MoviesProvider>().getGenres(movie.id.toString());
     context.read<TrailerProvider>().search(movie.originalTitle);
@@ -68,14 +72,12 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
-                    color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
+                    color: appTheme.darkTheme ? darkColor : Colors.white,
                   ),
                   child: ListView(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
                     children: [
-
-
                       const SizedBox(
                         height: 20,
                       ),
@@ -105,15 +107,15 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                       const SizedBox(height: 10),
                       trailers.isNotEmpty
                           ? FadeIn(
-                              child: TextButton(
-                                onPressed: () {
+                              child: GestureDetector(
+                                onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) =>
-                                              PlayTrailer(id: trailers[0].id)));
+                                          builder: (_) => TrailersScreen(
+                                              trailers: trailers)));
                                 },
-                                child: Text("Ver Trailer"),
+                                child: Center(child: Text("Ver Videos")),
                               ),
                             )
                           : Center(child: Text("...")),
@@ -137,18 +139,7 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
     );
   }
 
-  Row typeMovieWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        typeMovie("Action"),
-        const SizedBox(width: 7),
-        typeMovie("Drama"),
-        const SizedBox(width: 7),
-        typeMovie("History"),
-      ],
-    );
-  }
+
 
   Center titleMovieWidget(
     movie,

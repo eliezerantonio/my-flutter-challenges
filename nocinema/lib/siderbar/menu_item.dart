@@ -36,7 +36,7 @@ class MenuItem extends StatelessWidget {
               title,
               style: TextStyle(
                 fontWeight: FontWeight.w300,
-                fontSize: 20,
+                fontSize: 18,
               ),
             )
           ],

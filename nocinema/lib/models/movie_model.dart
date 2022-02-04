@@ -55,14 +55,14 @@ class Movie {
     voteAverage = json['vote_average'] / 1;
     title = json['title'];
     popularity = json['popularity'] / 1;
-    posterPath = json['poster_path'];
+    posterPath = json['poster_path'] ?? "";
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     genreIds = json['genre_ids'].cast<int>();
-    // backdropPath = json['backdrop_path'];
+    backdropPath = json['backdrop_path']??"";
     adult = json['adult'];
-    overview = json['overview'];
-    releaseDate = json['release_date'];
+    overview = json['overview'] ?? "";
+    releaseDate = json['release_date'] ?? "";
   }
   getPosterImg() {
     if (posterPath == null) {

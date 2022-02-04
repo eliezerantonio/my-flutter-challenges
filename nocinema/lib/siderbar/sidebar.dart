@@ -84,14 +84,15 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   height: screenHeight,
-                  color: appTheme.darkTheme ? Colors.grey[800] : Colors.white,
+                  color: appTheme.darkTheme ? Colors.grey[850] : Colors.white,
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 40),
                         Center(
-                          child: ClipOval(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
                               "assets/icon.png",
                               width: 100,
@@ -110,7 +111,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                               : secondary,
                         ),
                         MenuItem(
-                          icon: Icons.play_arrow,
+                          icon: Icons.play_arrow_outlined,
                           title: "Exibição",
                           onTap: () {
                             onIconPressed();
@@ -119,7 +120,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           },
                         ),
                         MenuItem(
-                          icon: Icons.movie,
+                          icon: Icons.movie_outlined,
                           title: "Populares ",
                           onTap: () {
                             onIconPressed();
@@ -137,7 +138,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           },
                         ),
                         MenuItem(
-                          icon: Icons.search,
+                          icon: Icons.search_outlined,
                           title: "Filtros",
                           onTap: () {
                             onIconPressed();
@@ -148,7 +149,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                           },
                         ),
                         Divider(
-                          height: 64,
+                          height: 26,
                           thickness: 0.5,
                           indent: 32,
                           endIndent: 32,
@@ -190,7 +191,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                                   fontWeight: FontWeight.w300,
                                   fontSize: 17,
                                 )),
-                            leading: Icon(Icons.info,
+                            leading: Icon(Icons.info_outline,
                                 color: appTheme.darkTheme
                                     ? Color(darkCustomColor)
                                     : secondary,
@@ -214,7 +215,7 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
                       width: 35,
                       height: 110,
                       color:
-                          appTheme.darkTheme ? Colors.grey[800] : Colors.white,
+                          appTheme.darkTheme ? Colors.grey[850] : Colors.white,
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                           progress: _animationController.view,
@@ -249,7 +250,6 @@ class _SidebarState extends State<SideBar> with SingleTickerProviderStateMixin {
           Text("+244 924 033 375"),
           Text("eliezerfernandoantonio@gmail.com"),
           SizedBox(height: 14),
-          Text("Designer: Adilson Chameia", style: TextStyle()),
         ],
       ),
       actions: [

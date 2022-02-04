@@ -26,6 +26,12 @@ class _PopularScreenState extends State<PopularScreen> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final populares = context.watch<MoviesProvider>().populares;
     return StaggeredGridViewMovie(
