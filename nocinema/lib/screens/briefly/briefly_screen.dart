@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:nocinema/bloc_navigation/bloc_navigation.dart';
 import 'package:nocinema/providers/movie_provider.dart';
@@ -26,9 +25,15 @@ class _BrieflyScreenState extends State<BrieflyScreen> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final upcomings = context.watch<MoviesProvider>().upcomings;
-    return StaggeredGridViewMovie(scrollController: _scrollController, movies: upcomings);
+    return StaggeredGridViewMovie(
+        scrollController: _scrollController, movies: upcomings);
   }
 }
-

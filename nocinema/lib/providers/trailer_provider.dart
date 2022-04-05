@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:nocinema/models/trailer.dart';
 
-const CHAVE = "your key";
+const CHAVE = "AIzaSyBRmA7IrKxREizPrvVKFpSx6BIbcRgv_Fo";
 
 const URL_BASE = "https://www.googleapis.com/youtube/v3/";
 
@@ -17,10 +17,9 @@ class TrailerProvider with ChangeNotifier {
           "search"
               "?part=snippet"
               "&type=video"
-              "&maxResults=1"
-              "&order=date"
+              "&maxResults=20"
               "&key=$CHAVE"
-              "&q=$pesquisa official trailer",
+              "&q=$pesquisa - Official Trailer",
     ));
 
     if (response.statusCode == 200) {

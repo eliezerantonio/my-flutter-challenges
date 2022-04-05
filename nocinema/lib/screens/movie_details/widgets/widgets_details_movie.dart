@@ -7,7 +7,7 @@ informationMovie(String text) {
   return SingleChildScrollView(
     physics: BouncingScrollPhysics(),
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Text(
         text,
         textAlign: TextAlign.justify,
@@ -31,7 +31,7 @@ Padding infoWidget(
   String text,
 ) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
     child: Text(
       text,
       textAlign: TextAlign.justify,

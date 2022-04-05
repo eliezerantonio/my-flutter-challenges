@@ -42,6 +42,12 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
     final movies = Provider.of<MoviesProvider>(context).now_playings;
@@ -98,7 +104,9 @@ class _ExhibitionScreenState extends State<ExhibitionScreen>
               )
             : Center(
                 child: CircularProgressIndicator(
-                    color: Colors.grey[700],),),
+                  color: Colors.grey[700],
+                ),
+              ),
       ),
     );
   }

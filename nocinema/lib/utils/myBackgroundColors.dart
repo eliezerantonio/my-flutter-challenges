@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 final List<Color> backgroundDarkMode = [
-  Colors.grey[850]!.withOpacity(0.4),
-  Colors.grey[850]!.withOpacity(0.4),
-  Colors.grey[850]!.withOpacity(0.4),
-  Colors.grey[850]!.withOpacity(0.4),
+  Colors.grey[800]!.withOpacity(0.2),
+  Colors.grey[800]!.withOpacity(0.2),
+  Colors.grey[800]!.withOpacity(0.2),
+  Colors.grey[800]!.withOpacity(0.2),
   Colors.grey[850]!,
   Colors.grey[850]!,
   Colors.grey[850]!
@@ -21,6 +21,7 @@ final List<Color> backgroundWhiteMode = [
 ];
 
 final darkCustomColor = 0xff00838f;
+final darkColor = Colors.grey[850];
 
 MaterialColor getColor(double percent) {
   if (percent > 66) {
