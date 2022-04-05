@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:nocinema/models/trailer.dart';
 
-const CHAVE = "your key";
+const CHAVE = "AIzaSyBRmA7IrKxREizPrvVKFpSx6BIbcRgv_Fo";
 
 const URL_BASE = "https://www.googleapis.com/youtube/v3/";
 

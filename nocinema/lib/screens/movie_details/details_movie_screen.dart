@@ -110,12 +110,26 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => TrailersScreen(
-                                              trailers: trailers)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => TrailersScreen(
+                                        trailers: trailers,
+                                      ),
+                                    ),
+                                  );
                                 },
-                                child: Center(child: Text("Ver Videos")),
+                                child: Center(
+                                    child: Container(
+                                        height: 40,
+                                        width: 100,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey[800],
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Text("Ver Videos",
+                                            style: TextStyle(
+                                                color: Colors.white)))),
                               ),
                             )
                           : Center(child: Text("...")),
@@ -138,8 +152,6 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
       ),
     );
   }
-
-
 
   Center titleMovieWidget(
     movie,

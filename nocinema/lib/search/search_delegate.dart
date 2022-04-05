@@ -6,16 +6,7 @@ import 'package:nocinema/screens/movie_details/details_movie_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DataSerach extends SearchDelegate {
-  final filmes = [
-    'SpiderMan',
-    'Aquaman',
-    'Batman',
-    'Capitao america',
-  ];
-  final filmesRecentes = [
-    'SpiderMan',
-    'Capitao america',
-  ];
+  List<Movie> movies = [];
   String selecao = '';
   final moviesProvider = MoviesProvider();
 
@@ -51,7 +42,53 @@ class DataSerach extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(child: Text('Em Construção  :) '));
+    if (movies.isNotEmpty) {
+      return ListView(
+          physics: const BouncingScrollPhysics(),
+          children: movies.map(
+            (movie) {
+              movie.uiniqueId = '${movie.id}-card';
+              return ListTile(
+                leading: Hero(
+                  tag: movie.uiniqueId,
+                  child: CachedNetworkImage(
+                    width: 50,
+                    imageUrl: movie.getPosterImg(),
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Image.asset(
+                        "assets/no-image.jpg",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                title: Text(movie.title),
+                subtitle: Text(movie.originalTitle),
+                onTap: () {
+                  close(context, null); //encerrar busca ao clspiicar
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DetailsMovieScreen(
+                        movie: movie,
+                      ),
+                    ),
+                  );
+                  movie.uiniqueId = '';
+                },
+              );
+            },
+          ).toList());
+    } else {
+      return Center(child: CircularProgressIndicator(color: Colors.grey[800]));
+    }
+    ;
   }
 
   Widget _emptyContainer() {
@@ -74,11 +111,11 @@ class DataSerach extends SearchDelegate {
         future: moviesProvider.searchMovie(query),
         builder: (BuildContext context, AsyncSnapshot<List<Movie>> snaphot) {
           if (snaphot.hasData) {
-            final movies = snaphot.data;
+            movies = snaphot.data!;
 
             return ListView(
                 physics: const BouncingScrollPhysics(),
-                children: movies!.map(
+                children: movies.map(
                   (movie) {
                     movie.uiniqueId = '${movie.id}-card';
                     return ListTile(
