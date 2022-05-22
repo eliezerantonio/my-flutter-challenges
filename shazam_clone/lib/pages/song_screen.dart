@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../models/deezer_song.dart';
@@ -23,8 +24,11 @@ class SongScreen extends StatelessWidget {
                     Column(
                       children: [
                         Image.network(
-                          song?.album?.coverMedium,
+                          song?.album?.coverMedium ??
+                              "https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg",
                           fit: BoxFit.cover,
+                          width: size.width,
+                          height: 400,
                         )
                       ],
                     ),
@@ -96,48 +100,71 @@ class SongScreen extends StatelessWidget {
                                             fontWeight: FontWeight.bold,
                                             fontSize: 22),
                                       ),
-                                      Text(
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      AutoSizeText(
                                         song?.artist?.name ?? '',
+                                        minFontSize: 8,
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        song?.album?.title ?? '',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   const Spacer(),
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: const Color(0xFF2196F3)),
-                                    child: const Icon(Icons.play_arrow,
-                                        color: Colors.white, size: 50),
+                                  FadeInRight(
+                                    duration:
+                                        const Duration(milliseconds: 1000),
+                                    child: Container(
+                                      width: 60,
+                                      height: 60,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: const Color(0xFF2196F3)),
+                                      child: const Icon(Icons.play_arrow,
+                                          color: Colors.white, size: 50),
+                                    ),
                                   )
                                 ],
                               ),
                             ),
-                            Container(
-                              width: 160,
-                              height: 40,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: const Color(0xFF2196F3)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.play_arrow, color: Colors.white),
-                                  Text(
-                                    "PLAY F...L SONG",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                            BounceInUp(
+                              duration: const Duration(milliseconds: 8000),
+                              from: 90,
+                              child: Container(
+                                width: 160,
+                                height: 40,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: const Color(0xFF2196F3)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.play_arrow, color: Colors.white),
+                                    Text(
+                                      "PLAY F...L SONG",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -154,7 +181,7 @@ class SongScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      print("oi");
+                      Navigator.of(context).pop();
                     },
                     child: Container(
                       width: 30,

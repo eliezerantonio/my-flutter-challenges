@@ -30,6 +30,7 @@ dependencies:
   acr_cloud_sdk: ^2.0.1
   animate_do: ^2.1.0
   animated_text_kit: ^4.2.1
+  auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   flutter:

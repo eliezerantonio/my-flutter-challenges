@@ -8,8 +8,8 @@ class DeezerSongManager extends ChangeNotifier {
   DeezerSongManager() {
     initAcr();
   }
-  final AcrCloudSdk acr = AcrCloudSdk();
   final songService = SongService();
+  final AcrCloudSdk acr = AcrCloudSdk();
   DeezerSong currentSong;
   bool isRecognizing = false;
   bool success = false;
@@ -19,8 +19,10 @@ class DeezerSongManager extends ChangeNotifier {
       acr
         ..init(
           host: '', // https://www.acrcloud.com/
-          accessKey: '',
-          accessSecret: '',
+          accessKey:
+              '', // https://www.acrcloud.com/
+          accessSecret:
+              '', // https://www.acrcloud.com/
           setLog: false,
         )
         ..songModelStream.listen(searchSong);
@@ -31,20 +33,37 @@ class DeezerSongManager extends ChangeNotifier {
 
   void searchSong(SongModel song) async {
     print("---------------${song.metadata}------------------------");
+    if (song.metadata == null) {
+      stopRecognizing();
+      return;
+    }
+
     final metaData = song?.metadata;
     if (metaData != null && metaData.music.isNotEmpty) {
       final trackId = metaData?.music[0]?.externalMetadata?.deezer?.track?.id;
-      print("tractk id $trackId");
       try {
         final res = await songService.getTrack(trackId);
         currentSong = res;
         success = true;
+        isRecognizing = false;
+        // await acr.stop();
         notifyListeners();
       } catch (e) {
         isRecognizing = false;
         success = false;
         notifyListeners();
       }
+    }
+  }
+
+  Future<void> stopRecognizing() async {
+    isRecognizing = false;
+    success = false;
+    notifyListeners();
+    try {
+      await acr.stop();
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -57,17 +76,6 @@ class DeezerSongManager extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
       stopRecognizing();
-    }
-  }
-
-  Future<void> stopRecognizing() async {
-    isRecognizing = false;
-    success = false;
-    notifyListeners();
-    try {
-      await acr.stop();
-    } catch (e) {
-      print(e.toString());
     }
   }
 }

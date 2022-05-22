@@ -4,6 +4,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:shazam_clone/models/deezer_song_manager.dart';
 
+import 'song_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
 
@@ -13,8 +15,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final songManager = context.read<DeezerSongManager>();
+    if (songManager.success && mounted) {
+      Future.delayed(const Duration(seconds: 1));
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => SongScreen(
+              song: songManager.currentSong,
+            ),
+          ),
+        );
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final songManager = context.watch<DeezerSongManager>();
+
     return Scaffold(
         body: SafeArea(
       child: Container(
@@ -44,12 +67,17 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.white, size: 35)
                             : Container(),
                         !songManager.isRecognizing
-                            ? const Text(
-                                "Toque para ouvir",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
+                            ? DefaultTextStyle(
+                                style: const TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Horizon',
+                                    fontWeight: FontWeight.bold),
+                                child: AnimatedTextKit(
+                                  animatedTexts: [
+                                    TyperAnimatedText('Tap To Listen'),
+                                    TyperAnimatedText('Shazam Clone',
+                                        textAlign: TextAlign.center),
+                                  ],
                                 ),
                               )
                             : Container(),
@@ -60,9 +88,6 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () async {
                       songManager.startRecognizing();
-
-                      // await Future.delayed(const Duration(seconds: 8));
-                      // songManager.stopRecognizing();
                     },
                     child: !songManager.isRecognizing
                         ? FadeInUp(
@@ -120,9 +145,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: AnimatedTextKit(
                     animatedTexts: [
-                      RotateAnimatedText('Ouvindo'),
-                      RotateAnimatedText('Agurade o resultado'),
-                      TyperAnimatedText('Estamos preparando tudo',
+                      RotateAnimatedText('Listening'),
+                      RotateAnimatedText('Wait for the result'),
+                      TyperAnimatedText('We are preparing everything',
                           textAlign: TextAlign.center),
                     ],
                   ),
@@ -134,7 +159,9 @@ class _HomePageState extends State<HomePage> {
                     right: 10,
                     child: FadeIn(
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          songManager.stopRecognizing();
+                        },
                         child: Container(
                           width: 85,
                           height: 26,
@@ -159,7 +186,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   )
                 : Container(),
-            if (songManager.success) Container(child: const Text("Deu certo"))
           ],
         ),
       ),
