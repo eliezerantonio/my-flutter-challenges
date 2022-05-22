@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-
-import 'pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:shazam_clone/models/deezer_song_manager.dart';
+import 'package:shazam_clone/pages/home_page.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      home: HomePage()
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => DeezerSongManager())],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Shazam Clone',
+        home: HomePage(),
+      ),
     );
   }
 }
