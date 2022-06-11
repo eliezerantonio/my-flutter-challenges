@@ -143,7 +143,7 @@ class SongScreen extends StatelessWidget {
                               ),
                             ),
                             BounceInUp(
-                              duration: const Duration(milliseconds: 8000),
+                              duration: const Duration(milliseconds: 3000),
                               from: 90,
                               child: Container(
                                 width: 160,

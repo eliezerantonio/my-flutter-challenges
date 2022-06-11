@@ -18,11 +18,11 @@ class DeezerSongManager extends ChangeNotifier {
     try {
       acr
         ..init(
-          host: '', // https://www.acrcloud.com/
+          host: 'identify-eu-west-1.acrcloud.com', // https://www.acrcloud.com/
           accessKey:
-              '', // https://www.acrcloud.com/
+              '32638b33ecce7a701b6a3299b2d7fe85', // https://www.acrcloud.com/
           accessSecret:
-              '', // https://www.acrcloud.com/
+              'barilSkcK82uxhNvO7jBGYTKliw4rsVPG4mYzqPm', // https://www.acrcloud.com/
           setLog: false,
         )
         ..songModelStream.listen(searchSong);
@@ -46,7 +46,7 @@ class DeezerSongManager extends ChangeNotifier {
         currentSong = res;
         success = true;
         isRecognizing = false;
-        // await acr.stop();
+        await acr.stop();
         notifyListeners();
       } catch (e) {
         isRecognizing = false;
